@@ -6,6 +6,7 @@ public class User {
     private String mLastName;
     private String mFirstName;
     private Color mColor;
+    private MokaItem mCurrentItem;
 
     public User(String lastName, String firstName, Color color) {
         mLastName = lastName;
@@ -35,5 +36,13 @@ public class User {
 
     public void setColor(Color color) {
         mColor = color;
+    }
+
+    public MokaItem getCurrentItem() {
+        return mCurrentItem;
+    }
+
+    public void setCurrentItem(MokaItem currentItem) {
+        this.mCurrentItem = currentItem;
     }
 }
