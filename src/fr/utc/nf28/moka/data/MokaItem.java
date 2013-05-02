@@ -1,10 +1,10 @@
 package fr.utc.nf28.moka.data;
 
-public abstract class Item {
+public abstract class MokaItem {
     private int mX;
     private int mY;
 
-    public Item(int x, int y) {
+    public MokaItem(int x, int y) {
         mX = x;
         mY = y;
     }
