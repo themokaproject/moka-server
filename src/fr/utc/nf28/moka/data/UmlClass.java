@@ -21,11 +21,35 @@ public class UmlClass extends MokaItem {
         mClassName = className;
     }
 
+    public List<String> getMembers() {
+        return mMembers;
+    }
+
+    public List<String> getMethods() {
+        return mMethods;
+    }
+
     public void addMember(String member) {
         mMembers.add(member);
     }
 
     public void addMethod(String method) {
         mMethods.add(method);
+    }
+
+    public void removeMember(String member) {
+        mMembers.remove(member);
+    }
+
+    public void removeMethod(String method) {
+        mMethods.remove(method);
+    }
+
+    public void clearMembers() {
+        mMembers = new ArrayList<String>();
+    }
+
+    public void clearMethods() {
+        mMethods = new ArrayList<String>();
     }
 }
