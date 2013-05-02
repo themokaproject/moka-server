@@ -1,6 +1,18 @@
+# Java class files
 *.class
 
-# Package Files #
-*.jar
-*.war
-*.ear
+# generated files
+bin/
+gen/
+
+# Eclipse project files
+.classpath
+.project
+
+# IntelliJ files and folders
+.idea/
+.settings/
+*.iml
+
+# Windows file system files
+*.db
