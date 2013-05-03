@@ -1,2 +1,2 @@
 main=true
-gui=false
+gui=true
