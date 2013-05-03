@@ -14,4 +14,10 @@ public class MokaAgent extends Agent {
         final Object[] args = getArguments();
         mEnvironment = (MokaEnvironment)args[0];
     }
+
+    public MokaEnvironment getEnvironment() {
+        return mEnvironment;
+    }
+
+
 }

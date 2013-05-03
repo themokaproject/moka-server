@@ -6,6 +6,8 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
+import java.io.IOException;
+
 /**
  * A behaviour that handles connections.
  */
@@ -15,8 +17,15 @@ public class ConnectionHandlingBehaviour extends CyclicBehaviour {
         final ACLMessage message = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
         if (message != null) {
             final String connectionRequest = message.getContent();
-            User user = JSONParserUtils.deserializeUser(connectionRequest);
-            System.out.println(user.toString());
+            try {
+                User user = JSONParserUtils.deserializeUser(connectionRequest);
+                System.out.println(user.toString());
+                ((ConnectionAgent)myAgent).getEnvironment().addUser(user);
+            } catch (IOException e) {
+                System.out.println("Connection request syntax is wrong");
+            }
+
+
         }
     }
 }
