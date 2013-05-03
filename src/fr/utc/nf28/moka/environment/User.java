@@ -1,17 +1,17 @@
 package fr.utc.nf28.moka.environment;
 
-import java.awt.*;
-
 public class User {
     private String mLastName;
     private String mFirstName;
-    private Color mColor;
+    private int mColor;
     private MokaItem mCurrentItem;
 
-    public User(String lastName, String firstName, Color color) {
+    public User() {
+    }
+
+    public User(String lastName, String firstName) {
         mLastName = lastName;
         mFirstName = firstName;
-        mColor = color;
     }
 
     public String getLastName() {
@@ -30,11 +30,11 @@ public class User {
         mFirstName = firstName;
     }
 
-    public Color getColor() {
+    public int getColor() {
         return mColor;
     }
 
-    public void setColor(Color color) {
+    public void setColor(int color) {
         mColor = color;
     }
 
@@ -44,5 +44,10 @@ public class User {
 
     public void setCurrentItem(MokaItem currentItem) {
         this.mCurrentItem = currentItem;
+    }
+
+    @Override
+    public String toString() {
+        return mFirstName + " " + mLastName;
     }
 }
