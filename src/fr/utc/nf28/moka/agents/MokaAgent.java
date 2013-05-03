@@ -1,6 +1,6 @@
 package fr.utc.nf28.moka.agents;
 
-import fr.utc.nf28.moka.data.MokaEnvironment;
+import fr.utc.nf28.moka.environment.MokaEnvironment;
 import jade.core.Agent;
 
 /**

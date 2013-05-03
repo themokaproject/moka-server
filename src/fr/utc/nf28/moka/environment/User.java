@@ -1,4 +1,4 @@
-package fr.utc.nf28.moka.data;
+package fr.utc.nf28.moka.environment;
 
 import java.awt.*;
 

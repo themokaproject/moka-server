@@ -1,11 +1,9 @@
 package fr.utc.nf28.moka;
 
-import fr.utc.nf28.moka.data.MokaEnvironment;
-import jade.core.ProfileException;
+import fr.utc.nf28.moka.environment.MokaEnvironment;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
 import jade.wrapper.AgentContainer;
-import jade.wrapper.StaleProxyException;
 
 public class Launcher {
     public static void main(String[] args) {
