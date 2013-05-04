@@ -6,8 +6,6 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
-import java.util.List;
-
 /**
  * A behaviour that handles deconnections.
  */
