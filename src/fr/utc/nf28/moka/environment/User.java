@@ -3,6 +3,7 @@ package fr.utc.nf28.moka.environment;
 public class User {
     private String mLastName;
     private String mFirstName;
+    private String mIpAdress;
     private int mColor;
     private MokaItem mCurrentItem;
 
@@ -44,6 +45,14 @@ public class User {
 
     public void setCurrentItem(MokaItem currentItem) {
         this.mCurrentItem = currentItem;
+    }
+
+    public String getIpAdress() {
+        return mIpAdress;
+    }
+
+    public void setIpAdress(String ipAdress) {
+        this.mIpAdress = ipAdress;
     }
 
     @Override
