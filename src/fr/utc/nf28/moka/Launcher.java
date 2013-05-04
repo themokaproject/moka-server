@@ -25,7 +25,7 @@ public class Launcher {
             System.out.println(JSONParserUtils.serializeUser(user));
 
             UmlClass uml = new UmlClass(0,0,"MyClass");
-            System.out.println(JSONParserUtils.serializeUmlClass(uml));
+            System.out.println(JSONParserUtils.serializeItem(uml));
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,8 +1,7 @@
 package fr.utc.nf28.moka.util;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.utc.nf28.moka.environment.MokaItem;
 import fr.utc.nf28.moka.environment.UmlClass;
 import fr.utc.nf28.moka.environment.User;
 
@@ -22,14 +21,14 @@ public class JSONParserUtils {
         return sMapper.readValue(json, User.class);
     }
 
-    public static String serializeUmlClass(UmlClass uml) throws IOException{
+    public static String serializeItem(MokaItem item) throws IOException{
         StringWriter sw = new StringWriter();
-        sMapper.writeValue(sw, uml);
+        sMapper.writeValue(sw, item);
         return sw.toString();
     }
 
-    public static UmlClass deserializeUmlClass(final String json) throws IOException {
-        return sMapper.readValue(json, UmlClass.class);
+    public static MokaItem deserializeItem(final String json) throws IOException {
+        return sMapper.readValue(json, MokaItem.class);
     }
 
 

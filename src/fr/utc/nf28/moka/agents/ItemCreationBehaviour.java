@@ -1,6 +1,6 @@
 package fr.utc.nf28.moka.agents;
 
-import fr.utc.nf28.moka.environment.UmlClass;
+import fr.utc.nf28.moka.environment.MokaItem;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
@@ -15,11 +15,13 @@ public class ItemCreationBehaviour extends CyclicBehaviour {
         if (message != null) {
             final String itemJson = message.getContent();
             try {
-                UmlClass item = JSONParserUtils.deserializeUmlClass(itemJson);
+                MokaItem item = JSONParserUtils.deserializeItem(itemJson);
                 System.out.println(item.toString());
-                ((ConnectionAgent)myAgent).getEnvironment().addItem(item);
+                ((ItemCreationAgent)myAgent).getEnvironment().addItem(item);
             } catch (IOException e) {
                 System.out.println("Item creation request syntax is wrong");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
 
