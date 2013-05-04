@@ -63,6 +63,6 @@ public abstract class MokaItem {
     }
 
     public String toString() {
-        return "x:" + mX + " y:" + mY;
+        return "id:" + mId + " x:" + mX + " y:" + mY;
     }
 }
