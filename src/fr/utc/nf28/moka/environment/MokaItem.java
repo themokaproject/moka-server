@@ -8,17 +8,29 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  */
 @JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
 public abstract class MokaItem {
+    private static int sIdIndex = 0;
+
+    private int mId;
     private int mX;
     private int mY;
     private boolean mLocked = true;
 
     public MokaItem() {
-
+        mId = sIdIndex++;
     }
 
     public MokaItem(int x, int y) {
+        this();
         mX = x;
         mY = y;
+    }
+
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int mId) {
+        this.mId = mId;
     }
 
     public int getY() {
