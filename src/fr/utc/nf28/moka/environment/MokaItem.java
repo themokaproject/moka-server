@@ -1,33 +1,38 @@
 package fr.utc.nf28.moka.environment;
 
-import java.awt.*;
-
 public abstract class MokaItem {
     private int mX;
     private int mY;
-    private User mLastModifier;
     private boolean mLocked = true;
+
+    public MokaItem() {
+
+    }
 
     public MokaItem(int x, int y) {
         mX = x;
         mY = y;
     }
 
+    public int getY() {
+        return mY;
+    }
+
+    public void setY(int mY) {
+        this.mY = mY;
+    }
+
+    public int getX() {
+        return mX;
+    }
+
+    public void setX(int x) {
+        this.mX = x;
+    }
+
     public void move(int x, int y) {
         mX = x;
         mY = y;
-    }
-
-    public Point getPosition() {
-        return new Point(mX,mY);
-    }
-
-    public User getLastModifier() {
-        return mLastModifier;
-    }
-
-    public void setLastModifier(User lastModifier) {
-        this.mLastModifier = lastModifier;
     }
 
     public boolean isLocked() {

@@ -8,9 +8,11 @@ public class UmlClass extends MokaItem {
     private List<String> mMembers = new ArrayList<String>();
     private List<String> mMethods = new ArrayList<String>();
 
-
+    public UmlClass() {
+    }
     public UmlClass(int x, int y, String className) {
         super(x, y);
+        mClassName = className;
     }
 
     public String getClassName() {
@@ -54,6 +56,6 @@ public class UmlClass extends MokaItem {
     }
 
     public String toString() {
-        return "umlclass:" + mClassName + super.toString();
+        return "umlclass:" + mClassName + " " + super.toString();
     }
 }

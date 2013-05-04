@@ -22,7 +22,15 @@ public class JSONParserUtils {
         return sMapper.readValue(json, User.class);
     }
 
+    public static String serializeUmlClass(UmlClass uml) throws IOException{
+        StringWriter sw = new StringWriter();
+        sMapper.writeValue(sw, uml);
+        return sw.toString();
+    }
+
     public static UmlClass deserializeUmlClass(final String json) throws IOException {
         return sMapper.readValue(json, UmlClass.class);
     }
+
+
 }
