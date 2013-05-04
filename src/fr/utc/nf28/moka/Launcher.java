@@ -1,6 +1,7 @@
 package fr.utc.nf28.moka;
 
 import fr.utc.nf28.moka.environment.MokaEnvironment;
+import fr.utc.nf28.moka.environment.items.ImageLink;
 import fr.utc.nf28.moka.environment.items.UmlClass;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
@@ -24,8 +25,11 @@ public class Launcher {
             user.setIp("127.0.0.1");
             System.out.println(JSONParserUtils.serializeUser(user));
 
-            UmlClass uml = new UmlClass(0,0,"MyClass");
+            UmlClass uml = new UmlClass(100,100,"MyClass");
             System.out.println(JSONParserUtils.serializeItem(uml));
+
+            ImageLink image = new ImageLink(200,200,"http://masciulli.fr/img.png");
+            System.out.println(JSONParserUtils.serializeItem(image));
 
         } catch (Exception e) {
             e.printStackTrace();
