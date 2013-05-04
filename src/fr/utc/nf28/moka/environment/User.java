@@ -57,6 +57,6 @@ public class User {
 
     @Override
     public String toString() {
-        return mFirstName + " " + mLastName;
+        return mIp + " " + mFirstName + " " + mLastName;
     }
 }

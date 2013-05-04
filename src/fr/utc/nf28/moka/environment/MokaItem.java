@@ -37,4 +37,8 @@ public abstract class MokaItem {
     public void setLocked(boolean locked) {
         mLocked = locked;
     }
+
+    public String toString() {
+        return "x:" + mX + " y:" + mY;
+    }
 }

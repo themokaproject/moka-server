@@ -52,4 +52,8 @@ public class UmlClass extends MokaItem {
     public void clearMethods() {
         mMethods = new ArrayList<String>();
     }
+
+    public String toString() {
+        return "umlclass:" + mClassName + super.toString();
+    }
 }
