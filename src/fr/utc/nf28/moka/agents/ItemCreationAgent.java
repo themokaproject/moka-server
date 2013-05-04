@@ -6,6 +6,7 @@ package fr.utc.nf28.moka.agents;
 public class ItemCreationAgent extends MokaAgent{
 
     public void setup() {
+        super.setup();
         addBehaviour(new ItemCreationBehaviour());
     }
 }
