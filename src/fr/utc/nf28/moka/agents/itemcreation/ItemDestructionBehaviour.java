@@ -1,5 +1,6 @@
-package fr.utc.nf28.moka.agents;
+package fr.utc.nf28.moka.agents.itemcreation;
 
+import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.environment.MokaEnvironment;
 import fr.utc.nf28.moka.environment.MokaItem;
 import jade.core.behaviours.CyclicBehaviour;

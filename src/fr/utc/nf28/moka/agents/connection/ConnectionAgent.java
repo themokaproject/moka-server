@@ -1,4 +1,6 @@
-package fr.utc.nf28.moka.agents;
+package fr.utc.nf28.moka.agents.connection;
+
+import fr.utc.nf28.moka.agents.MokaAgent;
 
 /**
  * An agent that handles connections and deconnections of clients to Moka

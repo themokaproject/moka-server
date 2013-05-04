@@ -16,8 +16,8 @@ public class Launcher {
         try {
             final AgentContainer container = runtime.createMainContainer(new ProfileImpl("profile.txt"));
             MokaEnvironment environment = new MokaEnvironment();
-            container.createNewAgent("ConnectionAgent", "fr.utc.nf28.moka.agents.ConnectionAgent", new Object[]{environment}).start();
-            container.createNewAgent("ItemCreationAgent", "fr.utc.nf28.moka.agents.ItemCreationAgent", new Object[]{environment}).start();
+            container.createNewAgent("ConnectionAgent", "fr.utc.nf28.moka.agents.connection.ConnectionAgent", new Object[]{environment}).start();
+            container.createNewAgent("ItemCreationAgent", "fr.utc.nf28.moka.agents.itemcreation.ItemCreationAgent", new Object[]{environment}).start();
 
             User user = new User("Alexandre", "Masciulli");
             user.setColor(Color.WHITE.getRGB());

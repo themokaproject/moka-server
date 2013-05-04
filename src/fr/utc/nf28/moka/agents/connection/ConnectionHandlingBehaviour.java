@@ -1,4 +1,4 @@
-package fr.utc.nf28.moka.agents;
+package fr.utc.nf28.moka.agents.connection;
 
 import fr.utc.nf28.moka.environment.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;

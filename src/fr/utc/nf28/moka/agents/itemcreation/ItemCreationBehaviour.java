@@ -1,4 +1,4 @@
-package fr.utc.nf28.moka.agents;
+package fr.utc.nf28.moka.agents.itemcreation;
 
 import fr.utc.nf28.moka.environment.MokaItem;
 import fr.utc.nf28.moka.util.JSONParserUtils;
