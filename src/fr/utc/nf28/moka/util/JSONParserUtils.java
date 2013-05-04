@@ -2,12 +2,14 @@ package fr.utc.nf28.moka.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.utc.nf28.moka.environment.MokaItem;
-import fr.utc.nf28.moka.environment.UmlClass;
 import fr.utc.nf28.moka.environment.User;
 
 import java.io.IOException;
 import java.io.StringWriter;
 
+/**
+ * a JSON serializer/deserializer that uses Jackson
+ */
 public class JSONParserUtils {
     private static final ObjectMapper sMapper = new ObjectMapper();
 

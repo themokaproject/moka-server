@@ -3,6 +3,9 @@ package fr.utc.nf28.moka.environment;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A UML class item.
+ */
 public class UmlClass extends MokaItem {
     private String mClassName;
     private List<String> mMembers = new ArrayList<String>();

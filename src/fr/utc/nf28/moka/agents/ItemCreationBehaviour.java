@@ -8,6 +8,9 @@ import jade.lang.acl.MessageTemplate;
 
 import java.io.IOException;
 
+/**
+ * A behaviour that handles item creation.
+ */
 public class ItemCreationBehaviour extends CyclicBehaviour {
     @Override
     public void action() {
