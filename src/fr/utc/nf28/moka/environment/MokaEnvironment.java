@@ -1,5 +1,8 @@
 package fr.utc.nf28.moka.environment;
 
+import fr.utc.nf28.moka.environment.items.MokaItem;
+import fr.utc.nf28.moka.environment.users.User;
+
 import java.util.ArrayList;
 import java.util.List;
 

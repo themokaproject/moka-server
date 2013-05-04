@@ -1,8 +1,8 @@
 package fr.utc.nf28.moka.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.utc.nf28.moka.environment.MokaItem;
-import fr.utc.nf28.moka.environment.User;
+import fr.utc.nf28.moka.environment.items.MokaItem;
+import fr.utc.nf28.moka.environment.users.User;
 
 import java.io.IOException;
 import java.io.StringWriter;

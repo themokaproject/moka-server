@@ -1,4 +1,4 @@
-package fr.utc.nf28.moka.environment;
+package fr.utc.nf28.moka.environment.items;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 

@@ -1,4 +1,6 @@
-package fr.utc.nf28.moka.environment;
+package fr.utc.nf28.moka.environment.users;
+
+import fr.utc.nf28.moka.environment.items.MokaItem;
 
 public class User {
     private String mLastName;

@@ -1,6 +1,6 @@
 package fr.utc.nf28.moka.agents.itemcreation;
 
-import fr.utc.nf28.moka.environment.MokaItem;
+import fr.utc.nf28.moka.environment.items.MokaItem;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;

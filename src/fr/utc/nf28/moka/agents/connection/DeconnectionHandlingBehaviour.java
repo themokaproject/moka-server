@@ -2,7 +2,7 @@ package fr.utc.nf28.moka.agents.connection;
 
 import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.environment.MokaEnvironment;
-import fr.utc.nf28.moka.environment.User;
+import fr.utc.nf28.moka.environment.users.User;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;

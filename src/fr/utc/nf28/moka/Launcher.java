@@ -1,8 +1,8 @@
 package fr.utc.nf28.moka;
 
 import fr.utc.nf28.moka.environment.MokaEnvironment;
-import fr.utc.nf28.moka.environment.UmlClass;
-import fr.utc.nf28.moka.environment.User;
+import fr.utc.nf28.moka.environment.items.UmlClass;
+import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
