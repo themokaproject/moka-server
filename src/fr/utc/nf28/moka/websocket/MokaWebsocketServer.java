@@ -12,13 +12,13 @@ import java.net.UnknownHostException;
  * Date: 04/05/13
  * Time: 22:11
  */
-public class MokaWebsocketServer extends WebSocketServer {
+public class MokaWebSocketServer extends WebSocketServer {
 
-	public MokaWebsocketServer(int port) throws UnknownHostException {
+	public MokaWebSocketServer(int port) throws UnknownHostException {
 		super( new InetSocketAddress(port));
 	}
 
-	public MokaWebsocketServer(InetSocketAddress add){
+	public MokaWebSocketServer(InetSocketAddress add){
 		super(add);
 	}
 
