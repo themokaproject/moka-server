@@ -3,6 +3,7 @@ package fr.utc.nf28.moka.util;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.utc.nf28.moka.environment.UmlClass;
 import fr.utc.nf28.moka.environment.User;
 
 import java.io.IOException;
@@ -19,5 +20,9 @@ public class JSONParserUtils {
 
     public static User deserializeUser(final String json) throws IOException {
         return sMapper.readValue(json, User.class);
+    }
+
+    public static UmlClass deserializeUmlClass(final String json) throws IOException {
+        return sMapper.readValue(json, UmlClass.class);
     }
 }
