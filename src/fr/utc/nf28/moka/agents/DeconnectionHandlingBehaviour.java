@@ -22,7 +22,7 @@ public class DeconnectionHandlingBehaviour extends CyclicBehaviour {
             final List<User> users = ((ConnectionAgent) myAgent).getEnvironment().getUsers();
             for(User user : users) {
                 if(user.getIp().equals(ip)) {
-                    System.out.println("Remove user " + user.getIp() + " : " + user.getFirstName() + " " + user.getLastName());
+                    System.out.println("Remove user " + user.toString());
                     users.remove(user);
                     return;
                 }
