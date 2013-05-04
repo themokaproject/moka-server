@@ -19,6 +19,7 @@ public class Launcher {
 
             User user = new User("Alexandre", "Masciulli");
             user.setColor(Color.WHITE.getRGB());
+            user.setIp("127.0.0.1");
             System.out.println(JSONParserUtils.serializeUser(user));
         } catch (Exception e) {
             e.printStackTrace();
