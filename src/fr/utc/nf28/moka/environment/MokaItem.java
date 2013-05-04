@@ -6,6 +6,7 @@ public abstract class MokaItem {
     private int mX;
     private int mY;
     private User mLastModifier;
+    private boolean mLocked = true;
 
     public MokaItem(int x, int y) {
         mX = x;
@@ -27,5 +28,13 @@ public abstract class MokaItem {
 
     public void setLastModifier(User lastModifier) {
         this.mLastModifier = lastModifier;
+    }
+
+    public boolean isLocked() {
+        return mLocked;
+    }
+
+    public void setLocked(boolean locked) {
+        mLocked = locked;
     }
 }
