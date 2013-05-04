@@ -7,11 +7,6 @@ import org.java_websocket.server.WebSocketServer;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 
-/**
- * User: Vbarthel
- * Date: 04/05/13
- * Time: 22:11
- */
 public class MokaWebSocketServer extends WebSocketServer {
 
 	public MokaWebSocketServer(int port) throws UnknownHostException {
