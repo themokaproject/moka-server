@@ -3,13 +3,13 @@ package fr.utc.nf28.moka.environment.items;
 /**
  * An image item.
  */
-public class Image extends MokaItem {
+public class ImageLink extends MokaItem {
     private String mUrl;
 
-    public Image() {
+    public ImageLink() {
     }
 
-    public Image(int x, int y, String url) {
+    public ImageLink(int x, int y, String url) {
         super(x,y);
         mUrl = url;
     }
