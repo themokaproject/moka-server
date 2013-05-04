@@ -15,7 +15,7 @@ public class ItemDestructionBehaviour extends CyclicBehaviour {
         final ACLMessage message = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.INFORM));
         if (message != null) {
             int itemId = Integer.parseInt(message.getContent());
-            final MokaEnvironment environment = ((ItemCreationAgent) myAgent).getEnvironment();
+            final MokaEnvironment environment = ((MokaAgent) myAgent).getEnvironment();
             for(MokaItem item : environment.getItems()) {
                 if(item.getId() == itemId) {
                     System.out.println("Remove item " + item.toString());

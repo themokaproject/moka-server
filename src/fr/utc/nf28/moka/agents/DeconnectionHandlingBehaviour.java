@@ -15,7 +15,7 @@ public class DeconnectionHandlingBehaviour extends CyclicBehaviour {
         final ACLMessage message = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.INFORM));
         if (message != null) {
             final String ip = message.getContent();
-            final MokaEnvironment environment = ((ConnectionAgent) myAgent).getEnvironment();
+            final MokaEnvironment environment = ((MokaAgent) myAgent).getEnvironment();
             for(User user : environment.getUsers()) {
                 if(user.getIp().equals(ip)) {
                     System.out.println("Remove user " + user.toString());
