@@ -19,15 +19,12 @@ public class ItemCreationBehaviour extends CyclicBehaviour {
             final String itemJson = message.getContent();
             try {
                 MokaItem item = JSONParserUtils.deserializeItem(itemJson);
-                System.out.println(item.toString());
                 ((ItemCreationAgent)myAgent).getEnvironment().addItem(item);
             } catch (IOException e) {
                 System.out.println("Item creation request syntax is wrong");
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
         }
     }
 }

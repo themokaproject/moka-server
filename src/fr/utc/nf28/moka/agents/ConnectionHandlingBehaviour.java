@@ -19,7 +19,6 @@ public class ConnectionHandlingBehaviour extends CyclicBehaviour {
             final String connectionRequest = message.getContent();
             try {
                 User user = JSONParserUtils.deserializeUser(connectionRequest);
-                System.out.println(user.toString());
                 ((ConnectionAgent)myAgent).getEnvironment().addUser(user);
             } catch (IOException e) {
                 System.out.println("Connection request syntax is wrong");

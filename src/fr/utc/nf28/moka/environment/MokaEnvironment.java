@@ -24,18 +24,35 @@ public class MokaEnvironment {
 
     public void addItem(MokaItem item) {
         mItems.add(item);
+        System.out.println(toString());
     }
 
     public void addUser(User user) {
         mUsers.add(user);
+        System.out.println(toString());
     }
 
     public void removeItem(MokaItem item) {
         mItems.remove(item);
+        System.out.println(toString());
     }
 
     public void removeUser(User user) {
         mUsers.remove(user);
+        System.out.println(toString());
+    }
+
+    public String toString() {
+        String s = "";
+        s+="== Users ==\n";
+        for (User u : mUsers) {
+            s+= u.toString() + "\n";
+        }
+        s+="== Items ==\n";
+        for (MokaItem mi : mItems) {
+            s+= mi.toString() + "\n";
+        }
+        return s;
     }
 
 
