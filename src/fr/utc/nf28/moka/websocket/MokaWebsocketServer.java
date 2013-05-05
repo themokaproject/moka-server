@@ -9,38 +9,37 @@ import java.net.UnknownHostException;
 
 public class MokaWebSocketServer extends WebSocketServer {
 
-	public MokaWebSocketServer(int port) throws UnknownHostException {
-		super( new InetSocketAddress(port));
-	}
+    public MokaWebSocketServer(int port) throws UnknownHostException {
+        super(new InetSocketAddress(port));
+    }
 
-	public MokaWebSocketServer(InetSocketAddress add){
-		super(add);
-	}
+    public MokaWebSocketServer(InetSocketAddress add) {
+        super(add);
+    }
 
-	@Override
-	public void onOpen(WebSocket connexion, ClientHandshake clientHandshake) {
-		//TODO onOpen
-		System.out.println( connexion.getRemoteSocketAddress().getAddress().getHostAddress() + " entered the room!" );
-	}
+    @Override
+    public void onOpen(WebSocket connection, ClientHandshake clientHandshake) {
+        //TODO onOpen
+        System.out.println(connection.getRemoteSocketAddress().getAddress().getHostAddress() + " entered the room!");
+    }
 
-	@Override
-	public void onClose(WebSocket connexion, int i, String s, boolean b) {
-		//TODO onClose
-		System.out.println( connexion + " has left the room!" );
-	}
+    @Override
+    public void onClose(WebSocket connection, int i, String s, boolean b) {
+        //TODO onClose
+        System.out.println(connection + " has left the room!");
+    }
 
-	@Override
-	public void onMessage(WebSocket connexion, String message) {
-		//TODO onMessage
-		System.out.println( connexion + ": " + message );
-	}
+    @Override
+    public void onMessage(WebSocket connection, String message) {
+        //TODO onMessage
+        System.out.println(connection + ": " + message);
+    }
 
-	@Override
-	public void onError(WebSocket webSocket, Exception ex) {
-		//TODO onError
-		ex.printStackTrace();
-	}
-
+    @Override
+    public void onError(WebSocket webSocket, Exception ex) {
+        //TODO onError
+        ex.printStackTrace();
+    }
 
 
 }
