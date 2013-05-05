@@ -11,6 +11,7 @@ public abstract class MokaItem {
     private static int sIdIndex = 0;
 
     private int mId;
+    private String mTitle;
     private int mX;
     private int mY;
     private boolean mLocked = true;
@@ -31,6 +32,14 @@ public abstract class MokaItem {
 
     public void setId(int mId) {
         this.mId = mId;
+    }
+
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public void setTitle(String title) {
+        this.mTitle = title;
     }
 
     public int getY() {
