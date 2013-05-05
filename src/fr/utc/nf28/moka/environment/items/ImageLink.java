@@ -9,8 +9,8 @@ public class ImageLink extends MokaItem {
     public ImageLink() {
     }
 
-    public ImageLink(int x, int y, String url) {
-        super(x,y);
+    public ImageLink(String title, int x, int y, String url) {
+        super(title, x, y);
         mUrl = url;
     }
 

@@ -25,10 +25,10 @@ public class Launcher {
             user.setIp("127.0.0.1");
             System.out.println(JSONParserUtils.serializeUser(user));
 
-            UmlClass uml = new UmlClass(100,100,"MyClass");
+            UmlClass uml = new UmlClass("MyClass", 100, 100, "MyClass");
             System.out.println(JSONParserUtils.serializeItem(uml));
 
-            ImageLink image = new ImageLink(200,200,"http://masciulli.fr/img.png");
+            ImageLink image = new ImageLink("Image1", 200, 200, "http://masciulli.fr/img.png");
             System.out.println(JSONParserUtils.serializeItem(image));
 
         } catch (Exception e) {

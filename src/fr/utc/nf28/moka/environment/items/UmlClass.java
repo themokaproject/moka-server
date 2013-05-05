@@ -13,8 +13,8 @@ public class UmlClass extends MokaItem {
 
     public UmlClass() {
     }
-    public UmlClass(int x, int y, String className) {
-        super(x, y);
+    public UmlClass(String title, int x, int y, String className) {
+        super(title, x, y);
         mClassName = className;
     }
 

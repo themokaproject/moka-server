@@ -20,8 +20,9 @@ public abstract class MokaItem {
         mId = sIdIndex++;
     }
 
-    public MokaItem(int x, int y) {
+    public MokaItem(String title, int x, int y) {
         this();
+        mTitle = title;
         mX = x;
         mY = y;
     }
@@ -72,6 +73,6 @@ public abstract class MokaItem {
     }
 
     public String toString() {
-        return "id:" + mId + " x:" + mX + " y:" + mY;
+        return "title:" + mTitle + "id:" + mId + " x:" + mX + " y:" + mY;
     }
 }
