@@ -27,22 +27,39 @@ public class MokaEnvironment {
 
     public void addItem(MokaItem item) {
         mItems.add(item);
+        System.out.println("add item " + item.toString());
         System.out.println(toString());
     }
 
     public void addUser(User user) {
         mUsers.add(user);
+        System.out.println("add user " + user.toString());
         System.out.println(toString());
     }
 
     public void removeItem(MokaItem item) {
         mItems.remove(item);
+        System.out.println("remove item " + item.toString());
         System.out.println(toString());
     }
 
     public void removeUser(User user) {
         mUsers.remove(user);
+        System.out.println("remove user " + user.toString());
         System.out.println(toString());
+    }
+
+    public void updateItem(MokaItem newValue) {
+        for (MokaItem i : mItems) {
+            if(i.getId() == newValue.getId()) {
+                mItems.remove(i);
+                mItems.add(newValue);
+                System.out.println("modify item " + newValue.toString());
+                System.out.println(toString());
+                return;
+            }
+        }
+        System.out.println("no item with id " + newValue.getId());
     }
 
     public String toString() {
