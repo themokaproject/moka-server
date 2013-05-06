@@ -6,10 +6,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * A generic visual item.
  * The JsonTypeInfo annotation allows Jackson to include the real type (for example UmlClass) in the serialized string
  */
-@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public abstract class MokaItem {
     private static int sIdIndex = 0;
-
     private int mId;
     private String mTitle;
     private int mX;

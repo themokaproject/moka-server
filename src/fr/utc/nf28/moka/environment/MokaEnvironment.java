@@ -51,7 +51,7 @@ public class MokaEnvironment {
 
     public void updateItem(MokaItem newValue) {
         for (MokaItem i : mItems) {
-            if(i.getId() == newValue.getId()) {
+            if (i.getId() == newValue.getId()) {
                 mItems.remove(i);
                 mItems.add(newValue);
                 System.out.println("modify item " + newValue.toString());
@@ -64,13 +64,13 @@ public class MokaEnvironment {
 
     public String toString() {
         String s = "";
-        s+="== Users ==\n";
+        s += "== Users ==\n";
         for (User u : mUsers) {
-            s+= u.toString() + "\n";
+            s += u.toString() + "\n";
         }
-        s+="== Items ==\n";
+        s += "== Items ==\n";
         for (MokaItem mi : mItems) {
-            s+= mi.toString() + "\n";
+            s += mi.toString() + "\n";
         }
         return s;
     }
