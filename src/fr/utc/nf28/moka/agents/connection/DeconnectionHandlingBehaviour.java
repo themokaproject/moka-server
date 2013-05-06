@@ -17,14 +17,13 @@ public class DeconnectionHandlingBehaviour extends CyclicBehaviour {
         if (message != null) {
             final String ip = message.getContent();
             final MokaEnvironment environment = ((MokaAgent) myAgent).getEnvironment();
-            for(User user : environment.getUsers()) {
-                if(user.getIp().equals(ip)) {
-                    System.out.println("Remove user " + user.toString());
+            for (User user : environment.getUsers()) {
+                if (user.getIp().equals(ip)) {
                     environment.removeUser(user);
                     return;
                 }
             }
-            System.out.println("No user with ip " + ip);
+            System.out.println("no user with ip " + ip);
         }
     }
 }

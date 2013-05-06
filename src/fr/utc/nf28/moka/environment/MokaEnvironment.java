@@ -38,15 +38,22 @@ public class MokaEnvironment {
     }
 
     public void removeItem(MokaItem item) {
-        mItems.remove(item);
-        System.out.println("remove item " + item.toString());
-        System.out.println(toString());
+        if (mItems.remove(item)) {
+            System.out.println("remove item " + item.toString());
+            System.out.println(toString());
+        } else {
+            System.out.println("no item " + item.toString());
+        }
+
     }
 
     public void removeUser(User user) {
-        mUsers.remove(user);
-        System.out.println("remove user " + user.toString());
-        System.out.println(toString());
+        if (mUsers.remove(user)) {
+            System.out.println("remove user " + user.toString());
+            System.out.println(toString());
+        } else {
+            System.out.println("no user " + user.toString());
+        }
     }
 
     public void updateItem(MokaItem newValue) {

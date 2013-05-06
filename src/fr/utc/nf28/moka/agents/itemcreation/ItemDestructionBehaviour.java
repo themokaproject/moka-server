@@ -17,14 +17,13 @@ public class ItemDestructionBehaviour extends CyclicBehaviour {
         if (message != null) {
             int itemId = Integer.parseInt(message.getContent());
             final MokaEnvironment environment = ((MokaAgent) myAgent).getEnvironment();
-            for(MokaItem item : environment.getItems()) {
-                if(item.getId() == itemId) {
-                    System.out.println("Remove item " + item.toString());
+            for (MokaItem item : environment.getItems()) {
+                if (item.getId() == itemId) {
                     environment.removeItem(item);
                     return;
                 }
             }
-            System.out.println("No items with id " + itemId);
+            System.out.println("no item with id " + itemId);
         }
     }
 }
