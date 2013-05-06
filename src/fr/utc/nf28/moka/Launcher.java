@@ -19,6 +19,7 @@ public class Launcher {
             MokaEnvironment environment = new MokaEnvironment();
             container.createNewAgent("ConnectionAgent", "fr.utc.nf28.moka.agents.connection.ConnectionAgent", new Object[]{environment}).start();
             container.createNewAgent("ItemCreationAgent", "fr.utc.nf28.moka.agents.itemcreation.ItemCreationAgent", new Object[]{environment}).start();
+            container.createNewAgent("ItemEditionAgent", "fr.utc.nf28.moka.agents.edition.EditionAgent", new Object[]{environment}).start();
 
             User user = new User("Alexandre", "Masciulli");
             user.setColor(Color.WHITE.getRGB());
