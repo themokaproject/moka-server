@@ -24,8 +24,6 @@ public class ItemEdtionHandlingBehaviour extends CyclicBehaviour {
             } catch (IOException e) {
                 System.out.println("Edtion request syntax is wrong");
             }
-
-
         }
     }
 }
