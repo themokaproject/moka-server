@@ -1,5 +1,6 @@
 package fr.utc.nf28.moka.environment.items;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import fr.utc.nf28.moka.environment.users.User;
 
@@ -64,10 +65,12 @@ public abstract class MokaItem {
         mY = y;
     }
 
+    @JsonIgnore
     public boolean isLocked() {
         return mLocker == null;
     }
 
+    @JsonIgnore
     public User getLocker() {
         return mLocker;
     }
