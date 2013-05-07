@@ -1,6 +1,7 @@
 package fr.utc.nf28.moka.environment.items;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import fr.utc.nf28.moka.environment.users.User;
 
 /**
  * A generic visual item.
@@ -13,7 +14,7 @@ public abstract class MokaItem {
     private String mTitle;
     private int mX;
     private int mY;
-    private boolean mLocked = true;
+    private transient User mLocker;
 
     public MokaItem() {
         mId = sIdIndex++;
@@ -64,11 +65,23 @@ public abstract class MokaItem {
     }
 
     public boolean isLocked() {
-        return mLocked;
+        return mLocker == null;
     }
 
-    public void setLocked(boolean locked) {
-        mLocked = locked;
+    public User getLocker() {
+        return mLocker;
+    }
+
+    public void lock(User locker) {
+        if(mLocker != null) {
+            System.out.println("Item " + toString() + "already locked");
+            return;
+        }
+        mLocker = locker;
+    }
+
+    public void unlock() {
+        mLocker = null;
     }
 
     public String toString() {
