@@ -1,6 +1,7 @@
 package fr.utc.nf28.moka.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.utc.nf28.moka.environment.items.LockingRequest;
 import fr.utc.nf28.moka.environment.items.MokaItem;
 import fr.utc.nf28.moka.environment.users.User;
 
@@ -31,6 +32,15 @@ public class JSONParserUtils {
 
     public static MokaItem deserializeItem(final String json) throws IOException {
         return sMapper.readValue(json, MokaItem.class);
+    }
+
+    public static String serializeLockingRequest(LockingRequest request) throws IOException{
+        StringWriter sw = new StringWriter();
+        sMapper.writeValue(sw, request);
+        return sw.toString();
+    }
+    public static LockingRequest deserializeLockingRequest(final String json) throws IOException {
+        return sMapper.readValue(json, LockingRequest.class);
     }
 
 
