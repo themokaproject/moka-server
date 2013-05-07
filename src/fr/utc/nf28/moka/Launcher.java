@@ -2,6 +2,7 @@ package fr.utc.nf28.moka;
 
 import fr.utc.nf28.moka.environment.MokaEnvironment;
 import fr.utc.nf28.moka.environment.items.ImageLink;
+import fr.utc.nf28.moka.environment.items.LockingRequest;
 import fr.utc.nf28.moka.environment.items.UmlClass;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
@@ -20,6 +21,7 @@ public class Launcher {
             container.createNewAgent("ConnectionAgent", "fr.utc.nf28.moka.agents.connection.ConnectionAgent", new Object[]{environment}).start();
             container.createNewAgent("ItemCreationAgent", "fr.utc.nf28.moka.agents.itemcreation.ItemCreationAgent", new Object[]{environment}).start();
             container.createNewAgent("ItemEditionAgent", "fr.utc.nf28.moka.agents.itemedition.ItemEditionAgent", new Object[]{environment}).start();
+            container.createNewAgent("ItemLockingAgent", "fr.utc.nf28.moka.agents.itemedition.ItemLockingAgent", new Object[]{environment}).start();
 
             User user = new User("Alexandre", "Masciulli");
             user.setColor(Color.WHITE.getRGB());
@@ -32,6 +34,10 @@ public class Launcher {
             ImageLink image = new ImageLink("Image1", 200, 200, "http://masciulli.fr/img.png");
             System.out.println(JSONParserUtils.serializeItem(image));
 
+            LockingRequest lockingRequest = new LockingRequest();
+            lockingRequest.itemId = 0;
+            lockingRequest.userIp = "127.0.0.1";
+            System.out.println(JSONParserUtils.serializeLockingRequest(lockingRequest));
         } catch (Exception e) {
             e.printStackTrace();
         }
