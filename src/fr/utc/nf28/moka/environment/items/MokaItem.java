@@ -1,14 +1,12 @@
 package fr.utc.nf28.moka.environment.items;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import fr.utc.nf28.moka.environment.users.User;
 
 /**
  * A generic visual item.
  * The JsonTypeInfo annotation allows Jackson to include the real type (for example UmlClass) in the serialized string
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public abstract class MokaItem {
     private static int sIdIndex = 0;
     private int mId;
@@ -16,16 +14,18 @@ public abstract class MokaItem {
     private int mX;
     private int mY;
     private transient User mLocker;
+    private String mType;
 
     public MokaItem() {
         mId = sIdIndex++;
     }
 
-    public MokaItem(String title, int x, int y) {
+    public MokaItem(String title, int x, int y, String type) {
         this();
         mTitle = title;
         mX = x;
         mY = y;
+        mType = type;
     }
 
     public int getId() {
@@ -58,6 +58,14 @@ public abstract class MokaItem {
 
     public void setX(int x) {
         this.mX = x;
+    }
+
+    public String getType() {
+        return mType;
+    }
+
+    public void setType(String type) {
+        this.mType = type;
     }
 
     public void move(int x, int y) {

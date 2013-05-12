@@ -6,11 +6,13 @@ package fr.utc.nf28.moka.environment.items;
 public class ImageLink extends MokaItem {
     private String mUrl;
 
+    private static String sType = "image";
+
     public ImageLink() {
     }
 
     public ImageLink(String title, int x, int y, String url) {
-        super(title, x, y);
+        super(title, x, y, sType);
         mUrl = url;
     }
 
