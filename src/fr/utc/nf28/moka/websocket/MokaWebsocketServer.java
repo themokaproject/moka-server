@@ -1,11 +1,16 @@
 package fr.utc.nf28.moka.websocket;
 
+import fr.utc.nf28.moka.environment.users.User;
+import fr.utc.nf28.moka.util.JSONParserUtils;
+import fr.utc.nf28.moka.websocket.request.AddUserWebSocketRequest;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 public class MokaWebSocketServer extends WebSocketServer {
 
@@ -40,6 +45,18 @@ public class MokaWebSocketServer extends WebSocketServer {
         //TODO onError
         ex.printStackTrace();
     }
+
+	public void addUser(User user) throws IOException{
+		AddUserWebSocketRequest request = new AddUserWebSocketRequest(user);
+		sendAll(JSONParserUtils.serializeWebSocketRequest(request));
+	}
+
+
+	public void sendAll(String message){
+		for(WebSocket connection : this.connections()){
+			  connection.send(message);
+		}
+	}
 
 
 }
