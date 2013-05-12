@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.utc.nf28.moka.environment.items.LockingRequest;
 import fr.utc.nf28.moka.environment.items.MokaItem;
 import fr.utc.nf28.moka.environment.users.User;
+import fr.utc.nf28.moka.websocket.request.WebSocketRequest;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -42,6 +43,10 @@ public class JSONParserUtils {
     public static LockingRequest deserializeLockingRequest(final String json) throws IOException {
         return sMapper.readValue(json, LockingRequest.class);
     }
+
+	public static String serializeWebSocketRequest(WebSocketRequest request) throws IOException {
+		return sMapper.writeValueAsString(request);
+	}
 
 
 }
