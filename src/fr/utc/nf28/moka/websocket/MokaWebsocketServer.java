@@ -3,6 +3,7 @@ package fr.utc.nf28.moka.websocket;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.websocket.request.AddUserWebSocketRequest;
+import fr.utc.nf28.moka.websocket.request.RemoveUserWebSocketRequest;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
@@ -46,9 +47,14 @@ public class MokaWebSocketServer extends WebSocketServer {
 		ex.printStackTrace();
 	}
 
-	public void addUser(User user) throws IOException{
+	public void addUser(User user) throws IOException {
 		AddUserWebSocketRequest request = new AddUserWebSocketRequest(user);
 		sendAll(JSONParserUtils.serializeWebSocketRequest(request));
+	}
+
+	public void removeUser(User user) throws IOException {
+		RemoveUserWebSocketRequest request = new RemoveUserWebSocketRequest(user);
+	    sendAll(JSONParserUtils.serializeWebSocketRequest(request));
 	}
 
 	public void sendAll(String message){
