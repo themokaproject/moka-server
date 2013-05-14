@@ -12,6 +12,9 @@ import java.util.Scanner;
 
 public class MokaWebSocketLauncher {
 
+	private static User user;
+	private static UmlClass item;
+
 	public static void main(String[] args) throws UnknownHostException {
 		WebSocketImpl.DEBUG = true;
 		int port = 8887;
@@ -22,12 +25,26 @@ public class MokaWebSocketLauncher {
 		System.out.println( "Server started on port: " + test.getPort() );
 
 		try{
+			initTest();
 			readAction(test);
 		} catch (IOException e){
 			e.printStackTrace();;
 		}
 
 	}
+
+
+	private static void initTest(){
+		user = new User("Vincent", "Barthélémy");
+		user.setIp("127.0.0.1");
+		item = new UmlClass();
+		item.setId(144);
+		item.setType("umlClass");
+		item.setX(300);
+		item.setY(450);
+	}
+
+
 	public static void readAction(MokaWebSocketServer server) throws IOException {
 		String action;
 		Scanner scanIn = new Scanner(System.in);
@@ -37,35 +54,17 @@ public class MokaWebSocketLauncher {
 			System.out.println(action);
 
 			if(action.equals("1")){
-				User vb = new User();
-				vb.setFirstName("Vincent");
-				vb.setIp("127.0.0.1");
-				server.addUser(vb);
+				server.addUser(user);
 			}else if(action.equals("2")){
-				User vb = new User();
-				vb.setIp("127.0.0.1");
-				server.removeUser(vb);
+				server.removeUser(user);
 			}else if(action.equals("3")){
-				UmlClass item = new UmlClass();
-				item.setId(144);
-				item.setType("umlClass");
 				server.addItem(item);
 			}else if(action.equals("4")){
-				UmlClass item = new UmlClass();
-				item.setId(144);
 				server.removeItem(item);
 			}else if(action.equals("5")){
-				UmlClass item = new UmlClass();
-				item.setId(144);
-				item.setX(250);
-				item.setY(450);
 				server.moveItem(item);
 			}else if(action.equals("6")){
-				User vb = new User();
-				vb.setIp("127.0.0.1");
-				UmlClass item = new UmlClass();
-				item.setId(144);
-				server.selectItem(vb, item);
+				server.selectItem(user, item);
 			}
 		}
 	}
