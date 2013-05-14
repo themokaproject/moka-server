@@ -47,32 +47,32 @@ public class MokaWebSocketServer extends WebSocketServer {
 	}
 
 	public void addUser(User user) throws IOException {
-		AddUserWebSocketRequest request = new AddUserWebSocketRequest(user.getIp(), user.getFirstName());
+		WebSocketRequest request = WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.getFirstName());
 		sendAll(request);
 	}
 
 	public void removeUser(User user) throws IOException {
-		RemoveUserWebSocketRequest request = new RemoveUserWebSocketRequest(user.getIp());
+		WebSocketRequest request = WebSocketRequestFactory.createRemoveUserRequest(user.getIp());
 		sendAll(request);
 	}
 
 	public void addItem(MokaItem item) throws IOException {
-		AddItemWebSocketRequest request = new AddItemWebSocketRequest(item.getType(), String.valueOf(item.getId()));
+		WebSocketRequest request = WebSocketRequestFactory.createAddItemRequest(item.getType(), String.valueOf(item.getId()));
 		sendAll(request);
 	}
 
 	public void removeItem(MokaItem item) throws IOException {
-		RemoveItemWebSocketRequest request = new RemoveItemWebSocketRequest(String.valueOf(item.getId()));
+		WebSocketRequest request = WebSocketRequestFactory.createRemoveItemRequest(String.valueOf(item.getId()));
 		sendAll(request);
 	}
 
 	public void moveItem(MokaItem item) throws IOException {
-		MoveItemWebSocketRequest request = new MoveItemWebSocketRequest(String.valueOf(item.getId()), item.getY(), item.getX());
+		WebSocketRequest request = WebSocketRequestFactory.createMoveItemRequest(String.valueOf(item.getId()), item.getY(), item.getX());
 		sendAll(request);
 	}
 
 	public void selectItem(User user, MokaItem item) throws IOException {
-		SelectItemWebSocketRequest request = new SelectItemWebSocketRequest(user.getIp(), String.valueOf(item.getId()));
+		WebSocketRequest request = WebSocketRequestFactory.createSelectItemRequest(user.getIp(), String.valueOf(item.getId()));
 		sendAll(request);
 	}
 
