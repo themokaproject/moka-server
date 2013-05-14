@@ -5,13 +5,13 @@ import fr.utc.nf28.moka.environment.items.MokaItem;
 public class RemoveItemWebSocketRequest extends WebSocketRequest {
 	private static final String TYPE = "removeItem";
 
-	public RemoveItemWebSocketRequest(MokaItem item) {
+	public RemoveItemWebSocketRequest(String itemId) {
 		super(TYPE);
 		content = new RemoveItemContent();
-		((RemoveItemContent)content).itemId = item.getId();
+		((RemoveItemContent)content).itemId = itemId;
 	}
 
 	private class RemoveItemContent{
-		public int itemId;
+		public String itemId;
 	}
 }

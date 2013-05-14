@@ -5,10 +5,10 @@ import fr.utc.nf28.moka.environment.users.User;
 public class RemoveUserWebSocketRequest extends WebSocketRequest {
 	private static final String TYPE = "removeUser";
 
-	public RemoveUserWebSocketRequest(User user){
+	public RemoveUserWebSocketRequest(String userId){
 		super(TYPE);
 		content = new RemoveUserContent();
-		((RemoveUserContent)content).userId = user.getIp(); //Use the ip as Id :s  (need a User.id ??)
+		((RemoveUserContent)content).userId = userId;
 	}
 
 	private class RemoveUserContent{

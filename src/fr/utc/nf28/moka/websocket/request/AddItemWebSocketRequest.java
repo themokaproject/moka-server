@@ -5,15 +5,15 @@ import fr.utc.nf28.moka.environment.items.MokaItem;
 public class AddItemWebSocketRequest extends WebSocketRequest {
 	private static final String TYPE = "addItem";
 
-	public AddItemWebSocketRequest(MokaItem item) {
+	public AddItemWebSocketRequest(String type, String itemId) {
 		super(TYPE);
 		content = new AddItemContent();
-		((AddItemContent)content).type = item.getType();
-		((AddItemContent)content).itemId = item.getId();
+		((AddItemContent)content).type = type;
+		((AddItemContent)content).itemId = itemId;
 	}
 
 	private class AddItemContent {
 		public String type;
-		public int itemId;
+		public String itemId;
 	}
 }

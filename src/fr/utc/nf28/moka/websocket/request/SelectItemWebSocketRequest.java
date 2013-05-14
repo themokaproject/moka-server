@@ -6,16 +6,16 @@ import fr.utc.nf28.moka.environment.users.User;
 public class SelectItemWebSocketRequest extends WebSocketRequest {
 	private static final String TYPE = "selectItem";
 
-	public SelectItemWebSocketRequest(User user, MokaItem item) {
+	public SelectItemWebSocketRequest(String userId, String itemId) {
 		super(TYPE);
 		content = new SelectItemContent();
-		((SelectItemContent)content).userId = user.getIp(); //Use the ip as Id :s  (need a User.id ??)
-		((SelectItemContent)content).itemId = item.getId();
+		((SelectItemContent)content).userId = userId;
+		((SelectItemContent)content).itemId = itemId;
 	}
 
 	private class SelectItemContent {
 		public String userId;
-		public int itemId;
+		public String itemId;
 	}
 
 }

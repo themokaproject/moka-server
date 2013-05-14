@@ -5,16 +5,16 @@ import fr.utc.nf28.moka.environment.items.MokaItem;
 public class MoveItemWebSocketRequest extends WebSocketRequest {
 	private static final String TYPE = "moveItem";
 
-	public MoveItemWebSocketRequest(MokaItem item) {
+	public MoveItemWebSocketRequest(String itemId, int top, int left) {
 		super(TYPE);
 		content = new MoveItemContent();
-		((MoveItemContent)content).itemId = item.getId();
-		((MoveItemContent)content).top = item.getY();
-		((MoveItemContent)content).left = item.getX();
+		((MoveItemContent)content).itemId = itemId;
+		((MoveItemContent)content).top = top;
+		((MoveItemContent)content).left = left;
 	}
 
 	private class MoveItemContent {
-		public int itemId;
+		public String itemId;
 		public int top;
 		public int left;
 	}

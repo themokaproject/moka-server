@@ -5,11 +5,11 @@ import fr.utc.nf28.moka.environment.users.User;
 public class AddUserWebSocketRequest extends WebSocketRequest {
 	private static final String TYPE = "addUser";
 
-	public AddUserWebSocketRequest(User user){
+	public AddUserWebSocketRequest(String userId, String name){
 		super(TYPE);
 		content = new AddUserContent();
-		((AddUserContent)content).name = user.getFirstName();
-		((AddUserContent)content).userId = user.getIp(); //Use the ip as Id :s  (need a User.id ??)
+		((AddUserContent)content).userId = userId;
+		((AddUserContent)content).name = name;
 	}
 
 	private class AddUserContent{
