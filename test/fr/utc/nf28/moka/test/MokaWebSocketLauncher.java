@@ -39,6 +39,10 @@ public class MokaWebSocketLauncher {
 				vb.setFirstName("Vincent");
 				vb.setIp("127.0.0.1");
 				server.addUser(vb);
+			}else if(action.equals("2")){
+				User vb = new User();
+				vb.setIp("127.0.0.1");
+				server.removeUser(vb);
 			}
 		}
 	}
