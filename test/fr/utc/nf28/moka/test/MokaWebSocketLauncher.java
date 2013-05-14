@@ -1,5 +1,6 @@
 package fr.utc.nf28.moka.test;
 
+import fr.utc.nf28.moka.environment.items.UmlClass;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.websocket.MokaWebSocketServer;
 import org.java_websocket.WebSocketImpl;
@@ -43,6 +44,11 @@ public class MokaWebSocketLauncher {
 				User vb = new User();
 				vb.setIp("127.0.0.1");
 				server.removeUser(vb);
+			}else if(action.equals("3")){
+				UmlClass item = new UmlClass();
+				item.setId(144);
+				item.setType("umlClass");
+				server.addItem(item);
 			}
 		}
 	}
