@@ -54,17 +54,17 @@ public class MokaWebSocketLauncher {
 			System.out.println(action);
 
 			if(action.equals("1")){
-				server.addUser(user);
+				server.addUser(user.getIp(), user.getFirstName());
 			}else if(action.equals("2")){
-				server.removeUser(user);
+				server.removeUser(user.getIp());
 			}else if(action.equals("3")){
-				server.addItem(item);
+				server.addItem(item.getType(), String.valueOf(item.getId()));
 			}else if(action.equals("4")){
-				server.removeItem(item);
+				server.removeItem(String.valueOf(item.getId()));
 			}else if(action.equals("5")){
-				server.moveItem(item);
+				server.moveItem(String.valueOf(item.getId()), item.getX(), item.getY());
 			}else if(action.equals("6")){
-				server.selectItem(user, item);
+				server.selectItem(user.getIp(), String.valueOf(item.getId()));
 			}
 		}
 	}
