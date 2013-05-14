@@ -45,31 +45,43 @@ public class MokaWebSocketServer extends WebSocketServer {
 		ex.printStackTrace();
 	}
 
+	//for test purpose only
+	//TODO DELETE
 	public void addUser(String userId, String pseudo) throws IOException {
 		WebSocketRequest request = WebSocketRequestFactory.createAddUserRequest(userId, pseudo);
 		sendAll(request);
 	}
 
+	//for test purpose only
+	//TODO DELETE
 	public void removeUser(String userId) throws IOException {
 		WebSocketRequest request = WebSocketRequestFactory.createRemoveUserRequest(userId);
 		sendAll(request);
 	}
 
+	//for test purpose only
+	//TODO DELETE
 	public void addItem(String type, String itemId) throws IOException {
 		WebSocketRequest request = WebSocketRequestFactory.createAddItemRequest(type, itemId);
 		sendAll(request);
 	}
 
+	//for test purpose only
+	//TODO DELETE
 	public void removeItem(String itemId) throws IOException {
 		WebSocketRequest request = WebSocketRequestFactory.createRemoveItemRequest(itemId);
 		sendAll(request);
 	}
 
+	//for test purpose only
+	//TODO DELETE
 	public void moveItem(String itemId, int x, int y) throws IOException {
 		WebSocketRequest request = WebSocketRequestFactory.createMoveItemRequest(itemId, x, y);
 		sendAll(request);
 	}
 
+	//for test purpose only
+	//TODO DELETE
 	public void selectItem(String userId, String itemId) throws IOException {
 		WebSocketRequest request = WebSocketRequestFactory.createSelectItemRequest(userId, itemId);
 		sendAll(request);
@@ -81,6 +93,8 @@ public class MokaWebSocketServer extends WebSocketServer {
 		}
 	}
 
+	//for test purpose only
+	//TODO DELETE
 	public void sendAll(WebSocketRequest request) throws IOException {
 		sendAll(JSONParserUtils.serializeWebSocketRequest(request));
 	}
