@@ -6,7 +6,7 @@ public class AddUserWebSocketRequest extends WebSocketRequest {
 	private static final String TYPE = "addUser";
 
 	public AddUserWebSocketRequest(User user){
-		type = TYPE;
+		super(TYPE);
 		content = new AddUserContent();
 		((AddUserContent)content).name = user.getFirstName();
 		((AddUserContent)content).userId = user.getIp(); //Use the ip as Id :s  (need a User.id ??)

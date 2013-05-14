@@ -6,7 +6,7 @@ public class RemoveUserWebSocketRequest extends WebSocketRequest {
 	private static final String TYPE = "removeUser";
 
 	public RemoveUserWebSocketRequest(User user){
-		type = TYPE;
+		super(TYPE);
 		content = new RemoveUserContent();
 		((RemoveUserContent)content).userId = user.getIp(); //Use the ip as Id :s  (need a User.id ??)
 	}
