@@ -5,6 +5,7 @@ import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.websocket.request.AddItemWebSocketRequest;
 import fr.utc.nf28.moka.websocket.request.AddUserWebSocketRequest;
+import fr.utc.nf28.moka.websocket.request.RemoveItemWebSocketRequest;
 import fr.utc.nf28.moka.websocket.request.RemoveUserWebSocketRequest;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
@@ -62,6 +63,11 @@ public class MokaWebSocketServer extends WebSocketServer {
 	public void addItem(MokaItem item) throws IOException {
 		AddItemWebSocketRequest request = new AddItemWebSocketRequest(item);
 	 	sendAll(JSONParserUtils.serializeWebSocketRequest(request));
+	}
+
+	public void removeItem(MokaItem item) throws IOException {
+		RemoveItemWebSocketRequest request = new RemoveItemWebSocketRequest(item);
+		sendAll(JSONParserUtils.serializeWebSocketRequest(request));
 	}
 
 	public void sendAll(String message){
