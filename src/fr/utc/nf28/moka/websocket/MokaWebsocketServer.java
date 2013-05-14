@@ -66,6 +66,11 @@ public class MokaWebSocketServer extends WebSocketServer {
 		sendAll(request);
 	}
 
+	public void moveItem(MokaItem item) throws IOException {
+		MoveItemWebSocketRequest request = new MoveItemWebSocketRequest(item);
+		sendAll(request);
+	}
+
 	public void sendAll(String message){
 		for(WebSocket connection : this.connections()){
 			connection.send(message);
