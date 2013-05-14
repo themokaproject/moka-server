@@ -5,11 +5,6 @@ import fr.utc.nf28.moka.environment.users.User;
 public class AddUserWebSocketRequest extends WebSocketRequest {
 	private static final String TYPE = "addUser";
 
-	public AddUserWebSocketRequest(){
-		content = new AddUserContent();
-		type = TYPE;
-	}
-
 	public AddUserWebSocketRequest(User user){
 		content = new AddUserContent();
 		type = TYPE;

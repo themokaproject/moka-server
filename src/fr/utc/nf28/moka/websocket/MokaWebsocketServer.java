@@ -46,7 +46,7 @@ public class MokaWebSocketServer extends WebSocketServer {
         ex.printStackTrace();
     }
 
-	public void addUser(User user) throws IOException{
+	private void addUser(User user) throws IOException{
 		AddUserWebSocketRequest request = new AddUserWebSocketRequest(user);
 		sendAll(JSONParserUtils.serializeWebSocketRequest(request));
 	}
