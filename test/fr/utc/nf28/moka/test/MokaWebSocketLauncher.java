@@ -54,6 +54,12 @@ public class MokaWebSocketLauncher {
 				UmlClass item = new UmlClass();
 				item.setId(144);
 				server.removeItem(item);
+			}else if(action.equals("5")){
+				UmlClass item = new UmlClass();
+				item.setId(144);
+				item.setX(250);
+				item.setY(450);
+				server.moveItem(item);
 			}
 		}
 	}
