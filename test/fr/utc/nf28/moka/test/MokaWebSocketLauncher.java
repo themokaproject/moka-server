@@ -60,6 +60,12 @@ public class MokaWebSocketLauncher {
 				item.setX(250);
 				item.setY(450);
 				server.moveItem(item);
+			}else if(action.equals("6")){
+				User vb = new User();
+				vb.setIp("127.0.0.1");
+				UmlClass item = new UmlClass();
+				item.setId(144);
+				server.selectItem(vb, item);
 			}
 		}
 	}
