@@ -30,6 +30,7 @@ public class MokaEnvironment {
         } else {
             System.out.println("item with id " + item.getId() + " replaced");
         }
+        System.out.println(toString());
     }
 
     public void addUser(User user) {
@@ -47,6 +48,7 @@ public class MokaEnvironment {
         } else {
             System.out.println("Item " + itemId + " removed");
         }
+        System.out.println(toString());
     }
 
     public void removeUser(String ip) {
@@ -55,6 +57,7 @@ public class MokaEnvironment {
         } else {
             System.out.println("User " + ip + " removed");
         }
+        System.out.println(toString());
     }
 
     public void updateItem(MokaItem newValue) {
