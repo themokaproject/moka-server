@@ -31,13 +31,15 @@ public class Launcher {
             ConnectionRequest connectionRequest = new ConnectionRequest();
             connectionRequest.setType("connection");
             connectionRequest.setRequest(JSONParserUtils.serializeUser(user));
-            System.out.println("connection == " + JSONParserUtils.serializeConnectionRequest(connectionRequest));
+            System.out.println("connection == ");
+            System.out.println(JSONParserUtils.serializeConnectionRequest(connectionRequest));
 
             ConnectionRequest disconnectionRequest = new ConnectionRequest();
             disconnectionRequest.setType("disconnection");
             disconnectionRequest.setRequest(user.getIp());
 
-            System.out.println("disconnection == " + JSONParserUtils.serializeConnectionRequest(disconnectionRequest));
+            System.out.println("disconnection == ");
+            System.out.println(JSONParserUtils.serializeConnectionRequest(disconnectionRequest));
 
             UmlClass uml = new UmlClass("MyClass", 100, 100, "MyClass");
             System.out.println(JSONParserUtils.serializeItem(uml));
