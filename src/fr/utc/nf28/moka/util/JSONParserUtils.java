@@ -1,10 +1,13 @@
 package fr.utc.nf28.moka.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.utc.nf28.moka.agents.connection.ConnectionRequest;
+import fr.utc.nf28.moka.agents.itemcreation.CreationRequest;
 import fr.utc.nf28.moka.agents.itemedition.EditionRequest;
 import fr.utc.nf28.moka.environment.items.LockingRequest;
 import fr.utc.nf28.moka.environment.items.MokaItem;
+import fr.utc.nf28.moka.environment.items.UmlClass;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.websocket.request.WebSocketRequest;
 
@@ -34,7 +37,8 @@ public class JSONParserUtils {
     }
 
     public static MokaItem deserializeItem(final String json) throws IOException {
-        return sMapper.readValue(json, MokaItem.class);
+        // TODO deserialize the appropriate class using the "type" key
+        return sMapper.readValue(json, UmlClass.class);
     }
 
     public static String serializeLockingRequest(LockingRequest request) throws IOException{
@@ -64,5 +68,13 @@ public class JSONParserUtils {
 
     public static ConnectionRequest deserializeConnectionRequest(String connectionRequest) throws IOException {
         return sMapper.readValue(connectionRequest, ConnectionRequest.class);
+    }
+
+    public static String serializeCreationRequest(CreationRequest request) throws IOException {
+        return sMapper.writeValueAsString(request);
+    }
+
+    public static CreationRequest deserializeCreationRequest(String creationRequest) throws IOException {
+        return sMapper.readValue(creationRequest, CreationRequest.class);
     }
 }

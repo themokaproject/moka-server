@@ -1,6 +1,7 @@
 package fr.utc.nf28.moka;
 
 import fr.utc.nf28.moka.agents.connection.ConnectionRequest;
+import fr.utc.nf28.moka.agents.itemcreation.CreationRequest;
 import fr.utc.nf28.moka.environment.MokaEnvironment;
 import fr.utc.nf28.moka.environment.items.ImageLink;
 import fr.utc.nf28.moka.environment.items.LockingRequest;
@@ -24,6 +25,7 @@ public class Launcher {
             container.createNewAgent("ItemEditionAgent", "fr.utc.nf28.moka.agents.itemedition.ItemEditionAgent", new Object[]{environment}).start();
             container.createNewAgent("ItemLockingAgent", "fr.utc.nf28.moka.agents.itemedition.ItemLockingAgent", new Object[]{environment}).start();
 
+            // USER
             User user = new User("Alexandre", "Masciulli");
             user.setColor(Color.WHITE.getRGB());
             user.setIp("127.0.0.1");
@@ -41,11 +43,26 @@ public class Launcher {
             System.out.println("disconnection == ");
             System.out.println(JSONParserUtils.serializeConnectionRequest(disconnectionRequest));
 
+            // ITEMS
             UmlClass uml = new UmlClass("MyClass", 100, 100, "MyClass");
-            System.out.println(JSONParserUtils.serializeItem(uml));
 
             ImageLink image = new ImageLink("Image1", 200, 200, "http://masciulli.fr/img.png");
-            System.out.println(JSONParserUtils.serializeItem(image));
+
+
+            CreationRequest creationRequest = new CreationRequest();
+            creationRequest.setType("creation");
+            creationRequest.setRequest(JSONParserUtils.serializeItem(uml));
+            System.out.println("UML creation == ");
+            System.out.println(JSONParserUtils.serializeCreationRequest(creationRequest));
+
+            CreationRequest destructionRequest = new CreationRequest();
+            destructionRequest.setType("destruction");
+            destructionRequest.setRequest(String.valueOf(uml.getId()));
+            System.out.println("UML destruction == ");
+            System.out.println(JSONParserUtils.serializeCreationRequest(destructionRequest));
+
+
+
 
             LockingRequest lockingRequest = new LockingRequest();
             lockingRequest.itemId = 0;

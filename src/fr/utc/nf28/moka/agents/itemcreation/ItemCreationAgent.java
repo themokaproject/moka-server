@@ -10,6 +10,5 @@ public class ItemCreationAgent extends MokaAgent {
     public void setup() {
         super.setup();
         addBehaviour(new ItemCreationBehaviour());
-        addBehaviour(new ItemDestructionBehaviour());
     }
 }

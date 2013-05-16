@@ -15,7 +15,7 @@ public class UmlClass extends MokaItem {
     public UmlClass() {
     }
     public UmlClass(String title, int x, int y, String className) {
-        super(title, x, y, sType);
+        super(title, x, y);
         mClassName = className;
     }
 
