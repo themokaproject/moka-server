@@ -19,10 +19,15 @@ public class ItemEdtionHandlingBehaviour extends CyclicBehaviour {
         if (message != null) {
             final String editionRequest = message.getContent();
             try {
-                MokaItem item = JSONParserUtils.deserializeItem(editionRequest);
-                ((MokaAgent) myAgent).getEnvironment().updateItem(item);
+                EditionRequest request = JSONParserUtils.deserializeEditionRequest(editionRequest);
+                String editType = request.getEditType();
+                if(editType == "move") {
+                    // find an ItemMoveAgent and send it request.getRequest() as content
+                } else {
+                    throw new IOException();
+                }
             } catch (IOException e) {
-                System.out.println("Edtion request syntax is wrong");
+                System.out.println("Edition request syntax is wrong");
             }
         }
     }
