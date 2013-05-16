@@ -11,7 +11,7 @@ import jade.lang.acl.MessageTemplate;
 import java.io.IOException;
 
 /**
- * A behaviour that handles connections.
+ * A behaviour that handles connections and disconnections.
  */
 public class ConnectionHandlingBehaviour extends CyclicBehaviour {
     @Override

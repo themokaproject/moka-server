@@ -1,7 +1,7 @@
 package fr.utc.nf28.moka.agents.connection;
 
 /**
- * Used to hold any connection/deconnection message
+ * Used to hold any connection/disconnection message
  */
 public class ConnectionRequest {
 
