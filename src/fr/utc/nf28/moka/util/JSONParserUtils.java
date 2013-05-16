@@ -1,6 +1,7 @@
 package fr.utc.nf28.moka.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.utc.nf28.moka.agents.connection.ConnectionRequest;
 import fr.utc.nf28.moka.agents.itemedition.EditionRequest;
 import fr.utc.nf28.moka.environment.items.LockingRequest;
 import fr.utc.nf28.moka.environment.items.MokaItem;
@@ -50,6 +51,10 @@ public class JSONParserUtils {
 	}
 
     public static EditionRequest deserializeEditionRequest(String editionRequest) throws  IOException{
-        return  sMapper.readValue(editionRequest, EditionRequest.class);
+        return sMapper.readValue(editionRequest, EditionRequest.class);
+    }
+
+    public static ConnectionRequest deserializeConnectionRequest(String connectionRequest) throws IOException {
+        return sMapper.readValue(connectionRequest, ConnectionRequest.class);
     }
 }
