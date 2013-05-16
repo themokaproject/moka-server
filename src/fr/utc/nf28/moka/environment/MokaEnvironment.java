@@ -3,9 +3,7 @@ package fr.utc.nf28.moka.environment;
 import fr.utc.nf28.moka.environment.items.MokaItem;
 import fr.utc.nf28.moka.environment.users.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * A class that holds all the models of the running Moka platform
@@ -13,7 +11,7 @@ import java.util.List;
  */
 public class MokaEnvironment {
     private HashMap<String, User> mUsers = new HashMap<String, User>();
-    private List<MokaItem> mItems = new ArrayList<MokaItem>();
+    private HashMap<Integer, MokaItem> mItems = new HashMap<Integer, MokaItem>();
 
     public MokaEnvironment() {
     }
@@ -22,34 +20,37 @@ public class MokaEnvironment {
         return mUsers;
     }
 
-    public List<MokaItem> getItems() {
+    public HashMap<Integer, MokaItem> getItems() {
         return mItems;
     }
 
     public void addItem(MokaItem item) {
-        mItems.add(item);
-        System.out.println("add item " + item.toString());
-        System.out.println(toString());
+        if(mItems.put(item.getId(), item) == null) {
+            System.out.println("item with id " + item.getId() + " added");
+        } else {
+            System.out.println("item with id " + item.getId() + " replaced");
+        }
     }
 
     public void addUser(User user) {
-        mUsers.put(user.getIp(), user);
-        System.out.println("add user " + user.toString());
+        if (mUsers.put(user.getIp(), user) == null) {
+            System.out.println("user with ip " + user.getIp() + " added");
+        } else {
+            System.out.println("user with ip " + user.getIp() + " replaced");
+        }
         System.out.println(toString());
     }
 
-    public void removeItem(MokaItem item) {
-        if (mItems.remove(item)) {
-            System.out.println("remove item " + item.toString());
-            System.out.println(toString());
+    public void removeItem(int itemId) {
+        if (mItems.remove(itemId) == null) {
+            System.out.println("no item with id " + itemId);
         } else {
-            System.out.println("no item " + item.toString());
+            System.out.println("Item " + itemId + " removed");
         }
-
     }
 
     public void removeUser(String ip) {
-        if(mUsers.remove(ip) == null) {
+        if (mUsers.remove(ip) == null) {
             System.out.println("no user with ip " + ip);
         } else {
             System.out.println("User " + ip + " removed");
@@ -57,16 +58,7 @@ public class MokaEnvironment {
     }
 
     public void updateItem(MokaItem newValue) {
-        for (MokaItem i : mItems) {
-            if (i.getId() == newValue.getId()) {
-                mItems.remove(i);
-                mItems.add(newValue);
-                System.out.println("modify item " + newValue.toString());
-                System.out.println(toString());
-                return;
-            }
-        }
-        System.out.println("no item with id " + newValue.getId());
+        // TODO correctly implement udpate
     }
 
     public String toString() {
@@ -76,7 +68,7 @@ public class MokaEnvironment {
             s += u.toString() + "\n";
         }
         s += "== Items ==\n";
-        for (MokaItem mi : mItems) {
+        for (MokaItem mi : mItems.values()) {
             s += mi.toString() + "\n";
         }
         return s;
