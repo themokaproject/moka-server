@@ -46,6 +46,14 @@ public class JSONParserUtils {
         return sMapper.readValue(json, LockingRequest.class);
     }
 
+    public static String serializeEditionRequest(EditionRequest request) throws IOException {
+        return sMapper.writeValueAsString(request);
+    }
+
+    public static String serializeConnectionRequest(ConnectionRequest request) throws IOException {
+        return sMapper.writeValueAsString(request);
+    }
+
 	public static String serializeWebSocketRequest(WebSocketRequest request) throws IOException {
 		return sMapper.writeValueAsString(request);
 	}

@@ -1,5 +1,6 @@
 package fr.utc.nf28.moka;
 
+import fr.utc.nf28.moka.agents.connection.ConnectionRequest;
 import fr.utc.nf28.moka.environment.MokaEnvironment;
 import fr.utc.nf28.moka.environment.items.ImageLink;
 import fr.utc.nf28.moka.environment.items.LockingRequest;
@@ -26,7 +27,17 @@ public class Launcher {
             User user = new User("Alexandre", "Masciulli");
             user.setColor(Color.WHITE.getRGB());
             user.setIp("127.0.0.1");
-            System.out.println(JSONParserUtils.serializeUser(user));
+
+            ConnectionRequest connectionRequest = new ConnectionRequest();
+            connectionRequest.setType("connection");
+            connectionRequest.setRequest(JSONParserUtils.serializeUser(user));
+            System.out.println("connection == " + JSONParserUtils.serializeConnectionRequest(connectionRequest));
+
+            ConnectionRequest disconnectionRequest = new ConnectionRequest();
+            disconnectionRequest.setType("disconnection");
+            disconnectionRequest.setRequest(user.getIp());
+
+            System.out.println("disconnection == " + JSONParserUtils.serializeConnectionRequest(disconnectionRequest));
 
             UmlClass uml = new UmlClass("MyClass", 100, 100, "MyClass");
             System.out.println(JSONParserUtils.serializeItem(uml));

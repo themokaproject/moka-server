@@ -21,18 +21,7 @@ public class ItemLockingBehaviour extends CyclicBehaviour {
             try {
                 LockingRequest lockingRequest = JSONParserUtils.deserializeLockingRequest(lockingRequestJson);
                 MokaEnvironment environment = ((MokaAgent) myAgent).getEnvironment();
-                for (MokaItem item : environment.getItems()) {
-                    if(item.getId() == lockingRequest.itemId) {
-                        for (User user : environment.getUsers()) {
-                            if(user.getIp().equals(lockingRequest.userIp)) {
-                                item.lock(user);
-                                return;
-                            }
-                        }
-                        System.out.println("no user with ip " + lockingRequest.userIp);
-                        return;
-                    }
-                }
+                // TODO reimplement locking
                 System.out.println("no item with id " + lockingRequest.itemId);
             } catch (IOException e) {
                 System.out.println("Locking request syntax is wrong");

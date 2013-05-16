@@ -4,6 +4,7 @@ import fr.utc.nf28.moka.environment.items.MokaItem;
 import fr.utc.nf28.moka.environment.users.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -11,13 +12,13 @@ import java.util.List;
  * All MokaAgents have a reference to their MokaEnvironment
  */
 public class MokaEnvironment {
-    private List<User> mUsers = new ArrayList<User>();
+    private HashMap<String, User> mUsers = new HashMap<String, User>();
     private List<MokaItem> mItems = new ArrayList<MokaItem>();
 
     public MokaEnvironment() {
     }
 
-    public List<User> getUsers() {
+    public HashMap<String, User> getUsers() {
         return mUsers;
     }
 
@@ -32,7 +33,7 @@ public class MokaEnvironment {
     }
 
     public void addUser(User user) {
-        mUsers.add(user);
+        mUsers.put(user.getIp(), user);
         System.out.println("add user " + user.toString());
         System.out.println(toString());
     }
@@ -47,12 +48,11 @@ public class MokaEnvironment {
 
     }
 
-    public void removeUser(User user) {
-        if (mUsers.remove(user)) {
-            System.out.println("remove user " + user.toString());
-            System.out.println(toString());
+    public void removeUser(String ip) {
+        if(mUsers.remove(ip) == null) {
+            System.out.println("no user with ip " + ip);
         } else {
-            System.out.println("no user " + user.toString());
+            System.out.println("User " + ip + " removed");
         }
     }
 
@@ -72,7 +72,7 @@ public class MokaEnvironment {
     public String toString() {
         String s = "";
         s += "== Users ==\n";
-        for (User u : mUsers) {
+        for (User u : mUsers.values()) {
             s += u.toString() + "\n";
         }
         s += "== Items ==\n";

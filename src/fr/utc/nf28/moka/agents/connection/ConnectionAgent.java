@@ -11,6 +11,5 @@ public class ConnectionAgent extends MokaAgent {
     public void setup() {
         super.setup();
         addBehaviour(new ConnectionHandlingBehaviour());
-        addBehaviour(new DeconnectionHandlingBehaviour());
     }
 }
