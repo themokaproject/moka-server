@@ -24,6 +24,7 @@ public class Launcher {
             container.createNewAgent("ItemCreationAgent", "fr.utc.nf28.moka.agents.itemcreation.ItemCreationAgent", new Object[]{environment}).start();
             container.createNewAgent("ItemEditionAgent", "fr.utc.nf28.moka.agents.itemedition.ItemEditionAgent", new Object[]{environment}).start();
             container.createNewAgent("ItemLockingAgent", "fr.utc.nf28.moka.agents.itemedition.ItemLockingAgent", new Object[]{environment}).start();
+			container.createNewAgent("WebSocketAgent", "fr.utc.nf28.moka.agents.websocket.WebSocketAgent", null).start();
 
             // USER
             User user = new User("Alexandre", "Masciulli");
