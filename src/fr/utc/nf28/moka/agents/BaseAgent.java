@@ -15,14 +15,17 @@ import java.util.ArrayList;
  */
 public class BaseAgent extends Agent {
 
+	private static final String DEFAULT_TYPE = "DefaultServiceType";
+
 	/**
-	 * Retrieve all the agents AID that have the skill asked for
+	 * Retrieve all the agents AID that have a skill
+	 * that matches the name and the type
 	 *
 	 * @param skillName
 	 * @param skillType
 	 * @return an arrayList of AIDs
 	 */
-	private ArrayList<AID> getAgentsWithSkill(String skillName, String skillType) {
+	protected ArrayList<AID> getAgentsWithSkill(String skillName, String skillType) {
 		ArrayList<AID> result = new ArrayList<AID>();
 		DFAgentDescription agentDescription = new DFAgentDescription();
 		ServiceDescription serviceDescription = new ServiceDescription();
@@ -44,12 +47,14 @@ public class BaseAgent extends Agent {
 	}
 
 	/**
-	 * Register a skill with a type
+	 * Register a skill with a name
 	 *
-	 * @param skillType
+	 * @param skillName
 	 */
-	private void registerSkill(String skillType) {
-		registerSkill(null, skillType);
+	protected void registerSkill(String skillName) {
+		//use a default type
+		// type is a mandatory field of a service-description
+		registerSkill(skillName, DEFAULT_TYPE);
 	}
 
 	/**
@@ -58,7 +63,7 @@ public class BaseAgent extends Agent {
 	 * @param skillName
 	 * @param skillType
 	 */
-	private void registerSkill(String skillName, String skillType) {
+	protected void registerSkill(String skillName, String skillType) {
 		DFAgentDescription agentDescription = new DFAgentDescription();
 		ServiceDescription serviceDescription = new ServiceDescription();
 		serviceDescription.setName(skillName);
