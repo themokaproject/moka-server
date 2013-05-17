@@ -11,6 +11,7 @@ public class MokaAgent extends BaseAgent {
     protected MokaEnvironment mEnvironment;
 
     public void setup() {
+		super.setup();
         final Object[] args = getArguments();
         mEnvironment = (MokaEnvironment)args[0];
     }
