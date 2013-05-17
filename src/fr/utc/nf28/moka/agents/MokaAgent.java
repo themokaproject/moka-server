@@ -7,7 +7,7 @@ import jade.core.Agent;
  * A generic Agent for Moka
  * Has a reference to its MokaEnvironment
  */
-public class MokaAgent extends Agent {
+public class MokaAgent extends BaseAgent {
     protected MokaEnvironment mEnvironment;
 
     public void setup() {
