@@ -16,14 +16,6 @@ public class MokaEnvironment {
     public MokaEnvironment() {
     }
 
-    public HashMap<String, User> getUsers() {
-        return mUsers;
-    }
-
-    public HashMap<Integer, MokaItem> getItems() {
-        return mItems;
-    }
-
     public void addItem(MokaItem item) {
         if(mItems.put(item.getId(), item) == null) {
             System.out.println("item with id " + item.getId() + " added");
