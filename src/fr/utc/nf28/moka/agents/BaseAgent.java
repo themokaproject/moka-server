@@ -19,6 +19,17 @@ public class BaseAgent extends Agent {
 
 	/**
 	 * Retrieve all the agents AID that have a skill
+	 * that matches the name
+	 *
+	 * @param skillName
+	 * @return an arrayList of AIDs
+	 */
+	protected  ArrayList<AID> getAgentsWithSkill(String skillName) {
+		return getAgentsWithSkill(skillName, DEFAULT_TYPE);
+	}
+
+	/**
+	 * Retrieve all the agents AID that have a skill
 	 * that matches the name and the type
 	 *
 	 * @param skillName
@@ -27,14 +38,8 @@ public class BaseAgent extends Agent {
 	 */
 	protected ArrayList<AID> getAgentsWithSkill(String skillName, String skillType) {
 		ArrayList<AID> result = new ArrayList<AID>();
-		DFAgentDescription agentDescription = new DFAgentDescription();
-		ServiceDescription serviceDescription = new ServiceDescription();
-		serviceDescription.setName(skillName);
-		serviceDescription.setType(skillType);
-		agentDescription.addServices(serviceDescription);
-
 		try {
-			DFAgentDescription[] agentDescriptions = DFService.search(this, agentDescription);
+			DFAgentDescription[] agentDescriptions = DFService.search(this, getAgentDescriptionWithService(skillName, skillType));
 			for(DFAgentDescription ad : agentDescriptions ) {
 				result.add(ad.getName());
 			}
@@ -64,17 +69,20 @@ public class BaseAgent extends Agent {
 	 * @param skillType
 	 */
 	protected void registerSkill(String skillName, String skillType) {
+		try {
+			DFService.register(this, getAgentDescriptionWithService(skillName, skillType));
+		} catch (FIPAException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private DFAgentDescription getAgentDescriptionWithService(String skillName, String skillType) {
 		DFAgentDescription agentDescription = new DFAgentDescription();
 		ServiceDescription serviceDescription = new ServiceDescription();
 		serviceDescription.setName(skillName);
 		serviceDescription.setType(skillType);
 		agentDescription.addServices(serviceDescription);
-
-		try {
-			DFService.register(this, agentDescription);
-		} catch (FIPAException e) {
-			e.printStackTrace();
-		}
+		return  agentDescription;
 	}
 
 }
