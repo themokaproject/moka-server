@@ -10,10 +10,16 @@ import java.util.HashMap;
  * All MokaAgents have a reference to their MokaEnvironment
  */
 public class MokaEnvironment {
+    private int sItemIdGenCurrentIndex = 0;
+
     private HashMap<String, User> mUsers = new HashMap<String, User>();
     private HashMap<Integer, MokaItem> mItems = new HashMap<Integer, MokaItem>();
 
     public MokaEnvironment() {
+    }
+
+    public int generateNewId() {
+        return sItemIdGenCurrentIndex++;
     }
 
     public void addItem(MokaItem item) {
@@ -68,6 +74,5 @@ public class MokaEnvironment {
         }
         return s;
     }
-
 
 }

@@ -43,7 +43,11 @@ public class ItemCreationBehaviour extends CyclicBehaviour {
 
     private void create(String itemString) throws IOException {
         MokaItem item = JSONParserUtils.deserializeItem(itemString);
-        ((MokaAgent)myAgent).getEnvironment().addItem(item);
+        MokaEnvironment environment = ((MokaAgent)myAgent).getEnvironment();
+        int newId = environment.generateNewId();
+        // TODO communicate the item's id to the app
+        item.setId(newId);
+        environment.addItem(item);
     }
     
 }
