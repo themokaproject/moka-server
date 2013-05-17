@@ -16,6 +16,7 @@ public class WebSocketAgent extends BaseAgent {
 		super.setup();
 		registerSkill(SKILL_NAME);
 		startServer();
+		addBehaviour(new MessageBoxBehaviour());
 	}
 
 	/**
@@ -35,6 +36,15 @@ public class WebSocketAgent extends BaseAgent {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Send a message to the platform
+	 *
+	 * @param message
+	 */
+	public void sendToPlatform(String message) {
+		mServer.sendAll(message);
 	}
 
 }
