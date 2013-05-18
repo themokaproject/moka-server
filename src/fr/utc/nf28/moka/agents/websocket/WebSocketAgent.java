@@ -20,7 +20,7 @@ public class WebSocketAgent extends BaseAgent {
 	}
 
 	/**
-	 * Start the wenSocket server
+	 * Start the webSocket server
 	 * on the DEFAULT_PORT
 	 * or on the port provided as arguments
 	 */
@@ -39,7 +39,7 @@ public class WebSocketAgent extends BaseAgent {
 	}
 
 	/**
-	 * Send a message to the platform
+	 * Send a message to the platforms
 	 *
 	 * @param message
 	 */
