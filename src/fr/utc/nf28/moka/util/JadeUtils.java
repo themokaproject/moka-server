@@ -1,11 +1,19 @@
 package fr.utc.nf28.moka.util;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Hi-Bro
- * Date: 19/05/13
- * Time: 15:32
- * To change this template use File | Settings | File Templates.
- */
 public class JadeUtils {
+
+	/**
+	 * default type for Jade skill registering
+	 */
+	public static final String JADE_SKILL_TYPE_DEFAULT = "MokaDefaultSkillType";
+
+	/**
+	 * name for Jade skill registering of AndroidAgent
+	 */
+	public static final String JADE_SKILL_NAME_ANDROID = "AndroidAgentSkillName";
+
+	/**
+	 * name for Jade skill registering of ConnectionAgent
+	 */
+	public static final String JADE_SKILL_NAME_CONNECTION = "ConnectionAgentSkillName";
 }
