@@ -1,20 +1,19 @@
 package fr.utc.nf28.moka.agents.websocket;
 
 import fr.utc.nf28.moka.agents.BaseAgent;
+import fr.utc.nf28.moka.util.JadeUtils;
 import fr.utc.nf28.moka.websocket.MokaWebSocketServer;
 
 import java.net.UnknownHostException;
 
 public class WebSocketAgent extends BaseAgent {
-
-	public static final String SKILL_NAME = "WebSocketService";
 	public static final int DEFAULT_PORT = 8887;
 
 	private MokaWebSocketServer mServer;
 
 	public void setup() {
 		super.setup();
-		registerSkill(SKILL_NAME);
+		registerSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER);
 		startServer();
 		addBehaviour(new MessageBoxBehaviour());
 	}

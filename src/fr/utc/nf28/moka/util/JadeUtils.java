@@ -21,4 +21,6 @@ public class JadeUtils {
 	 * name for Jade skill registering of CreationAgent
 	 */
 	public static final String JADE_SKILL_NAME_CREATION = "CreationAgentSkillName";
+
+	public static final String JADE_SKILL_NAME_WEBSOCKET_SERVER = "WebSocketService";
 }
