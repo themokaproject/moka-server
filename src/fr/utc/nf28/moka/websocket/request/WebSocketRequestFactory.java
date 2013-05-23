@@ -19,10 +19,10 @@ public class WebSocketRequestFactory {
 	 * @return  {@link WebSocketRequest}
 	 */
 	public static WebSocketRequest createAddItemRequest(String type, String itemId) {
-		HashMap<String, String> content = new HashMap<String, String>();
-		content.put("type", type);
-		content.put("itemId", itemId);
-		return new WebSocketRequest(TYPE_ADD_ITEM, content);
+		WebSocketRequest request = new WebSocketRequest(TYPE_ADD_ITEM);
+		request.put("type", type);
+		request.put("itemId", itemId);
+		return request;
 	}
 
 	/**
@@ -33,9 +33,9 @@ public class WebSocketRequestFactory {
 	 * @return  {@link WebSocketRequest}
 	 */
 	public static WebSocketRequest createRemoveItemRequest(String itemId) {
-		HashMap<String, String> content = new HashMap<String, String>();
-		content.put("itemId", itemId);
-		return  new WebSocketRequest(TYPE_REMOVE_ITEM, content);
+		WebSocketRequest request = new WebSocketRequest(TYPE_REMOVE_ITEM);
+		request.put("itemId", itemId);
+		return request;
 	}
 
 	/**
@@ -47,10 +47,10 @@ public class WebSocketRequestFactory {
 	 * @return  {@link WebSocketRequest}
 	 */
 	public static WebSocketRequest createAddUserRequest(String userId, String name) {
-		HashMap<String, String> content = new HashMap<String, String>();
-		content.put("userId", userId);
-		content.put("name", name);
-		return  new WebSocketRequest(TYPE_ADD_USER, content);
+		WebSocketRequest request = new WebSocketRequest(TYPE_ADD_USER);
+		request.put("userId", userId);
+		request.put("name", name);
+		return request;
 	}
 
 	/**
@@ -61,9 +61,9 @@ public class WebSocketRequestFactory {
 	 * @return  {@link WebSocketRequest}
 	 */
 	public static WebSocketRequest createRemoveUserRequest(String userId) {
-		HashMap<String, String> content = new HashMap<String, String>();
-		content.put("userId", userId);
-		return  new WebSocketRequest(TYPE_REMOVE_USER, content);
+		WebSocketRequest request = new WebSocketRequest(TYPE_REMOVE_USER);
+		request.put("userId", userId);
+		return request;
 	}
 
 	/**
@@ -76,11 +76,11 @@ public class WebSocketRequestFactory {
 	 * @return  {@link WebSocketRequest}
 	 */
 	public static WebSocketRequest createMoveItemRequest(String itemId, int left, int top) {
-		HashMap<String, String> content = new HashMap<String, String>();
-		content.put("itemId", itemId);
-		content.put("left", String.valueOf(left));
-		content.put("top", String.valueOf(top));
-		return new WebSocketRequest(TYPE_MOVE_ITEM, content);
+		WebSocketRequest request = new WebSocketRequest(TYPE_MOVE_ITEM);
+		request.put("itemId", itemId);
+		request.put("left", String.valueOf(left));
+		request.put("top", String.valueOf(top));
+		return new WebSocketRequest(TYPE_MOVE_ITEM);
 	}
 
 	/**
@@ -92,10 +92,10 @@ public class WebSocketRequestFactory {
 	 * @return  {@link WebSocketRequest}
 	 */
 	public static WebSocketRequest createSelectItemRequest(String userId, String itemId) {
-		HashMap<String, String> content = new HashMap<String, String>();
-		content.put("userId", userId);
-		content.put("itemId", itemId);
-		return new WebSocketRequest(TYPE_SELECT_ITEM, content);
+		WebSocketRequest request = new WebSocketRequest(TYPE_SELECT_ITEM);
+		request.put("userId", userId);
+		request.put("itemId", itemId);
+		return request;
 	}
 
 }

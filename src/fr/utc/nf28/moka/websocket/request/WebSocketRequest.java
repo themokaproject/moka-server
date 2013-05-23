@@ -12,6 +12,7 @@ public class WebSocketRequest {
 
 	public WebSocketRequest(String type) {
 		this.type = type;
+		this.content = new HashMap<String, String>();
 	}
 
 	public WebSocketRequest(String type, HashMap<String, String> content) {
