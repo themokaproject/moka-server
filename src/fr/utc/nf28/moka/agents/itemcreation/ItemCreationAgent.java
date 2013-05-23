@@ -31,7 +31,7 @@ public class ItemCreationAgent extends MokaAgent {
 			uml.setId(getEnvironment().generateNewId());
 			getEnvironment().addItem(uml);
 			//TODO communicate the item's id to the app
-			final A2ATransaction transaction = new A2ATransaction("addItem", JSONParserUtils.serializeItem(uml));
+			final A2ATransaction transaction = new A2ATransaction("addItem", uml);
 			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 					JSONParserUtils.serializeA2ATransaction(transaction),
 					jade.lang.acl.ACLMessage.PROPAGATE);

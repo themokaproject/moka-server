@@ -23,11 +23,11 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 			try {
 				final A2ATransaction transaction = JSONParserUtils.deserializeA2ATransaction(message.getContent());
 				if (transaction.getType().equals("addUser")) {
-					final User user = (User) JSONParserUtils.deserializeUser((String)transaction.getContent());
+					final User user = (User)transaction.getContent();
 					final WebSocketRequest request = WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.getFirstName() + " " + user.getLastName().substring(0,1));
 					((WebSocketAgent) myAgent).sendToPlatform(JSONParserUtils.serializeWebSocketRequest(request));
 				} else if(transaction.getType().equals("addItem")) {
-					final UmlClass uml = (UmlClass) JSONParserUtils.deserializeItem((String)transaction.getContent());
+					final UmlClass uml = (UmlClass)transaction.getContent();
 					final WebSocketRequest request = WebSocketRequestFactory.createAddItemRequest("umlClass", "umlClass_1");
 					((WebSocketAgent) myAgent).sendToPlatform(JSONParserUtils.serializeWebSocketRequest(request));
 				} else {

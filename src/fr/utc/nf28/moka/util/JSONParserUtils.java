@@ -1,6 +1,6 @@
 package fr.utc.nf28.moka.util;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.agents.connection.ConnectionRequest;
@@ -26,7 +26,23 @@ public class JSONParserUtils {
 	}
 
 	public static A2ATransaction deserializeA2ATransaction(final String json) throws IOException{
-		return sMapper.readValue(json,A2ATransaction.class);
+		final JsonNode rootNode = sMapper.readTree(json);
+		final JsonNode typeNode = rootNode.get("type");
+		final JsonNode contentNode = rootNode.get("content");
+
+		if(typeNode != null && contentNode!=null) {
+			Object content = null;
+			if(typeNode.asText().equals("addUser")) {
+				content = sMapper.treeToValue(contentNode, User.class);
+			} else if(typeNode.asText().equals("addItem")) {
+				content = sMapper.treeToValue(contentNode, UmlClass.class);
+			} else {
+				content = sMapper.treeToValue(contentNode, Object.class);
+			}
+
+			return new A2ATransaction(typeNode.asText(), content);
+		}
+		return null;
 	}
 
     public static String serializeUser(User user) throws IOException {
