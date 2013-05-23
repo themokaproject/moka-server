@@ -26,7 +26,7 @@ public class ConnectionAgent extends MokaAgent {
 		User user = new User(userInfo.get("firstName"),userInfo.get("lastName"));
 		user.setIp(userInfo.get("ip"));
 		getEnvironment().addUser(user);
-		final A2ATransaction transaction = new A2ATransaction("addUser",user);
+		final A2ATransaction transaction = new A2ATransaction("addUser",JSONParserUtils.serializeUser(user));
 		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 				JSONParserUtils.serializeA2ATransaction(transaction),
 				jade.lang.acl.ACLMessage.PROPAGATE);
