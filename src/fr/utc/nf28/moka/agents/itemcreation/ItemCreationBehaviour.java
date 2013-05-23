@@ -1,5 +1,6 @@
 package fr.utc.nf28.moka.agents.itemcreation;
 
+import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.environment.MokaEnvironment;
 import fr.utc.nf28.moka.environment.items.MokaItem;
@@ -20,12 +21,12 @@ public class ItemCreationBehaviour extends CyclicBehaviour {
         if (message != null) {
             final String requestString = message.getContent();
             try {
-                CreationRequest creationRequest = JSONParserUtils.deserializeCreationRequest(requestString);
-                String creationType = creationRequest.getType();
-                if(creationType.equals("creation")) {
-                    create(creationRequest.getRequest());
-                } else if (creationType.equals("destruction")) {
-                    destroy(creationRequest.getRequest());
+				final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(requestString);
+				final String type = request.getType();
+                if(type.equals("creation")) {
+                    create(type.getRequest());
+                } else if (type.equals("destruction")) {
+                    destroy(type.getRequest());
                 } else {
                     throw new IOException();
                 }
