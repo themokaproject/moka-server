@@ -23,12 +23,11 @@ public class ConnectionHandlingBehaviour extends CyclicBehaviour {
             final String connectionRequestString = message.getContent();
             try {
                 final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(connectionRequestString);
-//				final HashMap<String,String> userInfo = request.content;
-                String requestType = request.getType();
-                if (requestType.equals("connection")) {
-                    connection(request.getRequest());
-                } else if (requestType.equals("disconnection")) {
-                    disconnection(request.getRequest());
+				final String type = request.getType();
+                if (type.equals("connection")) {
+                    connection((HashMap<String, String>) request.getContent());
+                } else if (type.equals("disconnection")) {
+                    disconnection("disconnect");
                 }
             } catch (IOException e) {
                 System.out.println("Connection/disconnection request syntax is wrong");
@@ -38,8 +37,9 @@ public class ConnectionHandlingBehaviour extends CyclicBehaviour {
         }
     }
 
-    private void connection(String request) throws IOException {
-        User user = JSONParserUtils.deserializeUser(request);
+    private void connection(final HashMap<String,String> userInfo) throws IOException {
+		User user = new User(userInfo.get("firstName"),userInfo.get("lastName"));
+		user.setIp(userInfo.get("ip"));
         ((MokaAgent)myAgent).getEnvironment().addUser(user);
     }
 
