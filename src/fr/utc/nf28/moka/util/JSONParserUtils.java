@@ -2,6 +2,7 @@ package fr.utc.nf28.moka.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.agents.connection.ConnectionRequest;
 import fr.utc.nf28.moka.agents.itemcreation.CreationRequest;
 import fr.utc.nf28.moka.agents.itemedition.EditionRequest;
@@ -19,6 +20,14 @@ import java.io.StringWriter;
  */
 public class JSONParserUtils {
     private static final ObjectMapper sMapper = new ObjectMapper();
+
+	public static String serializeA2ATransaction(final A2ATransaction transaction) throws IOException{
+		return sMapper.writeValueAsString(transaction);
+	}
+
+	public static A2ATransaction deserializeA2ATransaction(final String json) throws IOException{
+		return sMapper.readValue(json,A2ATransaction.class);
+	}
 
     public static String serializeUser(User user) throws IOException {
         StringWriter sw = new StringWriter();
