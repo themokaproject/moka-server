@@ -1,5 +1,6 @@
 package fr.utc.nf28.moka.agents.connection;
 
+import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.environment.MokaEnvironment;
 import fr.utc.nf28.moka.environment.users.User;
@@ -9,6 +10,7 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * A behaviour that handles connections and disconnections.
@@ -20,7 +22,8 @@ public class ConnectionHandlingBehaviour extends CyclicBehaviour {
         if (message != null) {
             final String connectionRequestString = message.getContent();
             try {
-                ConnectionRequest request = JSONParserUtils.deserializeConnectionRequest(connectionRequestString);
+                final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(connectionRequestString);
+//				final HashMap<String,String> userInfo = request.content;
                 String requestType = request.getType();
                 if (requestType.equals("connection")) {
                     connection(request.getRequest());
