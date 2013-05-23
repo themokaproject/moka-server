@@ -42,6 +42,7 @@ public class ConnectionHandlingBehaviour extends CyclicBehaviour {
 		User user = new User(userInfo.get("firstName"),userInfo.get("lastName"));
 		user.setIp(userInfo.get("ip"));
         ((MokaAgent)myAgent).getEnvironment().addUser(user);
+		final A2ATransaction transaction = new A2ATransaction("addUser",user);
     }
 
     private void disconnection(String ip) {

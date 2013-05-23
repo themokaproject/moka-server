@@ -7,6 +7,7 @@ import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
+import jade.lang.acl.ACLMessage;
 
 import java.util.ArrayList;
 
@@ -74,6 +75,23 @@ public class BaseAgent extends Agent {
 		} catch (FIPAException e) {
 			e.printStackTrace();
 		}
+	}
+
+
+	/**
+	 * send JADE message
+	 *
+	 * @param receivers   use getAgentsWithSkill
+	 * @param content     message content
+	 * @param performatif ACL performatif
+	 */
+	protected void sendMessage(ArrayList<AID> receivers, String content, int performatif) {
+		final ACLMessage connectionMessage = new ACLMessage(performatif);
+		for (AID receiver : receivers) {
+			connectionMessage.addReceiver(receiver);
+		}
+		connectionMessage.setContent(content);
+		send(connectionMessage);
 	}
 
 	private DFAgentDescription getAgentDescriptionWithService(String skillName, String skillType) {
