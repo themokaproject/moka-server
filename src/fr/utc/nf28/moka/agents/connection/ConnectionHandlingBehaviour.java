@@ -30,6 +30,7 @@ public class ConnectionHandlingBehaviour extends CyclicBehaviour {
                     disconnection("disconnect");
                 }
             } catch (IOException e) {
+				e.printStackTrace();
                 System.out.println("Connection/disconnection request syntax is wrong");
             }
         } else {

@@ -7,6 +7,9 @@ public class A2ATransaction {
 	private String mType;
 	private Object mContent;
 
+	public A2ATransaction(){
+	}
+
 	public A2ATransaction(String type) {
 		this.mType = type;
 	}
