@@ -29,6 +29,7 @@ public class ItemCreationBehaviour extends CyclicBehaviour {
 					throw new IOException();
 				}
 			} catch (IOException e) {
+				e.printStackTrace();
 				System.out.println("Item creation/destruction request syntax is wrong");
 			} catch (Exception e) {
 				e.printStackTrace();

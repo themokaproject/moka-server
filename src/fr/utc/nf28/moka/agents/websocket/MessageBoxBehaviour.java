@@ -1,6 +1,7 @@
 package fr.utc.nf28.moka.agents.websocket;
 
 import fr.utc.nf28.moka.agents.A2ATransaction;
+import fr.utc.nf28.moka.environment.items.UmlClass;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.websocket.request.WebSocketRequest;
@@ -24,6 +25,10 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 				if (transaction.getType().equals("addUser")) {
 					final User user = (User) JSONParserUtils.deserializeUser((String)transaction.getContent());
 					final WebSocketRequest request = WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.getFirstName() + " " + user.getLastName().substring(0,1));
+					((WebSocketAgent) myAgent).sendToPlatform(JSONParserUtils.serializeWebSocketRequest(request));
+				} else if(transaction.getType().equals("addItem")) {
+					final UmlClass uml = (UmlClass) JSONParserUtils.deserializeItem((String)transaction.getContent());
+					final WebSocketRequest request = WebSocketRequestFactory.createAddItemRequest("umlClass", "umlClass_1");
 					((WebSocketAgent) myAgent).sendToPlatform(JSONParserUtils.serializeWebSocketRequest(request));
 				} else {
 					((WebSocketAgent) myAgent).sendToPlatform(message.getContent());
