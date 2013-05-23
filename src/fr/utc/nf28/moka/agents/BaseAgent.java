@@ -77,7 +77,6 @@ public class BaseAgent extends Agent {
 		}
 	}
 
-
 	/**
 	 * send JADE message
 	 *

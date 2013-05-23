@@ -1,10 +1,12 @@
 package fr.utc.nf28.moka.agents.connection;
 
 import fr.utc.nf28.moka.agents.A2ATransaction;
+import fr.utc.nf28.moka.agents.BaseAgent;
 import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.environment.MokaEnvironment;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
+import fr.utc.nf28.moka.util.JadeUtils;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -25,7 +27,7 @@ public class ConnectionHandlingBehaviour extends CyclicBehaviour {
                 final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(connectionRequestString);
 				final String type = request.getType();
                 if (type.equals("connection")) {
-                    connection((HashMap<String, String>) request.getContent());
+					((ConnectionAgent)myAgent).connection((HashMap<String, String>) request.getContent());
                 } else if (type.equals("disconnection")) {
                     disconnection("disconnect");
                 }
@@ -38,12 +40,6 @@ public class ConnectionHandlingBehaviour extends CyclicBehaviour {
         }
     }
 
-    private void connection(final HashMap<String,String> userInfo) throws IOException {
-		User user = new User(userInfo.get("firstName"),userInfo.get("lastName"));
-		user.setIp(userInfo.get("ip"));
-        ((MokaAgent)myAgent).getEnvironment().addUser(user);
-		final A2ATransaction transaction = new A2ATransaction("addUser",user);
-    }
 
     private void disconnection(String ip) {
         ((MokaAgent)myAgent).getEnvironment().removeUser(ip);
