@@ -23,7 +23,7 @@ public class ConnectionHandlingBehaviour extends CyclicBehaviour {
             try {
                 final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(connectionRequestString);
 				final String type = request.getType();
-                if (type.equals(JadeUtils.TYPE_CONNECTION_TO_CONNECTION_AGENT)) {
+                if (type.equals(JadeUtils.TRANSACTION_TYPE_CONNECTION)) {
 					((ConnectionAgent)myAgent).connection((HashMap<String, String>) request.getContent());
                 } else if (type.equals("disconnection")) {
                     disconnection("disconnect");
@@ -32,7 +32,8 @@ public class ConnectionHandlingBehaviour extends CyclicBehaviour {
 				e.printStackTrace();
                 System.out.println("Connection/disconnection request syntax is wrong");
             }
-        } else {
+
+		} else {
             block();
         }
     }

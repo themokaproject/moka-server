@@ -22,7 +22,7 @@ public class ItemCreationBehaviour extends CyclicBehaviour {
 			try {
 				final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(requestString);
 				final String type = request.getType();
-				if (type.equals(JadeUtils.TYPE_ADD_ITEM_TO_ITEM_CREATION_AGENT)) {
+				if (type.equals(JadeUtils.TRANSACTION_TYPE_ADD_ITEM)) {
 					((ItemCreationAgent)myAgent).create((String)request.getContent());
 				} else if (type.equals("destruction")) {
 					//TODO implement destruction

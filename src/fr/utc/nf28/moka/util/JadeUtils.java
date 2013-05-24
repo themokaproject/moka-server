@@ -30,28 +30,10 @@ public class JadeUtils {
 	public static final String JADE_SKILL_NAME_WEBSOCKET_SERVER = "WebSocketService";
 
 
-	//Transactions to ConnectionAgent
-	public static final String TYPE_CONNECTION_TO_CONNECTION_AGENT = "connectionToConnectionAgent";
+	//connection transaction
+	public static final String TRANSACTION_TYPE_CONNECTION = "connection";
 
-	//Transactions to ItemCreationAgent
-	public static final String TYPE_ADD_ITEM_TO_ITEM_CREATION_AGENT = "addItemToItemCreationAgent";
+	//addItem transaction
+	public static final String TRANSACTION_TYPE_ADD_ITEM = "addItem";
 
-	//Transactions To WebSocketAgent
-	public static final String TYPE_ADD_USER_TO_WEB_SOCKET_AGENT = "addUserToWebSocketAgent";
-	public static final String TYPE_ADD_ITEM_TO_WEB_SOCKET_AGENT = "addItemToWebSocketAgent";
-
-	public static final HashMap<String, Class> SPECIFIC_CONTENT_CLASS = new HashMap<String, Class>(){
-		private final Class defaultClass = Object.class;
-
-		{
-			put(TYPE_ADD_USER_TO_WEB_SOCKET_AGENT, User.class);
-			put(TYPE_ADD_ITEM_TO_WEB_SOCKET_AGENT, UmlClass.class);
-		}
-
-		@Override
-		public Class get(Object key) {
-			Class result = super.get(key);
-			return (result == null) ? defaultClass : result;
-		}
-	};
 }

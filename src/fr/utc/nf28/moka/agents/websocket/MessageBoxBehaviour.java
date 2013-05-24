@@ -26,10 +26,10 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 				WebSocketRequest request = null;
 				String messageToSend = "";
 
-				if (transaction.getType().equals(JadeUtils.TYPE_ADD_USER_TO_WEB_SOCKET_AGENT)) {
+				if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_CONNECTION)) {
 					final User user = (User)transaction.getContent();
 					request = WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.getFirstName() + " " + user.getLastName().substring(0,1));
-				} else if(transaction.getType().equals(JadeUtils.TYPE_ADD_ITEM_TO_WEB_SOCKET_AGENT)) {
+				} else if(transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_ADD_ITEM)) {
 					final UmlClass uml = (UmlClass)transaction.getContent();
 					request = WebSocketRequestFactory.createAddItemRequest("umlClass", "umlClass_1");
 				}

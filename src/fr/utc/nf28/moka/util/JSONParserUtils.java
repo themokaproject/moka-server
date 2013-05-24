@@ -25,15 +25,21 @@ public class JSONParserUtils {
 		return sMapper.writeValueAsString(transaction);
 	}
 
-	public static A2ATransaction deserializeA2ATransaction(final String json) throws IOException{
+	public static A2ATransaction deserializeA2ATransaction(final String json) throws IOException {
 		final JsonNode rootNode = sMapper.readTree(json);
 		final JsonNode typeNode = rootNode.get("type");
 		final JsonNode contentNode = rootNode.get("content");
+		final JsonNode contentClassNode = rootNode.get("contentClass");
 
-		if(typeNode != null && contentNode!=null) {
-			Class contentClass = JadeUtils.SPECIFIC_CONTENT_CLASS.get(typeNode.asText());
+		if(typeNode != null && contentNode!=null && contentClassNode != null) {
+			Class contentClass = Object.class;
+			try {
+				contentClass = Class.forName(contentClassNode.asText());
+			} catch (ClassNotFoundException e) {
+				System.out.println("deserializeA2ATransaction:ClassNotFound : " + contentClassNode.asText());
+				System.out.println("use " +contentClass.toString() +" instead");
+			}
 			Object content = sMapper.treeToValue(contentNode, contentClass);
-			System.out.println(contentClass.toString());
 			return new A2ATransaction(typeNode.asText(), content);
 		}
 
