@@ -31,17 +31,12 @@ public class JSONParserUtils {
 		final JsonNode contentNode = rootNode.get("content");
 
 		if(typeNode != null && contentNode!=null) {
-			Object content = null;
-			if(typeNode.asText().equals("addUser")) {
-				content = sMapper.treeToValue(contentNode, User.class);
-			} else if(typeNode.asText().equals("addItem")) {
-				content = sMapper.treeToValue(contentNode, UmlClass.class);
-			} else {
-				content = sMapper.treeToValue(contentNode, Object.class);
-			}
-
+			Class contentClass = JadeUtils.SPECIFIC_CONTENT_CLASS.get(typeNode.asText());
+			Object content = sMapper.treeToValue(contentNode, contentClass);
+			System.out.println(contentClass.toString());
 			return new A2ATransaction(typeNode.asText(), content);
 		}
+
 		return null;
 	}
 

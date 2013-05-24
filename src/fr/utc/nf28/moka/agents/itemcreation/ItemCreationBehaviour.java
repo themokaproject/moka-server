@@ -3,6 +3,7 @@ package fr.utc.nf28.moka.agents.itemcreation;
 import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.util.JSONParserUtils;
+import fr.utc.nf28.moka.util.JadeUtils;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -21,7 +22,7 @@ public class ItemCreationBehaviour extends CyclicBehaviour {
 			try {
 				final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(requestString);
 				final String type = request.getType();
-				if (type.equals("creation")) {
+				if (type.equals(JadeUtils.TYPE_ADD_ITEM_TO_ITEM_CREATION_AGENT)) {
 					((ItemCreationAgent)myAgent).create((String)request.getContent());
 				} else if (type.equals("destruction")) {
 					//TODO implement destruction

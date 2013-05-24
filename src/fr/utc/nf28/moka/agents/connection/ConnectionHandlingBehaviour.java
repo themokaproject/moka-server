@@ -1,10 +1,7 @@
 package fr.utc.nf28.moka.agents.connection;
 
 import fr.utc.nf28.moka.agents.A2ATransaction;
-import fr.utc.nf28.moka.agents.BaseAgent;
 import fr.utc.nf28.moka.agents.MokaAgent;
-import fr.utc.nf28.moka.environment.MokaEnvironment;
-import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.util.JadeUtils;
 import jade.core.behaviours.CyclicBehaviour;
@@ -26,7 +23,7 @@ public class ConnectionHandlingBehaviour extends CyclicBehaviour {
             try {
                 final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(connectionRequestString);
 				final String type = request.getType();
-                if (type.equals("connection")) {
+                if (type.equals(JadeUtils.TYPE_CONNECTION_TO_CONNECTION_AGENT)) {
 					((ConnectionAgent)myAgent).connection((HashMap<String, String>) request.getContent());
                 } else if (type.equals("disconnection")) {
                     disconnection("disconnect");

@@ -4,6 +4,7 @@ import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.environment.items.UmlClass;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
+import fr.utc.nf28.moka.util.JadeUtils;
 import fr.utc.nf28.moka.websocket.request.WebSocketRequest;
 import fr.utc.nf28.moka.websocket.request.WebSocketRequestFactory;
 import jade.core.behaviours.CyclicBehaviour;
@@ -22,17 +23,25 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 		} else {
 			try {
 				final A2ATransaction transaction = JSONParserUtils.deserializeA2ATransaction(message.getContent());
-				if (transaction.getType().equals("addUser")) {
+				WebSocketRequest request = null;
+				String messageToSend = "";
+
+				if (transaction.getType().equals(JadeUtils.TYPE_ADD_USER_TO_WEB_SOCKET_AGENT)) {
 					final User user = (User)transaction.getContent();
-					final WebSocketRequest request = WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.getFirstName() + " " + user.getLastName().substring(0,1));
-					((WebSocketAgent) myAgent).sendToPlatform(JSONParserUtils.serializeWebSocketRequest(request));
-				} else if(transaction.getType().equals("addItem")) {
+					request = WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.getFirstName() + " " + user.getLastName().substring(0,1));
+				} else if(transaction.getType().equals(JadeUtils.TYPE_ADD_ITEM_TO_WEB_SOCKET_AGENT)) {
 					final UmlClass uml = (UmlClass)transaction.getContent();
-					final WebSocketRequest request = WebSocketRequestFactory.createAddItemRequest("umlClass", "umlClass_1");
-					((WebSocketAgent) myAgent).sendToPlatform(JSONParserUtils.serializeWebSocketRequest(request));
-				} else {
-					((WebSocketAgent) myAgent).sendToPlatform(message.getContent());
+					request = WebSocketRequestFactory.createAddItemRequest("umlClass", "umlClass_1");
 				}
+
+				if(request != null) {
+					messageToSend = JSONParserUtils.serializeWebSocketRequest(request);
+				} else {
+					messageToSend = message.getContent();
+				}
+
+				((WebSocketAgent) myAgent).sendToPlatform(messageToSend);
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
