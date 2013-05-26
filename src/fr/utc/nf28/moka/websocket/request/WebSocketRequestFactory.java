@@ -82,7 +82,7 @@ public class WebSocketRequestFactory {
 		request.put("itemId", itemId);
 		request.put("left", String.valueOf(left));
 		request.put("top", String.valueOf(top));
-		return new WebSocketRequest(TYPE_MOVE_ITEM);
+		return request;
 	}
 
 	/**

@@ -1,13 +1,16 @@
 package fr.utc.nf28.moka.agents.itemedition;
 
+import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.environment.items.MokaItem;
 import fr.utc.nf28.moka.util.JSONParserUtils;
+import fr.utc.nf28.moka.util.JadeUtils;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * A behaviour that handles item itemedition.
@@ -17,12 +20,12 @@ public class ItemEdtionHandlingBehaviour extends CyclicBehaviour {
     public void action() {
         final ACLMessage message = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
         if (message != null) {
-            final String editionRequest = message.getContent();
+            final String requestString = message.getContent();
             try {
-                EditionRequest request = JSONParserUtils.deserializeEditionRequest(editionRequest);
-                String editType = request.getEditType();
-                if(editType == "move") {
-                    // find an ItemMoveAgent and send it request.getRequest() as content
+				final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(requestString);
+				final String type = request.getType();
+                if(type.equals(JadeUtils.TRANSACTION_TYPE_MOVE_ITEM)) {
+					((ItemEditionAgent)myAgent).moveItem((HashMap<String, Integer>)request.getContent());
                 } else {
                     throw new IOException();
                 }

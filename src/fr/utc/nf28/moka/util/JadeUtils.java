@@ -23,6 +23,11 @@ public class JadeUtils {
 	public static final String JADE_SKILL_NAME_CONNECTION = "ConnectionAgentSkillName";
 
 	/**
+	 * name for Jade item movement skill
+	 */
+	public static final String JADE_SKILL_NAME_ITEM_MOVEMENT = "ItemMovementSkillName";
+
+	/**
 	 * name for Jade skill registering of CreationAgent
 	 */
 	public static final String JADE_SKILL_NAME_CREATION = "CreationAgentSkillName";
@@ -44,5 +49,10 @@ public class JadeUtils {
 	 * deleteItem transaction
 	 */
 	public static final String TRANSACTION_TYPE_DELETE_ITEM = "deleteItem";
+
+	/**
+	 * moveItem transaction
+	 */
+	public static final String TRANSACTION_TYPE_MOVE_ITEM = "moveItem";
 
 }

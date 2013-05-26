@@ -1,6 +1,7 @@
 package fr.utc.nf28.moka.agents.websocket;
 
 import fr.utc.nf28.moka.agents.A2ATransaction;
+import fr.utc.nf28.moka.environment.items.MokaItem;
 import fr.utc.nf28.moka.environment.items.UmlClass;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
@@ -28,12 +29,15 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 
 				if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_CONNECTION)) {
 					final User user = (User)transaction.getContent();
-					request = WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.getFirstName() + " " + user.getLastName().substring(0,1));
+					request = WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.getFirstName() + " " + user.getLastName().substring(0, 1));
 				} else if(transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_ADD_ITEM)) {
 					final UmlClass uml = (UmlClass)transaction.getContent();
 					request = WebSocketRequestFactory.createAddItemRequest("umlClass", "umlClass_1", String.valueOf(uml.getX()), String.valueOf(uml.getY()));
 				} else if(transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_DELETE_ITEM)) {
 					request = WebSocketRequestFactory.createRemoveItemRequest("umlClass_1");
+				} else if(transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_MOVE_ITEM)) {
+					final MokaItem item = (MokaItem)transaction.getContent();
+					request = WebSocketRequestFactory.createMoveItemRequest("umlClass_1", item.getX(), item.getY());
 				}
 
 				if(request != null) {

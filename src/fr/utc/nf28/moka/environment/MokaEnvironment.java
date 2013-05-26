@@ -58,6 +58,27 @@ public class MokaEnvironment {
         System.out.println(toString());
     }
 
+	public MokaItem moveItem(int itemId, int direction, int velocity) {
+		final MokaItem res = mItems.get(itemId);
+		final int dd = (4 * velocity);
+		System.out.println(dd);
+		if(res != null && dd < 100) {
+			if(direction % 10 == 1) {
+				res.setX(res.getX() + dd);
+			} else if (direction % 10 == 2) {
+				res.setX(res.getX() - dd);
+			}
+
+			if(direction >= 20) {
+				res.setY(res.getY() - dd);
+			} else if (direction >= 10) {
+				res.setY(res.getY() + dd);
+			}
+		}
+
+		return res;
+	}
+
     public void updateItem(MokaItem newValue) {
         // TODO correctly implement udpate
     }
