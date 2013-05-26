@@ -5,6 +5,7 @@ import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.environment.items.UmlClass;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.util.JadeUtils;
+import jade.lang.acl.ACLMessage;
 
 import java.io.IOException;
 
@@ -35,6 +36,8 @@ public class ItemCreationAgent extends MokaAgent {
 			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 					JSONParserUtils.serializeA2ATransaction(transaction),
 					jade.lang.acl.ACLMessage.PROPAGATE);
+			//TODO construct a well formed new item message
+			sendMessageToAndroidDevice(ACLMessage.INFORM, "new Item created !");
 		}
 	}
 }
