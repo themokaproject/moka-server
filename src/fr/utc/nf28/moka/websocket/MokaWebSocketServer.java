@@ -62,7 +62,7 @@ public class MokaWebSocketServer extends WebSocketServer {
 	//for test purpose only
 	//TODO DELETE
 	public void addItem(String type, String itemId) throws IOException {
-		WebSocketRequest request = WebSocketRequestFactory.createAddItemRequest(type, itemId);
+		WebSocketRequest request = WebSocketRequestFactory.createAddItemRequest(type, itemId, "200","350");
 		sendAll(request);
 	}
 

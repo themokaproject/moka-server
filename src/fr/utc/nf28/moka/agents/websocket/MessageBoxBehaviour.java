@@ -31,7 +31,7 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 					request = WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.getFirstName() + " " + user.getLastName().substring(0,1));
 				} else if(transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_ADD_ITEM)) {
 					final UmlClass uml = (UmlClass)transaction.getContent();
-					request = WebSocketRequestFactory.createAddItemRequest("umlClass", "umlClass_1");
+					request = WebSocketRequestFactory.createAddItemRequest("umlClass", "umlClass_1", String.valueOf(uml.getX()), String.valueOf(uml.getY()));
 				}
 
 				if(request != null) {
