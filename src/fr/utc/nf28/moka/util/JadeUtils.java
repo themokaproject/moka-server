@@ -30,10 +30,19 @@ public class JadeUtils {
 	public static final String JADE_SKILL_NAME_WEBSOCKET_SERVER = "WebSocketService";
 
 
-	//connection transaction
+	/**
+	 * connection transaction
+	 */
 	public static final String TRANSACTION_TYPE_CONNECTION = "connection";
 
-	//addItem transaction
+	/**
+	 * addItem transaction
+	 */
 	public static final String TRANSACTION_TYPE_ADD_ITEM = "addItem";
+
+	/**
+	 * deleteItem transaction
+	 */
+	public static final String TRANSACTION_TYPE_DELETE_ITEM = "deleteItem";
 
 }

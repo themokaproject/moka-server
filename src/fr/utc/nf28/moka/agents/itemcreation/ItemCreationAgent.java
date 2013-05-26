@@ -40,4 +40,18 @@ public class ItemCreationAgent extends MokaAgent {
 			sendMessageToAndroidDevice(ACLMessage.REQUEST, "new Item created !");
 		}
 	}
+
+	/**
+	 * delete an item
+	 *
+	 * @param itemId
+	 * @throws IOException
+	 */
+	public void deleteItem(int itemId) throws IOException {
+		getEnvironment().removeItem(itemId);
+		final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_DELETE_ITEM, itemId);
+		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
+				JSONParserUtils.serializeA2ATransaction(transaction),
+				jade.lang.acl.ACLMessage.PROPAGATE);
+	}
 }
