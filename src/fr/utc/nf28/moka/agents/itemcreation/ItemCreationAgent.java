@@ -37,7 +37,7 @@ public class ItemCreationAgent extends MokaAgent {
 					JSONParserUtils.serializeA2ATransaction(transaction),
 					jade.lang.acl.ACLMessage.PROPAGATE);
 			//TODO construct a well formed new item message
-			sendMessageToAndroidDevice(ACLMessage.INFORM, "new Item created !");
+			sendMessageToAndroidDevice(ACLMessage.REQUEST, "new Item created !");
 		}
 	}
 }
