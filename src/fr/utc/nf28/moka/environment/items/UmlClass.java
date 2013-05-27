@@ -10,7 +10,7 @@ public class UmlClass extends MokaItem {
     private String mClassName;
     private List<String> mMembers = new ArrayList<String>();
     private List<String> mMethods = new ArrayList<String>();
-    private static String sType = "uml";
+    private static final String sType = "uml";
 
     public UmlClass() {
     }

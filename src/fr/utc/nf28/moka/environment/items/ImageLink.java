@@ -6,7 +6,7 @@ package fr.utc.nf28.moka.environment.items;
 public class ImageLink extends MokaItem {
     private String mUrl;
 
-    private static String sType = "image";
+    private static final String sType = "image";
 
     public ImageLink() {
     }

@@ -9,13 +9,19 @@ package fr.utc.nf28.moka.rest.resource;
 
 // The browser requests per default the HTML MIME type.
 
+import fr.utc.nf28.moka.environment.HistoryEntry;
+import fr.utc.nf28.moka.util.JSONParserUtils;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 //Sets the path to base URL + /hello
-@Path("/hello")
+@Path("/history")
 public class HelloResource {
 
 	// This method is called if TEXT_PLAIN is request
@@ -40,4 +46,19 @@ public class HelloResource {
 				+ "<body><h1>" + "Hello Jersey" + "</body></h1>" + "</html> ";
 	}
 
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public String sayJSONHello() {
+		final List<HistoryEntry> historyEntries = new ArrayList<HistoryEntry>(5);
+		for (int i = 1; i <= 5; i++) {
+			historyEntries.add(new HistoryEntry("Historique n°" + i));
+		}
+		try {
+			System.out.println(JSONParserUtils.serializeHistory(historyEntries));
+			return JSONParserUtils.serializeHistory(historyEntries);
+		} catch (IOException e) {
+			System.out.println("Error");
+			return "";
+		}
+	}
 }
