@@ -8,6 +8,7 @@ import fr.utc.nf28.moka.rest.RestServerManager;
 import java.io.IOException;
 
 public class RestServerAgent extends BaseAgent {
+	@Override
 	public void setup() {
 		super.setup();
 		try {
@@ -18,6 +19,5 @@ public class RestServerAgent extends BaseAgent {
 			e.printStackTrace();
 			System.out.println("Rest Server start: fail!");
 		}
-
 	}
 }
