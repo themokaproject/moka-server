@@ -54,7 +54,6 @@ public class HelloResource {
 			historyEntries.add(new HistoryEntry("Historique n°" + i));
 		}
 		try {
-			System.out.println(JSONParserUtils.serializeHistory(historyEntries));
 			return JSONParserUtils.serializeHistory(historyEntries);
 		} catch (IOException e) {
 			System.out.println("Error");
