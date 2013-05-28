@@ -34,19 +34,27 @@ public class ItemCreationAgent extends MokaAgent {
 			final int newItemId = getEnvironment().generateNewId();
 			uml.setId(newItemId);
 			getEnvironment().addItem(uml);
+
 			//send back item id to the creator
 			final A2ATransaction responseTransaction =
 					new A2ATransaction(JadeUtils.TRANSACTION_TYPE_ITEM_CREATION_SUCCESS, newItemId);
 			response.setPerformative(ACLMessage.REQUEST);
 			response.setContent(JSONParserUtils.serializeA2ATransaction(responseTransaction));
 			send(response);
+
 			//propagate creation to Ui platform
-			final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_ADD_ITEM, uml);
+			final A2ATransaction transaction =
+					new A2ATransaction(JadeUtils.TRANSACTION_TYPE_ADD_ITEM, uml);
 			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 					JSONParserUtils.serializeA2ATransaction(transaction),
 					jade.lang.acl.ACLMessage.PROPAGATE);
-			//TODO construct a well formed new item message
-			sendMessageToAndroidDevice(ACLMessage.REQUEST, "new Item created !");
+
+			//request refreshing current item list for all android device
+			final A2ATransaction refreshTransaction =
+					new A2ATransaction(JadeUtils.TRANSACTION_TYPE_REFRESH_CURRENT_ITEMS,
+							"new item created, refresh list.");
+			sendMessageToAndroidDevice(ACLMessage.REQUEST,
+					JSONParserUtils.serializeA2ATransaction(refreshTransaction));
 		}
 	}
 
