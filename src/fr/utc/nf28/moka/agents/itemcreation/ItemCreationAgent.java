@@ -26,7 +26,7 @@ public class ItemCreationAgent extends MokaAgent {
 	 * @param type typeof this new item
 	 * @throws IOException
 	 */
-	public void create(String type) throws IOException {
+	public void create(String type, ACLMessage response) throws IOException {
 		if (type.equals("umlClass")) {
 			final UmlClass uml = new UmlClass("MyClass", 200, 350, "UmlClass");
 			uml.setId(getEnvironment().generateNewId());
