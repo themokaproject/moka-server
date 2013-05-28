@@ -23,7 +23,9 @@ public class ItemCreationAgent extends MokaAgent {
 	/**
 	 * create new item
 	 *
-	 * @param type typeof this new item
+	 * @param type     typeof this new item
+	 * @param response use to communicate item id to androidAgent which
+	 *                 request this item creation
 	 * @throws IOException
 	 */
 	public void create(String type, ACLMessage response) throws IOException {
