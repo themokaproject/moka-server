@@ -35,8 +35,10 @@ public class ItemCreationAgent extends MokaAgent {
 			uml.setId(newItemId);
 			getEnvironment().addItem(uml);
 			//send back item id to the creator
+			final A2ATransaction responseTransaction =
+					new A2ATransaction(JadeUtils.TRANSACTION_TYPE_ITEM_CREATION_SUCCESS, newItemId);
 			response.setPerformative(ACLMessage.REQUEST);
-			response.setContent(String.valueOf(newItemId));
+			response.setContent(JSONParserUtils.serializeA2ATransaction(responseTransaction));
 			send(response);
 			//propagate creation to Ui platform
 			final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_ADD_ITEM, uml);

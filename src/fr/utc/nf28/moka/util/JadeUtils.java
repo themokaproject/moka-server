@@ -34,7 +34,6 @@ public class JadeUtils {
 
 	public static final String JADE_SKILL_NAME_WEBSOCKET_SERVER = "WebSocketService";
 
-
 	/**
 	 * connection transaction
 	 */
@@ -54,5 +53,10 @@ public class JadeUtils {
 	 * moveItem transaction
 	 */
 	public static final String TRANSACTION_TYPE_MOVE_ITEM = "moveItem";
+
+	/**
+	 * creation success transaction
+	 */
+	public static final String TRANSACTION_TYPE_ITEM_CREATION_SUCCESS = "creationSuccess";
 
 }
