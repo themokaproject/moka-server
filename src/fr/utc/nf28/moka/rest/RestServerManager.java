@@ -2,6 +2,8 @@ package fr.utc.nf28.moka.rest;
 
 
 import com.sun.jersey.api.container.httpserver.HttpServerFactory;
+import com.sun.jersey.api.core.PackagesResourceConfig;
+import com.sun.jersey.api.core.ResourceConfig;
 import com.sun.net.httpserver.HttpServer;
 
 import javax.ws.rs.core.UriBuilder;
@@ -14,6 +16,7 @@ public class RestServerManager {
 	public static final URI BASE_URI = UriBuilder.fromUri(HOST).port(PORT).build();
 
 	public static HttpServer getServer() throws IOException {
-		return HttpServerFactory.create(BASE_URI);
+		ResourceConfig resourceConfig = new PackagesResourceConfig("fr.utc.nf28.moka.rest.resource");
+		return HttpServerFactory.create(BASE_URI, resourceConfig);
 	}
 }
