@@ -31,9 +31,13 @@ public class ItemCreationAgent extends MokaAgent {
 	public void create(String type, ACLMessage response) throws IOException {
 		if (type.equals("umlClass")) {
 			final UmlClass uml = new UmlClass("MyClass", 200, 350, "UmlClass");
-			uml.setId(getEnvironment().generateNewId());
+			final int newItemId = getEnvironment().generateNewId();
+			uml.setId(newItemId);
 			getEnvironment().addItem(uml);
 			//TODO communicate the item's id to the app
+			response.setPerformative(ACLMessage.REQUEST);
+			response.setContent(String.valueOf(newItemId));
+			//propagate creation to Ui platform
 			final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_ADD_ITEM, uml);
 			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 					JSONParserUtils.serializeA2ATransaction(transaction),
