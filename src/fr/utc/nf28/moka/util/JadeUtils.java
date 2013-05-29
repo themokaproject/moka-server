@@ -28,6 +28,11 @@ public class JadeUtils {
 	public static final String JADE_SKILL_NAME_ITEM_MOVEMENT = "ItemMovementSkillName";
 
 	/**
+	 * name for Jade item resizing skill
+	 */
+	public static final String JADE_SKILL_NAME_ITEM_RESIZING = "ItemResizingSkillName";
+
+	/**
 	 * name for Jade skill registering of CreationAgent
 	 */
 	public static final String JADE_SKILL_NAME_CREATION = "CreationAgentSkillName";
