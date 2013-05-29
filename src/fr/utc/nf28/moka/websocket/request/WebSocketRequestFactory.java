@@ -8,6 +8,7 @@ public class WebSocketRequestFactory {
 	private static final String TYPE_ADD_USER = "addUser";
 	private static final String TYPE_REMOVE_USER = "removeUser";
 	private static final String TYPE_MOVE_ITEM = "moveItem";
+	private static final String TYPE_RESIZE_ITEM = "resizeItem";
 	private static final String TYPE_SELECT_ITEM = "selectItem";
 
 	/**
@@ -110,7 +111,7 @@ public class WebSocketRequestFactory {
 	 * @return  {@link WebSocketRequest}
 	 */
 	public static WebSocketRequest createResizeItemRequest(String itemId, int width, int height) {
-		WebSocketRequest request = new WebSocketRequest(TYPE_MOVE_ITEM);
+		WebSocketRequest request = new WebSocketRequest(TYPE_RESIZE_ITEM);
 		request.put("itemId", itemId);
 		request.put("width", String.valueOf(width));
 		request.put("height", String.valueOf(height));
