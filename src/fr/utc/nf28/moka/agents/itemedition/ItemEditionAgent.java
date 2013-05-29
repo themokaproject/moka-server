@@ -18,8 +18,10 @@ public class ItemEditionAgent extends MokaAgent {
 	public void setup() {
 		super.setup();
 		addBehaviour(new ItemEdtionHandlingBehaviour());
-		registerSkill(JadeUtils.JADE_SKILL_NAME_ITEM_MOVEMENT);
-		registerSkill(JadeUtils.JADE_SKILL_NAME_ITEM_RESIZING);
+		HashMap<String,String> skills = new HashMap<String, String>();
+		skills.put(JadeUtils.JADE_SKILL_NAME_ITEM_MOVEMENT, JadeUtils.JADE_SKILL_TYPE_DEFAULT);
+		skills.put(JadeUtils.JADE_SKILL_NAME_ITEM_RESIZING, JadeUtils.JADE_SKILL_TYPE_DEFAULT);
+		registerSkills(skills);
 	}
 
 	public void moveItem(HashMap<String, Integer> itemInfo) throws IOException {

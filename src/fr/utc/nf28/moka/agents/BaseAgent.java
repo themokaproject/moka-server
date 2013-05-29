@@ -9,7 +9,11 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
 
+import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * A base agent that can register skills
@@ -77,6 +81,14 @@ public class BaseAgent extends Agent {
 		}
 	}
 
+	protected void registerSkills(HashMap<String, String> skillNameAndType)  {
+		try {
+			DFService.register(this, getAgentDescriptionWithServices(skillNameAndType));
+		} catch (FIPAException e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * send JADE message
 	 *
@@ -91,6 +103,18 @@ public class BaseAgent extends Agent {
 		}
 		connectionMessage.setContent(content);
 		send(connectionMessage);
+	}
+
+	private DFAgentDescription getAgentDescriptionWithServices(HashMap<String, String> skillNameAndType) {
+		DFAgentDescription agentDescription = new DFAgentDescription();
+		for (Iterator iterator = skillNameAndType.entrySet().iterator(); iterator.hasNext(); ) {
+			final Map.Entry entry = (Map.Entry)iterator.next();
+			ServiceDescription serviceDescription = new ServiceDescription();
+			serviceDescription.setName((String)entry.getKey());
+			serviceDescription.setType((String)entry.getValue());
+			agentDescription.addServices(serviceDescription);
+		}
+		return agentDescription;
 	}
 
 	private DFAgentDescription getAgentDescriptionWithService(String skillName, String skillType) {
