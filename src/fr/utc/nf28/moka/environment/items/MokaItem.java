@@ -7,6 +7,8 @@ import fr.utc.nf28.moka.environment.users.User;
  * A generic visual item.
  */
 public abstract class MokaItem {
+	private static final int DEFAULT_WIDTH = 175;
+	private static final int DEFAULT_HEIGHT = 100;
 	private static int sIdIndex = 0;
 	private int mId;
 	private String mTitle;
@@ -18,6 +20,8 @@ public abstract class MokaItem {
 
 	public MokaItem() {
 		mId = sIdIndex++;
+		mHeight = DEFAULT_HEIGHT;
+		mWidth = DEFAULT_WIDTH;
 	}
 
 	public MokaItem(String title, int x, int y) {
