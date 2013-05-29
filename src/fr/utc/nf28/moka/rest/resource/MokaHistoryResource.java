@@ -22,20 +22,13 @@ import java.util.List;
 
 //Sets the path to base URL + /hello
 @Path("/history")
-public class HelloResource {
+public class MokaHistoryResource {
 	private final List<HistoryEntry> mHistoryEntries = new ArrayList<HistoryEntry>(5);
 
-	public HelloResource() {
+	public MokaHistoryResource() {
 		for (int i = 1; i <= 5; i++) {
 			mHistoryEntries.add(new HistoryEntry("Historique n°" + i));
 		}
-	}
-
-	// This method is called if TEXT_PLAIN is request
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	public String sayPlainTextHello() {
-		return mHistoryEntries.toString();
 	}
 
 	// This method is called if JSON is request
