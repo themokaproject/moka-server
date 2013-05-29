@@ -82,7 +82,7 @@ public class MokaEnvironment {
 	public MokaItem resizeItem(int itemId, int direction) {
 		//TODO implement getById !
 		final MokaItem res = mItems.get(itemId);
-		final int dd = 4;
+		final int dd = 15;
 		if (res != null) {
 			if (direction % 10 == 1) {
 				res.setWidth(res.getWidth() + dd);
