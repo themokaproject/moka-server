@@ -62,7 +62,6 @@ public class MokaEnvironment {
 		//TODO implement getById !
 		final MokaItem res = mItems.get(itemId);
 		final int dd = (4 * velocity);
-		System.out.println(dd);
 		if (res != null && dd < 100) {
 			if (direction % 10 == 1) {
 				res.setX(res.getX() + dd);
