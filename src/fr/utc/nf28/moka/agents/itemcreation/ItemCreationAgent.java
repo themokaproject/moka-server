@@ -43,6 +43,12 @@ public class ItemCreationAgent extends MokaAgent {
 			System.out.println("demande de création d'un post it");
 		}
 
+		if(newItem==null){
+			//server side creation failed
+			//TODO implement callback error in order to warn AndroidDevice which has requested this creation
+			return;
+		}
+
 		//send back item id to the creator
 		sendBackItemId(response, newItemId);
 
