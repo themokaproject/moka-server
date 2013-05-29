@@ -38,6 +38,9 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 				} else if(transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_MOVE_ITEM)) {
 					final MokaItem item = (MokaItem)transaction.getContent();
 					request = WebSocketRequestFactory.createMoveItemRequest("umlClass_1", item.getX(), item.getY());
+				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM)) {
+					final MokaItem item = (MokaItem)transaction.getContent();
+					request = WebSocketRequestFactory.createResizeItemRequest("umlClass_1", item.getWidth(), item.getHeight());
 				}
 
 				if(request != null) {
