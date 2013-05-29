@@ -80,6 +80,11 @@ public abstract class MokaItem {
 		mY = y;
 	}
 
+	public void resize(int width, int height) {
+		mWidth = width;
+		mHeight = height;
+	}
+
 	@JsonIgnore
 	public boolean isLocked() {
 		return mLocker == null;
