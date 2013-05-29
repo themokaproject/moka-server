@@ -100,4 +100,23 @@ public class WebSocketRequestFactory {
 		return request;
 	}
 
+	/**
+	 * Create a {@link WebSocketRequest} that is aimed at
+	 * resizing an item on the client platforms.
+	 *
+	 * @param 	itemId the id of the id
+	 * @param 	width the width of the item
+	 * @param 	height the height position of the item
+	 * @return  {@link WebSocketRequest}
+	 */
+	public static WebSocketRequest createResizeItemRequest(String itemId, int width, int height) {
+		WebSocketRequest request = new WebSocketRequest(TYPE_MOVE_ITEM);
+		request.put("itemId", itemId);
+		request.put("width", String.valueOf(width));
+		request.put("height", String.valueOf(height));
+		return request;
+	}
+
+
+
 }
