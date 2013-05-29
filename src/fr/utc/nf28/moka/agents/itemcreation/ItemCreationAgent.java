@@ -41,7 +41,9 @@ public class ItemCreationAgent extends MokaAgent {
 
 			//propagate creation to Ui platform
 			propagateCreation(newItem);
+
 		} else if (type.equals("post-it")) {
+			//TODO implement post-it server side creation
 			System.out.println("demande de création d'un post it");
 			final int newItemId = getEnvironment().generateNewId();
 
