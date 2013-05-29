@@ -28,22 +28,22 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 				String messageToSend = "";
 
 				if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_CONNECTION)) {
-					final User user = (User)transaction.getContent();
+					final User user = (User) transaction.getContent();
 					request = WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.getFirstName() + " " + user.getLastName().substring(0, 1));
-				} else if(transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_ADD_ITEM)) {
-					final UmlClass uml = (UmlClass)transaction.getContent();
+				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_ADD_ITEM)) {
+					final UmlClass uml = (UmlClass) transaction.getContent();
 					request = WebSocketRequestFactory.createAddItemRequest("umlClass", "umlClass_1", String.valueOf(uml.getX()), String.valueOf(uml.getY()));
-				} else if(transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_DELETE_ITEM)) {
+				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_DELETE_ITEM)) {
 					request = WebSocketRequestFactory.createRemoveItemRequest("umlClass_1");
-				} else if(transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_MOVE_ITEM)) {
-					final MokaItem item = (MokaItem)transaction.getContent();
+				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_MOVE_ITEM)) {
+					final MokaItem item = (MokaItem) transaction.getContent();
 					request = WebSocketRequestFactory.createMoveItemRequest("umlClass_1", item.getX(), item.getY());
 				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM)) {
-					final MokaItem item = (MokaItem)transaction.getContent();
+					final MokaItem item = (MokaItem) transaction.getContent();
 					request = WebSocketRequestFactory.createResizeItemRequest("umlClass_1", item.getWidth(), item.getHeight());
 				}
 
-				if(request != null) {
+				if (request != null) {
 					messageToSend = JSONParserUtils.serializeWebSocketRequest(request);
 				} else {
 					messageToSend = message.getContent();
