@@ -30,26 +30,24 @@ public class ItemCreationAgent extends MokaAgent {
 	 * @throws IOException
 	 */
 	public void create(final String type, final ACLMessage response) throws IOException {
+		MokaItem newItem = null;
+		final int newItemId = getEnvironment().generateNewId();
+
 		if (type.equals("UML")) {
-			final UmlClass newItem = new UmlClass("MyClass", 200, 350, "UmlClass");
-			final int newItemId = getEnvironment().generateNewId();
+			//create the new item matching with UML type
+			newItem = new UmlClass("MyClass", 200, 350, "UmlClass");
 			newItem.setId(newItemId);
 			getEnvironment().addItem(newItem);
-
-			//send back item id to the creator
-			sendBackItemId(response, newItemId);
-
-			//propagate creation to Ui platform
-			propagateCreation(newItem);
-
 		} else if (type.equals("post-it")) {
 			//TODO implement post-it server side creation
 			System.out.println("demande de création d'un post it");
-			final int newItemId = getEnvironment().generateNewId();
-
-			//send back item id to the creator
-			sendBackItemId(response, newItemId);
 		}
+
+		//send back item id to the creator
+		sendBackItemId(response, newItemId);
+
+		//propagate creation to Ui platform
+		propagateCreation(newItem);
 
 		//request refreshing current item list for all android device
 		final A2ATransaction refreshTransaction =
