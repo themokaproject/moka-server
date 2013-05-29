@@ -43,7 +43,7 @@ public class ItemCreationAgent extends MokaAgent {
 			System.out.println("demande de création d'un post it");
 		}
 
-		if(newItem==null){
+		if (newItem == null) {
 			//server side creation failed
 			//TODO implement callback error in order to warn AndroidDevice which has requested this creation
 			return;
@@ -56,6 +56,15 @@ public class ItemCreationAgent extends MokaAgent {
 		propagateCreation(newItem);
 
 		//request refreshing current item list for all android device
+		requestAndroidRefresh();
+	}
+
+	/**
+	 * send ACL request to all android device to inform that a new item has been created
+	 *
+	 * @throws IOException
+	 */
+	public void requestAndroidRefresh() throws IOException {
 		final A2ATransaction refreshTransaction =
 				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_REFRESH_CURRENT_ITEMS,
 						"new item created, refresh list.");
@@ -68,16 +77,13 @@ public class ItemCreationAgent extends MokaAgent {
 	 *
 	 * @param response  ACL response for AndroidAgent which send the creation request
 	 * @param newItemId item id
+	 * @throws IOException
 	 */
-	public void sendBackItemId(final ACLMessage response, final int newItemId) {
+	public void sendBackItemId(final ACLMessage response, final int newItemId) throws IOException {
 		final A2ATransaction responseTransaction =
 				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_ITEM_CREATION_SUCCESS, newItemId);
 		response.setPerformative(ACLMessage.REQUEST);
-		try {
-			response.setContent(JSONParserUtils.serializeA2ATransaction(responseTransaction));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		response.setContent(JSONParserUtils.serializeA2ATransaction(responseTransaction));
 		send(response);
 	}
 
@@ -85,17 +91,14 @@ public class ItemCreationAgent extends MokaAgent {
 	 * Propagate item creation to the WebsocketAgent
 	 *
 	 * @param newItem item created
+	 * @throws IOException
 	 */
-	public void propagateCreation(MokaItem newItem) {
+	public void propagateCreation(MokaItem newItem) throws IOException {
 		final A2ATransaction transaction =
 				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_ADD_ITEM, newItem);
-		try {
-			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
-					JSONParserUtils.serializeA2ATransaction(transaction),
-					ACLMessage.PROPAGATE);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
+				JSONParserUtils.serializeA2ATransaction(transaction),
+				ACLMessage.PROPAGATE);
 	}
 
 	/**
