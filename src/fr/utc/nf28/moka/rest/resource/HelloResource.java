@@ -23,38 +23,27 @@ import java.util.List;
 //Sets the path to base URL + /hello
 @Path("/history")
 public class HelloResource {
+	private final List<HistoryEntry> mHistoryEntries = new ArrayList<HistoryEntry>(5);
+
+	public HelloResource() {
+		for (int i = 1; i <= 5; i++) {
+			mHistoryEntries.add(new HistoryEntry("Historique n°" + i));
+		}
+	}
 
 	// This method is called if TEXT_PLAIN is request
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String sayPlainTextHello() {
-		return "Hello Jersey";
+		return mHistoryEntries.toString();
 	}
 
-	// This method is called if XML is request
-	@GET
-	@Produces(MediaType.TEXT_XML)
-	public String sayXMLHello() {
-		return "<?xml version=\"1.0\"?>" + "<hello> Hello Jersey" + "</hello>";
-	}
-
-	// This method is called if HTML is request
-	@GET
-	@Produces(MediaType.TEXT_HTML)
-	public String sayHtmlHello() {
-		return "<html> " + "<title>" + "Hello Jersey" + "</title>"
-				+ "<body><h1>" + "Hello Jersey" + "</body></h1>" + "</html> ";
-	}
-
+	// This method is called if JSON is request
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String sayJSONHello() {
-		final List<HistoryEntry> historyEntries = new ArrayList<HistoryEntry>(5);
-		for (int i = 1; i <= 5; i++) {
-			historyEntries.add(new HistoryEntry("Historique n°" + i));
-		}
 		try {
-			return JSONParserUtils.serializeHistory(historyEntries);
+			return JSONParserUtils.serializeHistory(mHistoryEntries);
 		} catch (IOException e) {
 			System.out.println("Error");
 			return "";
