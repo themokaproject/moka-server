@@ -42,7 +42,11 @@ public class ItemCreationAgent extends MokaAgent {
 			//propagate creation to Ui platform
 			propagateCreation(newItem);
 		} else if (type.equals("post-it")) {
+			System.out.println("demande de création d'un post it");
+			final int newItemId = getEnvironment().generateNewId();
 
+			//send back item id to the creator
+			sendBackItemId(response, newItemId);
 		}
 
 		//request refreshing current item list for all android device
