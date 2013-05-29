@@ -16,22 +16,24 @@ import java.util.HashMap;
  * A behaviour that handles item itemedition.
  */
 public class ItemEdtionHandlingBehaviour extends CyclicBehaviour {
-    @Override
-    public void action() {
-        final ACLMessage message = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
-        if (message != null) {
-            final String requestString = message.getContent();
-            try {
+	@Override
+	public void action() {
+		final ACLMessage message = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
+		if (message != null) {
+			final String requestString = message.getContent();
+			try {
 				final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(requestString);
 				final String type = request.getType();
-                if(type.equals(JadeUtils.TRANSACTION_TYPE_MOVE_ITEM)) {
-					((ItemEditionAgent)myAgent).moveItem((HashMap<String, Integer>)request.getContent());
-                } else {
-                    throw new IOException();
-                }
-            } catch (IOException e) {
-                System.out.println("Edition request syntax is wrong");
-            }
-        }
-    }
+				if (type.equals(JadeUtils.TRANSACTION_TYPE_MOVE_ITEM)) {
+					((ItemEditionAgent) myAgent).moveItem((HashMap<String, Integer>) request.getContent());
+				} else if (type.equals(JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM)) {
+					((ItemEditionAgent) myAgent).resizeItem((HashMap<String, Integer>) request.getContent());
+				} else {
+					throw new IOException();
+				}
+			} catch (IOException e) {
+				System.out.println("Edition request syntax is wrong");
+			}
+		}
+	}
 }
