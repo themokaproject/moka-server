@@ -5,6 +5,7 @@ import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.util.JadeUtils;
+import jade.lang.acl.ACLMessage;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -29,6 +30,21 @@ public class ConnectionAgent extends MokaAgent {
 		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 				JSONParserUtils.serializeA2ATransaction(transaction),
 				jade.lang.acl.ACLMessage.PROPAGATE);
+
+		requestAndroidRefresh();
+	}
+
+	/**
+	 * send ACL request to all android device to inform that a new user is connected
+	 *
+	 * @throws IOException
+	 */
+	public void requestAndroidRefresh() throws IOException {
+		final A2ATransaction refreshTransaction =
+				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_REFRESH_HISTORY,
+						"new user, refresh history.");
+		sendMessageToAndroidDevice(ACLMessage.REQUEST,
+				JSONParserUtils.serializeA2ATransaction(refreshTransaction));
 	}
 
 }
