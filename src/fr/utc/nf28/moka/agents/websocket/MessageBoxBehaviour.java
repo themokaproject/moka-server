@@ -31,16 +31,18 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 					final User user = (User) transaction.getContent();
 					request = WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.getFirstName() + " " + user.getLastName().substring(0, 1));
 				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_ADD_ITEM)) {
-					final UmlClass uml = (UmlClass) transaction.getContent();
-					request = WebSocketRequestFactory.createAddItemRequest("umlClass", "umlClass_1", String.valueOf(uml.getX()), String.valueOf(uml.getY()));
+					final MokaItem item = (MokaItem) transaction.getContent();
+					//TODO get the real type
+					request = WebSocketRequestFactory.createAddItemRequest("umlClass", String.valueOf(item.getId()), String.valueOf(item.getX()), String.valueOf(item.getY()));
 				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_DELETE_ITEM)) {
-					request = WebSocketRequestFactory.createRemoveItemRequest("umlClass_1");
+					String id = String.valueOf(transaction.getContent());
+					request = WebSocketRequestFactory.createRemoveItemRequest(id);
 				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_MOVE_ITEM)) {
 					final MokaItem item = (MokaItem) transaction.getContent();
-					request = WebSocketRequestFactory.createMoveItemRequest("umlClass_1", item.getX(), item.getY());
+					request = WebSocketRequestFactory.createMoveItemRequest(String.valueOf(item.getId()), item.getX(), item.getY());
 				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM)) {
 					final MokaItem item = (MokaItem) transaction.getContent();
-					request = WebSocketRequestFactory.createResizeItemRequest("umlClass_1", item.getWidth(), item.getHeight());
+					request = WebSocketRequestFactory.createResizeItemRequest(String.valueOf(item.getId()), item.getWidth(), item.getHeight());
 				}
 
 				if (request != null) {
