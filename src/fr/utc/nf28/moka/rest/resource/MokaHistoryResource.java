@@ -10,6 +10,7 @@ package fr.utc.nf28.moka.rest.resource;
 // The browser requests per default the HTML MIME type.
 
 import fr.utc.nf28.moka.environment.HistoryEntry;
+import fr.utc.nf28.moka.environment.MokaEnvironment;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 
 import javax.ws.rs.GET;
@@ -23,23 +24,25 @@ import java.util.List;
 //Sets the path to base URL + /hello
 @Path("/history")
 public class MokaHistoryResource {
-	private final List<HistoryEntry> mHistoryEntries = new ArrayList<HistoryEntry>(5);
+    private final List<HistoryEntry> mHistoryEntries = new ArrayList<HistoryEntry>(5);
 
-	public MokaHistoryResource() {
-		for (int i = 1; i <= 5; i++) {
-			mHistoryEntries.add(new HistoryEntry("Historique n°" + i));
-		}
-	}
+    public MokaHistoryResource() {
+        super();
 
-	// This method is called if JSON is request
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public String sayJSONHello() {
-		try {
-			return JSONParserUtils.serializeHistory(mHistoryEntries);
-		} catch (IOException e) {
-			System.out.println("Error");
-			return "";
-		}
-	}
+        for (int i = 1; i <= 5; i++) {
+            mHistoryEntries.add(new HistoryEntry("Historique n°" + i));
+        }
+    }
+
+    // This method is called if JSON is request
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String sayJSONHello() {
+        try {
+            return JSONParserUtils.serializeHistory(MokaEnvironment.getInstance().getHistory());
+        } catch (IOException e) {
+            System.out.println("Error");
+            return "";
+        }
+    }
 }

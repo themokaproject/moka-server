@@ -19,7 +19,7 @@ public class Launcher {
         final Runtime runtime = Runtime.instance();
         try {
             final AgentContainer container = runtime.createMainContainer(new ProfileImpl("profile.txt"));
-            MokaEnvironment environment = new MokaEnvironment();
+            final MokaEnvironment environment = MokaEnvironment.getInstance();
             container.createNewAgent("ConnectionAgent", "fr.utc.nf28.moka.agents.connection.ConnectionAgent", new Object[]{environment}).start();
             container.createNewAgent("ItemCreationAgent", "fr.utc.nf28.moka.agents.itemcreation.ItemCreationAgent", new Object[]{environment}).start();
             container.createNewAgent("ItemEditionAgent", "fr.utc.nf28.moka.agents.itemedition.ItemEditionAgent", new Object[]{environment}).start();
