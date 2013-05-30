@@ -56,17 +56,32 @@ public class ItemCreationAgent extends MokaAgent {
 		propagateCreation(newItem);
 
 		//request refreshing current item list for all android device
-		requestAndroidRefresh();
+		requestAndroidCurrentItemsListRefresh();
 	}
 
 	/**
 	 * send ACL request to all android device to inform that a new item has been created
+	 * refresh history and current list
 	 *
 	 * @throws IOException
 	 */
-	public void requestAndroidRefresh() throws IOException {
+	public void requestAndroidCurrentItemsListRefresh() throws IOException {
 		final A2ATransaction refreshTransaction =
 				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_REFRESH_CURRENT_ITEMS,
+						"new item created, refresh list.");
+		sendMessageToAndroidDevice(ACLMessage.REQUEST,
+				JSONParserUtils.serializeA2ATransaction(refreshTransaction));
+	}
+
+	/**
+	 * send ACL request to all android device to inform that item has been deleted
+	 * refresh only history
+	 *
+	 * @throws IOException
+	 */
+	public void requestAndroidHistoryRefresh() throws IOException {
+		final A2ATransaction refreshTransaction =
+				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_REFRESH_HISTORY,
 						"new item created, refresh list.");
 		sendMessageToAndroidDevice(ACLMessage.REQUEST,
 				JSONParserUtils.serializeA2ATransaction(refreshTransaction));
@@ -113,5 +128,6 @@ public class ItemCreationAgent extends MokaAgent {
 		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 				JSONParserUtils.serializeA2ATransaction(transaction),
 				jade.lang.acl.ACLMessage.PROPAGATE);
+		requestAndroidHistoryRefresh();
 	}
 }
