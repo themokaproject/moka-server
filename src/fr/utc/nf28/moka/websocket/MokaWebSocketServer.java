@@ -13,6 +13,7 @@ import org.java_websocket.server.WebSocketServer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
 
 public class MokaWebSocketServer extends WebSocketServer {
 
@@ -39,6 +40,9 @@ public class MokaWebSocketServer extends WebSocketServer {
 	@Override
 	public void onMessage(WebSocket connection, String message) {
 		System.out.println(connection + ": " + message);
+		if ("askToSave".equals(message)) {
+			connectionAskToSave(connection);
+		}
 	}
 
 	@Override
@@ -57,6 +61,10 @@ public class MokaWebSocketServer extends WebSocketServer {
 			//TODO send in one request ?
 			sendRequest(WebSocketRequestFactory.createResizeItemRequest(String.valueOf(item.getId()), item.getWidth(), item.getHeight()), connection);
 		}
+	}
+
+	private void connectionAskToSave(WebSocket connection) {
+		sendRequest(WebSocketRequestFactory.createSaveWorkSpace(MokaEnvironment.getInstance().toString()), connection);
 	}
 
 

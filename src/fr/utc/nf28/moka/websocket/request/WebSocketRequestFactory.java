@@ -10,6 +10,7 @@ public class WebSocketRequestFactory {
 	private static final String TYPE_MOVE_ITEM = "moveItem";
 	private static final String TYPE_RESIZE_ITEM = "resizeItem";
 	private static final String TYPE_SELECT_ITEM = "selectItem";
+	private static final String TYPE_SAVE_WORSPACE = "saveWorkSpace";
 
 	/**
 	 * Create a {@link WebSocketRequest} that is aimed at
@@ -117,6 +118,16 @@ public class WebSocketRequestFactory {
 		request.put("height", String.valueOf(height));
 		return request;
 	}
+
+
+	public static WebSocketRequest createSaveWorkSpace(String workSpace) {
+		WebSocketRequest request = new WebSocketRequest(TYPE_SAVE_WORSPACE);
+		request.put("workSpace", workSpace);
+		request.put("date", String.valueOf(System.currentTimeMillis()));
+		return request;
+	}
+
+
 
 
 
