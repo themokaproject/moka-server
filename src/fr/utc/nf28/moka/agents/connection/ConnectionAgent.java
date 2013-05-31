@@ -5,6 +5,7 @@ import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.util.JadeUtils;
+import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 
 import java.io.IOException;
@@ -16,15 +17,16 @@ import java.util.HashMap;
  */
 public class ConnectionAgent extends MokaAgent {
 
-    public void setup() {
-        super.setup();
+	public void setup() {
+		super.setup();
 		registerSkill(JadeUtils.JADE_SKILL_NAME_CONNECTION);
-        addBehaviour(new ConnectionHandlingBehaviour());
-    }
+		addBehaviour(new ConnectionHandlingBehaviour());
+	}
 
-	public void connection(final HashMap<String,String> userInfo) throws IOException {
-		User user = new User(userInfo.get("firstName"),userInfo.get("lastName"));
+	public void connection(final HashMap<String, String> userInfo, AID userAID) throws IOException {
+		User user = new User(userInfo.get("firstName"), userInfo.get("lastName"));
 		user.setIp(userInfo.get("ip"));
+		user.setAID(userAID);
 		getEnvironment().addUser(user);
 		final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_CONNECTION, user);
 		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),

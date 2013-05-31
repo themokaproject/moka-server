@@ -15,31 +15,31 @@ import java.util.HashMap;
  * A behaviour that handles connections and disconnections.
  */
 public class ConnectionHandlingBehaviour extends CyclicBehaviour {
-    @Override
-    public void action() {
-        final ACLMessage message = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
-        if (message != null) {
-            final String connectionRequestString = message.getContent();
-            try {
-                final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(connectionRequestString);
+	@Override
+	public void action() {
+		final ACLMessage message = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
+		if (message != null) {
+			final String connectionRequestString = message.getContent();
+			try {
+				final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(connectionRequestString);
 				final String type = request.getType();
-                if (type.equals(JadeUtils.TRANSACTION_TYPE_CONNECTION)) {
-					((ConnectionAgent)myAgent).connection((HashMap<String, String>) request.getContent());
-                } else if (type.equals("disconnection")) {
-                    disconnection("disconnect");
-                }
-            } catch (IOException e) {
+				if (type.equals(JadeUtils.TRANSACTION_TYPE_CONNECTION)) {
+					((ConnectionAgent) myAgent).connection((HashMap<String, String>) request.getContent(), message.getSender());
+				} else if (type.equals("disconnection")) {
+					disconnection("disconnect");
+				}
+			} catch (IOException e) {
 				e.printStackTrace();
-                System.out.println("Connection/disconnection request syntax is wrong");
-            }
+				System.out.println("Connection/disconnection request syntax is wrong");
+			}
 
 		} else {
-            block();
-        }
-    }
+			block();
+		}
+	}
 
 
-    private void disconnection(String ip) {
-        ((MokaAgent)myAgent).getEnvironment().removeUser(ip);
-    }
+	private void disconnection(String ip) {
+		((MokaAgent) myAgent).getEnvironment().removeUser(ip);
+	}
 }
