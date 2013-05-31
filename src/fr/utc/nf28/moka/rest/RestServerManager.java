@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.URI;
 
 public class RestServerManager {
-	private static final String HOST = "http://127.0.0.1/moka/";
+	private static final String HOST = "http://127.0.0.1/api/";
 	private static final int PORT = 80;
 	private static final URI BASE_URI = UriBuilder.fromUri(HOST).port(PORT).build();
 
