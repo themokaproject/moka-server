@@ -63,7 +63,7 @@ public class User {
 		this.mAID = aid;
 	}
 
-	public AID getAID(AID aid) {
+	public AID getAID() {
 		return mAID;
 	}
 
