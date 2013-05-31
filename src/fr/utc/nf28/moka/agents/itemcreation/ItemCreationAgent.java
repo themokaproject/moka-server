@@ -3,6 +3,7 @@ package fr.utc.nf28.moka.agents.itemcreation;
 import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.environment.items.MokaItem;
+import fr.utc.nf28.moka.environment.items.PostIt;
 import fr.utc.nf28.moka.environment.items.UmlClass;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.util.JadeUtils;
@@ -34,13 +35,10 @@ public class ItemCreationAgent extends MokaAgent {
 		final int newItemId = getEnvironment().generateNewId();
 
 		if (type.equals("UML")) {
-			//create the new item matching with UML type
 			newItem = new UmlClass("MyClass", 200, 350, "UmlClass");
-			newItem.setId(newItemId);
-			getEnvironment().addItem(newItem);
+
 		} else if (type.equals("post-it")) {
-			//TODO implement post-it server side creation
-			System.out.println("demande de création d'un post it");
+            newItem = new PostIt("Post-it", 300, 350, "Post-it", "Post-it content");
 		}
 
 		if (newItem == null) {
@@ -48,6 +46,9 @@ public class ItemCreationAgent extends MokaAgent {
 			//TODO implement callback error in order to warn AndroidDevice which has requested this creation
 			return;
 		}
+
+        newItem.setId(newItemId);
+        getEnvironment().addItem(newItem);
 
 		//send back item id to the creator
 		sendBackItemId(response, newItemId);
