@@ -12,7 +12,7 @@ public class ImageLink extends MokaItem {
     }
 
     public ImageLink(String title, int x, int y, String url) {
-        super(title, x, y);
+        super(title, x, y, sType);
         mUrl = url;
     }
 
@@ -27,5 +27,6 @@ public class ImageLink extends MokaItem {
     public String toString() {
         return "image:" + mUrl + " " + super.toString();
     }
+
 
 }

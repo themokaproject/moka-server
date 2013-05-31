@@ -17,6 +17,7 @@ public abstract class MokaItem {
 	private int mHeight;
 	private int mWidth;
 	private transient User mLocker;
+    private String mType;
 
 	public MokaItem() {
 		mId = sIdIndex++;
@@ -24,11 +25,12 @@ public abstract class MokaItem {
 		mWidth = DEFAULT_WIDTH;
 	}
 
-	public MokaItem(String title, int x, int y) {
+	public MokaItem(String title, int x, int y, String type) {
 		this();
 		mTitle = title;
 		mX = x;
 		mY = y;
+        mType = type;
 	}
 
 	public int getId() {
@@ -114,4 +116,12 @@ public abstract class MokaItem {
 	public String toString() {
 		return "title:" + mTitle + " id:" + mId + " x:" + mX + " y:" + mY;
 	}
+
+    public String getType() {
+        return mType;
+    }
+
+    public void setType(String type) {
+        mType = type;
+    }
 }
