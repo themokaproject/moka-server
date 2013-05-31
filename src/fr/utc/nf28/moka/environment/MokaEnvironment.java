@@ -38,7 +38,7 @@ public class MokaEnvironment {
 		} else {
 			System.out.println("item with id " + item.getId() + " replaced");
 		}
-		mHistoryEntries.add(new HistoryEntry(item.getLocker().getFirstName()+" a ajouté un nouvel "+item.getType()));
+		mHistoryEntries.add(new HistoryEntry(item.getLocker().getFirstName() + " a ajouté un nouvel " + item.getType()));
 		System.out.println(toString());
 	}
 
@@ -50,6 +50,10 @@ public class MokaEnvironment {
 		}
 		mHistoryEntries.add(new HistoryEntry(user.getFirstName() + " " + user.getLastName() + " s'est connecté"));
 		System.out.println(toString());
+	}
+
+	public HashMap<String, User> getUsers() {
+		return mUsers;
 	}
 
 	public User getUserByAID(String userAID) {
