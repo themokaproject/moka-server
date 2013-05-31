@@ -1,7 +1,6 @@
 package fr.utc.nf28.moka.environment.users;
 
 import fr.utc.nf28.moka.environment.items.MokaItem;
-import jade.core.AID;
 
 public class User {
 	private String mLastName;
@@ -9,7 +8,7 @@ public class User {
 	private String mIp;
 	private int mColor;
 	private MokaItem mCurrentItem;
-	private AID mAID;
+	private String mAID;
 
 	public User() {
 	}
@@ -59,11 +58,11 @@ public class User {
 		this.mIp = ip;
 	}
 
-	public void setAID(AID aid) {
+	public void setAID(String aid) {
 		this.mAID = aid;
 	}
 
-	public AID getAID() {
+	public String getAID() {
 		return mAID;
 	}
 

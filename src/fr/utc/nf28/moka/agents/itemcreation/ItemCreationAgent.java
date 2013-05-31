@@ -2,12 +2,14 @@ package fr.utc.nf28.moka.agents.itemcreation;
 
 import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.agents.MokaAgent;
+import fr.utc.nf28.moka.environment.MokaEnvironment;
 import fr.utc.nf28.moka.environment.items.ImageLink;
 import fr.utc.nf28.moka.environment.items.MokaItem;
 import fr.utc.nf28.moka.environment.items.PostIt;
 import fr.utc.nf28.moka.environment.items.UmlClass;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.util.JadeUtils;
+import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 
 import java.io.IOException;
@@ -31,17 +33,18 @@ public class ItemCreationAgent extends MokaAgent {
 	 *                 request this item creation
 	 * @throws IOException
 	 */
-	public void create(final String type, final ACLMessage response) throws IOException {
+	public void create(final String type, final ACLMessage response, final AID creator) throws IOException {
 		MokaItem newItem = null;
-		final int newItemId = getEnvironment().generateNewId();
+		final MokaEnvironment environment = getEnvironment();
+		final int newItemId = environment.generateNewId();
 
 		if (type.equals("UML")) {
 			newItem = new UmlClass("MyClass", 200, 350, "UmlClass");
 		} else if (type.equals("post-it")) {
-            newItem = new PostIt("Post-it", 300, 350, "Post-it", "Post-it content");
-		} else if(type.equals("image")) {
-            newItem = new ImageLink("Image", 400, 450, "http://i1.cdnds.net/13/12/618x959/bill-gates-mugshot.jpg");
-        }
+			newItem = new PostIt("Post-it", 300, 350, "Post-it", "Post-it content");
+		} else if (type.equals("image")) {
+			newItem = new ImageLink("Image", 400, 450, "http://i1.cdnds.net/13/12/618x959/bill-gates-mugshot.jpg");
+		}
 
 		if (newItem == null) {
 			//server side creation failed
@@ -49,8 +52,12 @@ public class ItemCreationAgent extends MokaAgent {
 			return;
 		}
 
-        newItem.setId(newItemId);
-        getEnvironment().addItem(newItem);
+		//set creator as Locker
+		newItem.lock(environment.getUserByAID(creator.toString()));
+
+		//set item id
+		newItem.setId(newItemId);
+		environment.addItem(newItem);
 
 		//send back item id to the creator
 		sendBackItemId(response, newItemId);

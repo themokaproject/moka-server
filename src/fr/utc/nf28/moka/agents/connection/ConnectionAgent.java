@@ -26,7 +26,7 @@ public class ConnectionAgent extends MokaAgent {
 	public void connection(final HashMap<String, String> userInfo, AID userAID) throws IOException {
 		User user = new User(userInfo.get("firstName"), userInfo.get("lastName"));
 		user.setIp(userInfo.get("ip"));
-		user.setAID(userAID);
+		user.setAID(userAID.toString());
 		getEnvironment().addUser(user);
 		final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_CONNECTION, user);
 		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),

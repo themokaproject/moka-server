@@ -23,10 +23,10 @@ public class ItemCreationBehaviour extends CyclicBehaviour {
 				final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(requestString);
 				final String type = request.getType();
 				if (type.equals(JadeUtils.TRANSACTION_TYPE_ADD_ITEM)) {
-					((ItemCreationAgent)myAgent).create((String)request.getContent(),message.createReply());
+					((ItemCreationAgent) myAgent).create((String) request.getContent(), message.createReply(), message.getSender());
 				} else if (type.equals(JadeUtils.TRANSACTION_TYPE_DELETE_ITEM)) {
 					//TODO implement destruction
-					((ItemCreationAgent)myAgent).deleteItem((Integer)request.getContent());
+					((ItemCreationAgent) myAgent).deleteItem((Integer) request.getContent());
 				} else {
 					throw new IOException();
 				}
