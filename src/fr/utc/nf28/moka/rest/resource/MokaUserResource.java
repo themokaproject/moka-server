@@ -6,10 +6,10 @@ import fr.utc.nf28.moka.util.JSONParserUtils;
 import javax.ws.rs.Path;
 import java.io.IOException;
 
-@Path("/item/list")
-public class MokaItemResource extends MokaRestResource {
+@Path("/user/list")
+public class MokaUserResource extends MokaRestResource {
 	@Override
 	public String serialize() throws IOException {
-		return JSONParserUtils.serializeItems(MokaEnvironment.getInstance().getItems().values());
+		return JSONParserUtils.serializeUsers(MokaEnvironment.getInstance().getUsers().values());
 	}
 }
