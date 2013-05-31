@@ -126,6 +126,10 @@ public class MokaEnvironment {
         return mItems;
     }
 
+	public HashMap<String, User> getUsers() {
+		return  mUsers;
+	}
+
     public String toString() {
         String s = "";
         s += "== Users ==\n";
