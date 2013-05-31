@@ -1,5 +1,8 @@
 package fr.utc.nf28.moka.websocket;
 
+import fr.utc.nf28.moka.environment.MokaEnvironment;
+import fr.utc.nf28.moka.environment.items.MokaItem;
+import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.websocket.request.WebSocketRequest;
 import fr.utc.nf28.moka.websocket.request.WebSocketRequestFactory;
@@ -23,80 +26,54 @@ public class MokaWebSocketServer extends WebSocketServer {
 
 	@Override
 	public void onOpen(WebSocket connection, ClientHandshake clientHandshake) {
-		//TODO onOpen
 		System.out.println(connection.getRemoteSocketAddress().getAddress().getHostAddress() + " entered the room!");
+		connectionCheckIn(connection);
+
 	}
 
 	@Override
 	public void onClose(WebSocket connection, int i, String s, boolean b) {
-		//TODO onClose
 		System.out.println(connection + " has left the room!");
 	}
 
 	@Override
 	public void onMessage(WebSocket connection, String message) {
-		//TODO onMessage
 		System.out.println(connection + ": " + message);
 	}
 
 	@Override
 	public void onError(WebSocket webSocket, Exception ex) {
-		//TODO onError
 		ex.printStackTrace();
 	}
 
-	//for test purpose only
-	//TODO DELETE
-	public void addUser(String userId, String pseudo) throws IOException {
-		WebSocketRequest request = WebSocketRequestFactory.createAddUserRequest(userId, pseudo);
-		sendAll(request);
+	private void connectionCheckIn(WebSocket connection) {
+		MokaEnvironment environment = MokaEnvironment.getInstance();
+		for (User user : environment.getUsers().values()) {
+			sendRequest(WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.getFirstName() + " " + user.getLastName().substring(0, 1)), connection);
+		}
+
+		for (MokaItem item : environment.getItems().values()) {
+			sendRequest(WebSocketRequestFactory.createAddItemRequest(item.getType(), String.valueOf(item.getId()), String.valueOf(item.getX()), String.valueOf(item.getY())), connection);
+		}
 	}
 
-	//for test purpose only
-	//TODO DELETE
-	public void removeUser(String userId) throws IOException {
-		WebSocketRequest request = WebSocketRequestFactory.createRemoveUserRequest(userId);
-		sendAll(request);
-	}
-
-	//for test purpose only
-	//TODO DELETE
-	public void addItem(String type, String itemId) throws IOException {
-		WebSocketRequest request = WebSocketRequestFactory.createAddItemRequest(type, itemId, "200","350");
-		sendAll(request);
-	}
-
-	//for test purpose only
-	//TODO DELETE
-	public void removeItem(String itemId) throws IOException {
-		WebSocketRequest request = WebSocketRequestFactory.createRemoveItemRequest(itemId);
-		sendAll(request);
-	}
-
-	//for test purpose only
-	//TODO DELETE
-	public void moveItem(String itemId, int x, int y) throws IOException {
-		WebSocketRequest request = WebSocketRequestFactory.createMoveItemRequest(itemId, x, y);
-		sendAll(request);
-	}
-
-	//for test purpose only
-	//TODO DELETE
-	public void selectItem(String userId, String itemId) throws IOException {
-		WebSocketRequest request = WebSocketRequestFactory.createSelectItemRequest(userId, itemId);
-		sendAll(request);
-	}
 
 	public void sendAll(String message) {
-		for(WebSocket connection : this.connections()) {
+		for (WebSocket connection : this.connections()) {
 			connection.send(message);
 		}
 	}
 
-	//for test purpose only
-	//TODO DELETE
-	public void sendAll(WebSocketRequest request) throws IOException {
+	private void sendAll(WebSocketRequest request) throws IOException {
 		sendAll(JSONParserUtils.serializeWebSocketRequest(request));
+	}
+
+	private void sendRequest(WebSocketRequest request, WebSocket connection) {
+		try {
+			connection.send(JSONParserUtils.serializeWebSocketRequest(request));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 
