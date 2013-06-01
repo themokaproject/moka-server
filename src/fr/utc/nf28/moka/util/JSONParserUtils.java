@@ -79,42 +79,8 @@ public class JSONParserUtils {
 		return sMapper.readValue(json, UmlClass.class);
 	}
 
-	public static String serializeLockingRequest(LockingRequest request) throws IOException {
-		StringWriter sw = new StringWriter();
-		sMapper.writeValue(sw, request);
-		return sw.toString();
-	}
-
-	public static LockingRequest deserializeLockingRequest(final String json) throws IOException {
-		return sMapper.readValue(json, LockingRequest.class);
-	}
-
-	public static String serializeEditionRequest(EditionRequest request) throws IOException {
-		return sMapper.writeValueAsString(request);
-	}
-
-	public static String serializeConnectionRequest(ConnectionRequest request) throws IOException {
-		return sMapper.writeValueAsString(request);
-	}
-
 	public static String serializeWebSocketRequest(WebSocketRequest request) throws IOException {
 		return sMapper.writeValueAsString(request);
-	}
-
-	public static EditionRequest deserializeEditionRequest(String editionRequest) throws IOException {
-		return sMapper.readValue(editionRequest, EditionRequest.class);
-	}
-
-	public static ConnectionRequest deserializeConnectionRequest(String connectionRequest) throws IOException {
-		return sMapper.readValue(connectionRequest, ConnectionRequest.class);
-	}
-
-	public static String serializeCreationRequest(CreationRequest request) throws IOException {
-		return sMapper.writeValueAsString(request);
-	}
-
-	public static CreationRequest deserializeCreationRequest(String creationRequest) throws IOException {
-		return sMapper.readValue(creationRequest, CreationRequest.class);
 	}
 
 	public static String serializeHistory(Collection<HistoryEntry> historyEntries) throws IOException {
