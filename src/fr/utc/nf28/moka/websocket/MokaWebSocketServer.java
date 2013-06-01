@@ -53,7 +53,7 @@ public class MokaWebSocketServer extends WebSocketServer {
 	private void connectionCheckIn(WebSocket connection) {
 		MokaEnvironment environment = MokaEnvironment.getInstance();
 		for (User user : environment.getUsers().values()) {
-			sendRequest(WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.getFirstName() + " " + user.getLastName().substring(0, 1)), connection);
+			sendRequest(WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.makePseudo()), connection);
 		}
 
 		for (MokaItem item : environment.getItems().values()) {
