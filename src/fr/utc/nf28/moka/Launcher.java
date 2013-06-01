@@ -1,18 +1,9 @@
 package fr.utc.nf28.moka;
 
-import fr.utc.nf28.moka.agents.connection.ConnectionRequest;
-import fr.utc.nf28.moka.agents.itemcreation.CreationRequest;
 import fr.utc.nf28.moka.environment.MokaEnvironment;
-import fr.utc.nf28.moka.environment.items.ImageLink;
-import fr.utc.nf28.moka.environment.items.LockingRequest;
-import fr.utc.nf28.moka.environment.items.UmlClass;
-import fr.utc.nf28.moka.environment.users.User;
-import fr.utc.nf28.moka.util.JSONParserUtils;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
 import jade.wrapper.AgentContainer;
-
-import java.awt.*;
 
 public class Launcher {
     public static void main(String[] args) {
