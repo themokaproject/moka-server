@@ -93,7 +93,7 @@ public abstract class MokaItem {
 
 	@JsonIgnore
 	public boolean isLocked() {
-		return mLocker == null;
+		return mLocker != null;
 	}
 
 	@JsonIgnore
