@@ -13,15 +13,21 @@ import org.java_websocket.server.WebSocketServer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.List;
 
 public class MokaWebSocketServer extends WebSocketServer {
 
-	public MokaWebSocketServer(int port) throws UnknownHostException {
+	private Callback mCallback;
+
+	public MokaWebSocketServer(int port, Callback c) throws UnknownHostException {
 		super(new InetSocketAddress(port));
+		mCallback = c;
 	}
 
-	public MokaWebSocketServer(InetSocketAddress add) {
+	public MokaWebSocketServer(InetSocketAddress add, Callback c) {
 		super(add);
+		mCallback = c;
 	}
 
 	@Override
@@ -38,9 +44,39 @@ public class MokaWebSocketServer extends WebSocketServer {
 	@Override
 	public void onMessage(WebSocket connection, String message) {
 		System.out.println(connection + ": " + message);
-		if ("askToSave".equals(message)) {
-			sendBackUpRequest(connection);
+		try {
+			WebSocketRequest request = JSONParserUtils.deserializeWebSocketRequest(message);
+			if(request.getType().equals("backUp")) {
+				sendBackUpRequest(connection);
+			} else if(request.getType().equals("upload")) {
+			    System.out.println(request.getContent().toString());
+				uploadBackUp(request.getContent());
+				connectionCheckIn(connection);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println(message);
 		}
+
+	}
+
+	public void uploadBackUp(HashMap<String, String> backUp) throws IOException {
+		final MokaEnvironment environment = MokaEnvironment.getInstance();
+		/* TODO Does reloading users make sense ?
+		List<User> users = JSONParserUtils.deserializeUsers(backUp.get("Users"));
+		for(User u : users) {
+			environment.addUser(u);
+		}
+		*/
+		environment.clearItems();
+		List<MokaItem> items = JSONParserUtils.deserializeItems(backUp.get("Items"));
+		int maxId = -1;
+		for(MokaItem i : items) {
+			environment.addItem(i);
+			if(maxId < i.getId()) maxId = i.getId();
+		}
+		environment.setItemIdGenCurrentIndex(++maxId);
+		mCallback.uploadSucceed();
 	}
 
 	@Override
@@ -95,5 +131,9 @@ public class MokaWebSocketServer extends WebSocketServer {
 		}
 	}
 
+
+	public interface Callback{
+		void uploadSucceed();
+	}
 
 }

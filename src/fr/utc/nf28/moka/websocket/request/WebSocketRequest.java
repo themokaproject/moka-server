@@ -23,4 +23,20 @@ public class WebSocketRequest {
 	public void put(String key, String value) {
 		this.content.put(key, value);
 	}
+
+	public String getType() {
+		return  type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public HashMap<String, String> getContent(){
+		return content;
+	}
+
+	public void setContent(HashMap<String, String> content) {
+		this.content = content;
+	}
 }

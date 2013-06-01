@@ -1,17 +1,21 @@
 package fr.utc.nf28.moka.util;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.environment.HistoryEntry;
+import fr.utc.nf28.moka.environment.MokaEnvironment;
+import fr.utc.nf28.moka.environment.items.ImageLink;
 import fr.utc.nf28.moka.environment.items.MokaItem;
+import fr.utc.nf28.moka.environment.items.PostIt;
 import fr.utc.nf28.moka.environment.items.UmlClass;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.websocket.request.WebSocketRequest;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Collection;
+import java.util.*;
 
 /**
  * a JSON serializer/deserializer that uses Jackson
@@ -70,6 +74,7 @@ public class JSONParserUtils {
 		return sMapper.writeValueAsString(mokaItems);
 	}
 
+
 	public static MokaItem deserializeItem(final String json) throws IOException {
 		// TODO deserialize the appropriate class using the "type" key
 		return sMapper.readValue(json, UmlClass.class);
@@ -82,4 +87,49 @@ public class JSONParserUtils {
 	public static String serializeHistory(Collection<HistoryEntry> historyEntries) throws IOException {
 		return sMapper.writeValueAsString(historyEntries);
 	}
+
+	public static WebSocketRequest deserializeWebSocketRequest(String json) throws IOException {
+		final JsonNode rootNode = sMapper.readTree(json);
+		final JsonNode typeNode = rootNode.get("type");
+		final JsonNode contentNode = rootNode.get("content");
+		final WebSocketRequest result = new WebSocketRequest("DummyType");
+
+		if (typeNode != null && contentNode != null) {
+			result.setType(typeNode.asText());
+			if (!contentNode.asText().isEmpty()) {
+				HashMap<String, String> content = sMapper.readValue(contentNode.asText(), new TypeReference<HashMap<String, String>>() {
+				});
+				result.setContent(content);
+			}
+		}
+
+		return result;
+	}
+
+	public static List<User> deserializeUsers(String json) throws IOException {
+		return sMapper.readValue(json, new TypeReference<List<User>>() {
+		});
+	}
+
+	public static List<MokaItem> deserializeItems(String json) throws IOException {
+		final JsonNode rootNode = sMapper.readTree(json);
+		final List<MokaItem> result = new ArrayList<MokaItem>();
+
+		for (Iterator<JsonNode> iter = rootNode.elements(); iter.hasNext(); ) {
+			JsonNode currenNode = iter.next();
+			String className = currenNode.path("type").asText();
+			if (className.equals("umlClass")) {
+				UmlClass item = sMapper.treeToValue(currenNode, UmlClass.class);
+				result.add(item);
+			} else if (className.equals("post-it")) {
+				PostIt item = sMapper.treeToValue(currenNode, PostIt.class);
+				result.add(item);
+			} else if (className.equals("image")) {
+				ImageLink item = sMapper.treeToValue(currenNode, ImageLink.class);
+				result.add(item);
+			}
+		}
+		return result;
+	}
+
 }

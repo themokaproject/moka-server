@@ -32,13 +32,22 @@ public class MokaEnvironment {
 		return sItemIdGenCurrentIndex++;
 	}
 
+	public void setItemIdGenCurrentIndex(int index) {
+		sItemIdGenCurrentIndex = index;
+	}
+
+	public void clearItems(){
+		mItems.clear();
+	}
+
 	public void addItem(MokaItem item) {
 		if (mItems.put(item.getId(), item) == null) {
 			System.out.println("item with id " + item.getId() + " added");
 		} else {
 			System.out.println("item with id " + item.getId() + " replaced");
 		}
-		mHistoryEntries.add(new HistoryEntry(item.getLocker().makePseudo() + " a ajouté " + item.getType() + " " + item.getId()));
+		if (item.getLocker() != null)
+			mHistoryEntries.add(new HistoryEntry(item.getLocker().makePseudo() + " a ajouté " + item.getType() + " " + item.getId()));
 		System.out.println(toString());
 	}
 

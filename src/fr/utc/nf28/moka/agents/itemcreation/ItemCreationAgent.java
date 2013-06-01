@@ -71,33 +71,6 @@ public class ItemCreationAgent extends MokaAgent {
 		requestAndroidCurrentItemsListRefresh();
 	}
 
-	/**
-	 * send ACL request to all android device to inform that a new item has been created
-	 * refresh history and current list
-	 *
-	 * @throws IOException
-	 */
-	public void requestAndroidCurrentItemsListRefresh() throws IOException {
-		final A2ATransaction refreshTransaction =
-				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_REFRESH_CURRENT_ITEMS,
-						"new item created, refresh list.");
-		sendMessageToAndroidDevice(ACLMessage.REQUEST,
-				JSONParserUtils.serializeA2ATransaction(refreshTransaction));
-	}
-
-	/**
-	 * send ACL request to all android device to inform that item has been deleted
-	 * refresh only history
-	 *
-	 * @throws IOException
-	 */
-	public void requestAndroidHistoryRefresh() throws IOException {
-		final A2ATransaction refreshTransaction =
-				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_REFRESH_HISTORY,
-						"new item created, refresh list.");
-		sendMessageToAndroidDevice(ACLMessage.REQUEST,
-				JSONParserUtils.serializeA2ATransaction(refreshTransaction));
-	}
 
 	/**
 	 * Use to send back id of the new created item

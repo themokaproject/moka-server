@@ -1,5 +1,6 @@
 package fr.utc.nf28.moka.agents;
 
+import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.util.JadeUtils;
 import jade.core.AID;
 import jade.core.Agent;
@@ -10,6 +11,7 @@ import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
 
 import javax.swing.text.html.HTMLDocument;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -124,6 +126,46 @@ public class BaseAgent extends Agent {
 		serviceDescription.setType(skillType);
 		agentDescription.addServices(serviceDescription);
 		return agentDescription;
+	}
+
+	/**
+	 * send message to all android devices
+	 *
+	 * @param performatif message's performatif
+	 * @param content     message's content
+	 */
+	protected void sendMessageToAndroidDevice(final int performatif, final String content) {
+		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_ANDROID),
+				content,
+				performatif);
+	}
+
+	/**
+	 * send ACL request to all android device to inform that a new item has been created
+	 * refresh history and current list
+	 *
+	 * @throws java.io.IOException
+	 */
+	public void requestAndroidCurrentItemsListRefresh() throws IOException {
+		final A2ATransaction refreshTransaction =
+				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_REFRESH_CURRENT_ITEMS,
+						"new item created, refresh list.");
+		sendMessageToAndroidDevice(ACLMessage.REQUEST,
+				JSONParserUtils.serializeA2ATransaction(refreshTransaction));
+	}
+
+	/**
+	 * send ACL request to all android device to inform that item has been deleted
+	 * refresh only history
+	 *
+	 * @throws IOException
+	 */
+	public void requestAndroidHistoryRefresh() throws IOException {
+		final A2ATransaction refreshTransaction =
+				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_REFRESH_HISTORY,
+						"new item created, refresh list.");
+		sendMessageToAndroidDevice(ACLMessage.REQUEST,
+				JSONParserUtils.serializeA2ATransaction(refreshTransaction));
 	}
 
 }

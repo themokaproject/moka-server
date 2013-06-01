@@ -20,17 +20,4 @@ public class MokaAgent extends BaseAgent {
 		return mEnvironment;
 	}
 
-	/**
-	 * send message to all android devices
-	 *
-	 * @param performatif message's performatif
-	 * @param content     message's content
-	 */
-	protected void sendMessageToAndroidDevice(final int performatif, final String content) {
-		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_ANDROID),
-				content,
-				performatif);
-	}
-
-
 }
