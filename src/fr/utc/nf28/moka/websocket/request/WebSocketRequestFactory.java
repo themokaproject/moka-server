@@ -1,6 +1,5 @@
 package fr.utc.nf28.moka.websocket.request;
 
-import java.util.HashMap;
 
 public class WebSocketRequestFactory {
 	private static final String TYPE_ADD_ITEM = "addItem";

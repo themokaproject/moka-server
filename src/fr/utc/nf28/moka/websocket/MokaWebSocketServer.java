@@ -13,7 +13,6 @@ import org.java_websocket.server.WebSocketServer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
-import java.util.HashMap;
 
 public class MokaWebSocketServer extends WebSocketServer {
 
@@ -29,7 +28,6 @@ public class MokaWebSocketServer extends WebSocketServer {
 	public void onOpen(WebSocket connection, ClientHandshake clientHandshake) {
 		System.out.println(connection.getRemoteSocketAddress().getAddress().getHostAddress() + " entered the room!");
 		connectionCheckIn(connection);
-
 	}
 
 	@Override

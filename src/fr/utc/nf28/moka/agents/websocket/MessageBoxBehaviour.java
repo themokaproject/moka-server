@@ -2,7 +2,6 @@ package fr.utc.nf28.moka.agents.websocket;
 
 import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.environment.items.MokaItem;
-import fr.utc.nf28.moka.environment.items.UmlClass;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.util.JadeUtils;
