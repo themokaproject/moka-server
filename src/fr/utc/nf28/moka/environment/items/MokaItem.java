@@ -17,7 +17,7 @@ public abstract class MokaItem {
 	private int mHeight;
 	private int mWidth;
 	private transient User mLocker;
-    private String mType;
+	private String mType;
 
 	public MokaItem() {
 		mId = sIdIndex++;
@@ -30,7 +30,7 @@ public abstract class MokaItem {
 		mTitle = title;
 		mX = x;
 		mY = y;
-        mType = type;
+		mType = type;
 	}
 
 	public int getId() {
@@ -117,11 +117,11 @@ public abstract class MokaItem {
 		return "title:" + mTitle + " id:" + mId + " x:" + mX + " y:" + mY;
 	}
 
-    public String getType() {
-        return mType;
-    }
+	public String getType() {
+		return mType;
+	}
 
-    public void setType(String type) {
-        mType = type;
-    }
+	public void setType(String type) {
+		mType = type;
+	}
 }

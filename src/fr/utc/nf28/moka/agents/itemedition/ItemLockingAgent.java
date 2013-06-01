@@ -33,9 +33,9 @@ public class ItemLockingAgent extends MokaAgent {
 	 */
 	public void lockItem(int itemId, AID userAID) {
 		final MokaEnvironment environment = getEnvironment();
-		if(environment.lockItem(itemId, userAID.toString())){
+		if (environment.lockItem(itemId, userAID.toString())) {
 			//TODO send locking success
-		}else{
+		} else {
 			//TODO send locking failed
 		}
 	}
