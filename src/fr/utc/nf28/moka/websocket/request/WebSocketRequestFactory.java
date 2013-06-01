@@ -79,9 +79,9 @@ public class WebSocketRequestFactory {
 	 * @param 	top the top position of the item
 	 * @return  {@link WebSocketRequest}
 	 */
-	public static WebSocketRequest createMoveItemRequest(String itemId, int left, int top) {
+	public static WebSocketRequest createMoveItemRequest(int itemId, int left, int top) {
 		WebSocketRequest request = new WebSocketRequest(TYPE_MOVE_ITEM);
-		request.put("itemId", itemId);
+		request.put("itemId", String.valueOf(itemId));
 		request.put("left", String.valueOf(left));
 		request.put("top", String.valueOf(top));
 		return request;
