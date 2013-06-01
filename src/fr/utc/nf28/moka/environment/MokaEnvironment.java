@@ -68,12 +68,13 @@ public class MokaEnvironment {
 	}
 
 	public void removeItem(int itemId) {
+		final MokaItem item = mItems.get(itemId);
 		if (mItems.remove(itemId) == null) {
 			System.out.println("no item with id " + itemId);
 		} else {
 			System.out.println("Item " + itemId + " removed");
+			mHistoryEntries.add(new HistoryEntry(item.getLocker().makePseudo()+" a supprimé "+item.getType()+" "+item.getId()));
 		}
-		mHistoryEntries.add(new HistoryEntry("Un élément a été supprimé"));
 		System.out.println(toString());
 	}
 
