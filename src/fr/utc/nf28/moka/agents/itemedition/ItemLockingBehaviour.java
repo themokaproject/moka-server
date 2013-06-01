@@ -19,10 +19,9 @@ public class ItemLockingBehaviour extends CyclicBehaviour {
 				final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(requestString);
 				final String type = request.getType();
 				if (JadeUtils.TRANSACTION_TYPE_UNLOCK_ITEM.equals(type)) {
-					((ItemLockingAgent)myAgent).unlockItem((Integer)request.getContent());
+					((ItemLockingAgent) myAgent).unlockItem((Integer) request.getContent());
 				} else if (JadeUtils.TRANSACTION_TYPE_LOCK_ITEM.equals(type)) {
-					//TODO implement locking
-					System.out.println("locking requested !");
+					((ItemLockingAgent) myAgent).lockItem((Integer) request.getContent(), message.getSender());
 				}
 			} catch (IOException e) {
 				e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

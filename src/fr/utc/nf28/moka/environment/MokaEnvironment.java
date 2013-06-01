@@ -55,6 +55,16 @@ public class MokaEnvironment {
 		}
 	}
 
+	public boolean lockItem(int itemId, String userAID) {
+		final MokaItem item = mItems.get(itemId);
+		if (item != null & !item.isLocked()) {
+			item.lock(getUserByAID(userAID));
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public void addUser(User user) {
 		if (mUsers.put(user.getIp(), user) == null) {
 			System.out.println("user with ip " + user.getIp() + " added");
