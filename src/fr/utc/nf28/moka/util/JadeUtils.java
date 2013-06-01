@@ -1,10 +1,5 @@
 package fr.utc.nf28.moka.util;
 
-import fr.utc.nf28.moka.environment.items.UmlClass;
-import fr.utc.nf28.moka.environment.users.User;
-
-import java.util.HashMap;
-
 public class JadeUtils {
 
 	/**
@@ -37,7 +32,15 @@ public class JadeUtils {
 	 */
 	public static final String JADE_SKILL_NAME_CREATION = "CreationAgentSkillName";
 
+	/**
+	 * name for Jade websocket skill
+	 */
 	public static final String JADE_SKILL_NAME_WEBSOCKET_SERVER = "WebSocketService";
+
+	/**
+	 * name for Jade locking skill
+	 */
+	public static final String JADE_SKILL_NAME_LOCKING = "LockingSkillName";
 
 	/**
 	 * connection transaction
