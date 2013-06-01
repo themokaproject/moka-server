@@ -111,9 +111,9 @@ public class WebSocketRequestFactory {
 	 * @param 	height the height position of the item
 	 * @return  {@link WebSocketRequest}
 	 */
-	public static WebSocketRequest createResizeItemRequest(String itemId, int width, int height) {
+	public static WebSocketRequest createResizeItemRequest(int itemId, int width, int height) {
 		WebSocketRequest request = new WebSocketRequest(TYPE_RESIZE_ITEM);
-		request.put("itemId", itemId);
+		request.put("itemId", String.valueOf(itemId));
 		request.put("width", String.valueOf(width));
 		request.put("height", String.valueOf(height));
 		return request;

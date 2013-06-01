@@ -59,7 +59,7 @@ public class MokaWebSocketServer extends WebSocketServer {
 		for (MokaItem item : environment.getItems().values()) {
 			sendRequest(WebSocketRequestFactory.createAddItemRequest(item.getType(), item.getId(), item.getX(), item.getY()), connection);
 			//TODO send in one request ?
-			sendRequest(WebSocketRequestFactory.createResizeItemRequest(String.valueOf(item.getId()), item.getWidth(), item.getHeight()), connection);
+			sendRequest(WebSocketRequestFactory.createResizeItemRequest(item.getId(), item.getWidth(), item.getHeight()), connection);
 		}
 	}
 
