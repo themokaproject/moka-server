@@ -38,7 +38,8 @@ public class MokaEnvironment {
 		} else {
 			System.out.println("item with id " + item.getId() + " replaced");
 		}
-		mHistoryEntries.add(new HistoryEntry(item.getLocker().getFirstName()+" a ajouté un nouveau "+item.getType()));
+		final User locker = item.getLocker();
+		mHistoryEntries.add(new HistoryEntry(locker.getFirstName()+" "+locker.getLastName().substring(0,1)+" a ajouté "+item.getType()+" "+item.getId()));
 		System.out.println(toString());
 	}
 
