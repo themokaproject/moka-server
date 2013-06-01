@@ -59,10 +59,13 @@ public class MokaEnvironment {
 		final MokaItem item = mItems.get(itemId);
 		if (item != null & !item.isLocked()) {
 			item.lock(getUserByAID(userAID));
+			System.out.println(item.getType() + " " + item.getId() + " locked by " + item.getLocker().makePseudo());
 			return true;
-		} else {
+		} else if (item != null & item.isLocked()) {
+			System.out.println(item.getType() + " " + item.getId() + " already locked by " + item.getLocker().makePseudo());
 			return false;
 		}
+		return false;
 	}
 
 	public void addUser(User user) {
