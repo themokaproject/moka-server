@@ -45,6 +45,9 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_LOCK_ITEM_SUCCESS)) {
 					final HashMap<String, String> info= (HashMap<String, String>) transaction.getContent();
 					request = WebSocketRequestFactory.createSelectItemRequest(info.get("userId"), info.get("itemId"));
+				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_UNLOCK_ITEM)) {
+					final int itemId = (Integer) transaction.getContent();
+					request = WebSocketRequestFactory.createUnselectItemRequest(itemId);
 				}
 
 				if (request != null) {

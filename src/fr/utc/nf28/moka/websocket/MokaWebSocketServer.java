@@ -39,7 +39,7 @@ public class MokaWebSocketServer extends WebSocketServer {
 	public void onMessage(WebSocket connection, String message) {
 		System.out.println(connection + ": " + message);
 		if ("askToSave".equals(message)) {
-			connectionAskToSave(connection);
+			sendBackUpRequest(connection);
 		}
 	}
 
@@ -58,11 +58,15 @@ public class MokaWebSocketServer extends WebSocketServer {
 			sendRequest(WebSocketRequestFactory.createAddItemRequest(item.getType(), item.getId(), item.getX(), item.getY()), connection);
 			//TODO send in one request ?
 			sendRequest(WebSocketRequestFactory.createResizeItemRequest(item.getId(), item.getWidth(), item.getHeight()), connection);
+			//TODO send in one request ?
+			if (item.isLocked())
+				sendRequest(WebSocketRequestFactory.createSelectItemRequest(item.getLocker().getIp(), String.valueOf(item.getId())), connection);
+
 		}
 	}
 
-	private void connectionAskToSave(WebSocket connection) {
-		sendRequest(WebSocketRequestFactory.createSaveWorkSpace(MokaEnvironment.getInstance().toString()), connection);
+	private void sendBackUpRequest(WebSocket connection) {
+		sendRequest(WebSocketRequestFactory.createBackUpRequest(MokaEnvironment.getInstance().toString()), connection);
 	}
 
 

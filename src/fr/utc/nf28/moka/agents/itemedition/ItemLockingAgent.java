@@ -28,9 +28,13 @@ public class ItemLockingAgent extends MokaAgent {
 	 *
 	 * @param itemId item id
 	 */
-	public void unlockItem(int itemId) {
+	public void unlockItem(int itemId) throws IOException {
 		final MokaEnvironment environment = getEnvironment();
 		environment.unlockItem(itemId);
+		final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_UNLOCK_ITEM, itemId);
+		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
+				JSONParserUtils.serializeA2ATransaction(transaction),
+				jade.lang.acl.ACLMessage.PROPAGATE);
 	}
 
 	/**

@@ -9,6 +9,7 @@ public class WebSocketRequestFactory {
 	private static final String TYPE_MOVE_ITEM = "moveItem";
 	private static final String TYPE_RESIZE_ITEM = "resizeItem";
 	private static final String TYPE_SELECT_ITEM = "selectItem";
+	private static final String TYPE_UNSELECT_ITEM = "unselectItem";
 	private static final String TYPE_SAVE_WORSPACE = "saveWorkSpace";
 
 	/**
@@ -101,6 +102,12 @@ public class WebSocketRequestFactory {
 		return request;
 	}
 
+	public static WebSocketRequest createUnselectItemRequest(int itemId) {
+		WebSocketRequest request = new WebSocketRequest(TYPE_UNSELECT_ITEM);
+		request.put("itemId", String.valueOf(itemId));
+		return request;
+	}
+
 	/**
 	 * Create a {@link WebSocketRequest} that is aimed at
 	 * resizing an item on the client platforms.
@@ -119,7 +126,7 @@ public class WebSocketRequestFactory {
 	}
 
 
-	public static WebSocketRequest createSaveWorkSpace(String workSpace) {
+	public static WebSocketRequest createBackUpRequest(String workSpace) {
 		WebSocketRequest request = new WebSocketRequest(TYPE_SAVE_WORSPACE);
 		request.put("workSpace", workSpace);
 		request.put("date", String.valueOf(System.currentTimeMillis()));
