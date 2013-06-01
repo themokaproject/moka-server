@@ -45,7 +45,7 @@ public class ItemLockingAgent extends MokaAgent {
 		final A2ATransaction transaction;
 		if (locker == null) {
 			transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_LOCK_ITEM_ERROR, "");
-		} else if (locker.getAID().equals(userAID)) {
+		} else if (locker.getAID().equals(userAID.toString())) {
 			transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_LOCK_ITEM_SUCCESS, "");
 		} else {
 			transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_LOCK_ITEM_ALREADY, locker.makePseudo());
