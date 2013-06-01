@@ -66,6 +66,10 @@ public class User {
 		return mAID;
 	}
 
+	public String makePseudo(){
+		return mFirstName+" "+mLastName.substring(0,1);
+	}
+
 	@Override
 	public String toString() {
 		return mIp + " " + mFirstName + " " + mLastName;

@@ -38,8 +38,7 @@ public class MokaEnvironment {
 		} else {
 			System.out.println("item with id " + item.getId() + " replaced");
 		}
-		final User locker = item.getLocker();
-		mHistoryEntries.add(new HistoryEntry(locker.getFirstName()+" "+locker.getLastName().substring(0,1)+" a ajouté "+item.getType()+" "+item.getId()));
+		mHistoryEntries.add(new HistoryEntry(item.getLocker().makePseudo() + " a ajouté " + item.getType() + " " + item.getId()));
 		System.out.println(toString());
 	}
 
@@ -49,7 +48,7 @@ public class MokaEnvironment {
 		} else {
 			System.out.println("user with ip " + user.getIp() + " replaced");
 		}
-		mHistoryEntries.add(new HistoryEntry(user.getFirstName() + " " + user.getLastName() + " s'est connecté"));
+		mHistoryEntries.add(new HistoryEntry(user.makePseudo() + " s'est connecté"));
 		System.out.println(toString());
 	}
 
