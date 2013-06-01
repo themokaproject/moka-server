@@ -7,12 +7,14 @@ import fr.utc.nf28.moka.environment.items.ImageLink;
 import fr.utc.nf28.moka.environment.items.MokaItem;
 import fr.utc.nf28.moka.environment.items.PostIt;
 import fr.utc.nf28.moka.environment.items.UmlClass;
+import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.util.JadeUtils;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * An agent that creates items. Send a REQUEST with a creation JSON to this agent to ad an item
@@ -63,7 +65,7 @@ public class ItemCreationAgent extends MokaAgent {
 		sendBackItemId(response, newItemId);
 
 		//propagate creation to Ui platform
-		propagateCreation(newItem);
+		propagateCreation(newItem, environment.getUserByAID(creator.toString()));
 
 		//request refreshing current item list for all android device
 		requestAndroidCurrentItemsListRefresh();
@@ -118,12 +120,21 @@ public class ItemCreationAgent extends MokaAgent {
 	 * @param newItem item created
 	 * @throws IOException
 	 */
-	public void propagateCreation(MokaItem newItem) throws IOException {
+	public void propagateCreation(MokaItem newItem, User user) throws IOException {
 		final A2ATransaction transaction =
 				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_ADD_ITEM, newItem);
 		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 				JSONParserUtils.serializeA2ATransaction(transaction),
 				ACLMessage.PROPAGATE);
+
+		//TODO do it in one request ? create an item directly with a locker
+		final HashMap<String, String> info = new HashMap<String, String>();
+		info.put("itemId", String.valueOf(newItem.getId()));
+		info.put("userId", user.getIp());
+		final A2ATransaction transactionToWebSocketAgent = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_LOCK_ITEM_SUCCESS, info);
+		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
+				JSONParserUtils.serializeA2ATransaction(transactionToWebSocketAgent),
+				jade.lang.acl.ACLMessage.PROPAGATE);
 	}
 
 	/**

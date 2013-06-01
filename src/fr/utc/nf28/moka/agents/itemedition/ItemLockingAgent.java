@@ -10,6 +10,7 @@ import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * An agent that handles mutual exclusivity when a user edits an item
@@ -47,6 +48,13 @@ public class ItemLockingAgent extends MokaAgent {
 			transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_LOCK_ITEM_ERROR, "");
 		} else if (locker.getAID().equals(userAID.toString())) {
 			transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_LOCK_ITEM_SUCCESS, "");
+			final HashMap<String, String> info = new HashMap<String, String>();
+			info.put("itemId", String.valueOf(itemId));
+			info.put("userId", locker.getIp());
+			final A2ATransaction transactionToWebSocketAgent = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_LOCK_ITEM_SUCCESS, info);
+			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
+					JSONParserUtils.serializeA2ATransaction(transactionToWebSocketAgent),
+					jade.lang.acl.ACLMessage.PROPAGATE);
 		} else {
 			transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_LOCK_ITEM_ALREADY, locker.makePseudo());
 		}

@@ -12,6 +12,7 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class MessageBoxBehaviour extends CyclicBehaviour {
 
@@ -41,6 +42,9 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM)) {
 					final MokaItem item = (MokaItem) transaction.getContent();
 					request = WebSocketRequestFactory.createResizeItemRequest(item.getId(), item.getWidth(), item.getHeight());
+				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_LOCK_ITEM_SUCCESS)) {
+					final HashMap<String, String> info= (HashMap<String, String>) transaction.getContent();
+					request = WebSocketRequestFactory.createSelectItemRequest(info.get("userId"), info.get("itemId"));
 				}
 
 				if (request != null) {
