@@ -66,7 +66,14 @@ public class MokaWebSocketServer extends WebSocketServer {
 	}
 
 	private void sendBackUpRequest(WebSocket connection) {
-		sendRequest(WebSocketRequestFactory.createBackUpRequest(MokaEnvironment.getInstance().toString()), connection);
+		try {
+			sendRequest(WebSocketRequestFactory.createBackUpRequest(
+					JSONParserUtils.serializeUsers(MokaEnvironment.getInstance().getUsers().values()),
+					JSONParserUtils.serializeItems(MokaEnvironment.getInstance().getItems().values())),
+					connection);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 

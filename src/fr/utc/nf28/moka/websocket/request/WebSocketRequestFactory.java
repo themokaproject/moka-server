@@ -1,6 +1,9 @@
 package fr.utc.nf28.moka.websocket.request;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class WebSocketRequestFactory {
 	private static final String TYPE_ADD_ITEM = "addItem";
 	private static final String TYPE_REMOVE_ITEM = "removeItem";
@@ -126,10 +129,11 @@ public class WebSocketRequestFactory {
 	}
 
 
-	public static WebSocketRequest createBackUpRequest(String workSpace) {
+	public static WebSocketRequest createBackUpRequest(String userBackUp, String itemBackUp) {
 		WebSocketRequest request = new WebSocketRequest(TYPE_SAVE_WORSPACE);
-		request.put("workSpace", workSpace);
-		request.put("date", String.valueOf(System.currentTimeMillis()));
+		request.put("Date", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+		request.put("Users", userBackUp);
+		request.put("Items", itemBackUp);
 		return request;
 	}
 
