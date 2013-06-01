@@ -1,6 +1,7 @@
 package fr.utc.nf28.moka.agents.itemedition;
 
 import fr.utc.nf28.moka.agents.MokaAgent;
+import fr.utc.nf28.moka.environment.MokaEnvironment;
 import fr.utc.nf28.moka.util.JadeUtils;
 
 /**
@@ -8,9 +9,14 @@ import fr.utc.nf28.moka.util.JadeUtils;
  */
 public class ItemLockingAgent extends MokaAgent {
 
-    public void setup() {
-        super.setup();
+	public void setup() {
+		super.setup();
 		registerSkill(JadeUtils.JADE_SKILL_NAME_LOCKING);
-        addBehaviour(new ItemLockingBehaviour());
-    }
+		addBehaviour(new ItemLockingBehaviour());
+	}
+
+	public void unlockItem(int itemId) {
+		final MokaEnvironment environment = getEnvironment();
+		environment.unlockItem(itemId);
+	}
 }

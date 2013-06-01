@@ -42,6 +42,19 @@ public class MokaEnvironment {
 		System.out.println(toString());
 	}
 
+	/**
+	 * use to unlock item
+	 *
+	 * @param itemId item id
+	 */
+	public void unlockItem(int itemId) {
+		final MokaItem item = mItems.get(itemId);
+		if (item != null) {
+			item.unlock();
+			System.out.println("item  " + item.getId() + " unlock.");
+		}
+	}
+
 	public void addUser(User user) {
 		if (mUsers.put(user.getIp(), user) == null) {
 			System.out.println("user with ip " + user.getIp() + " added");
@@ -73,7 +86,7 @@ public class MokaEnvironment {
 			System.out.println("no item with id " + itemId);
 		} else {
 			System.out.println("Item " + itemId + " removed");
-			mHistoryEntries.add(new HistoryEntry(item.getLocker().makePseudo()+" a supprimé "+item.getType()+" "+item.getId()));
+			mHistoryEntries.add(new HistoryEntry(item.getLocker().makePseudo() + " a supprimé " + item.getType() + " " + item.getId()));
 		}
 		System.out.println(toString());
 	}
