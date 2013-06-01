@@ -55,17 +55,18 @@ public class MokaEnvironment {
 		}
 	}
 
-	public boolean lockItem(int itemId, String userAID) {
+	public User lockItem(int itemId, String userAID) {
 		final MokaItem item = mItems.get(itemId);
-		if (item != null & !item.isLocked()) {
+		if (item == null) {
+			return null;
+		}
+		if (!item.isLocked()) {
 			item.lock(getUserByAID(userAID));
 			System.out.println(item.getType() + " " + item.getId() + " locked by " + item.getLocker().makePseudo());
-			return true;
-		} else if (item != null & item.isLocked()) {
+		} else {
 			System.out.println(item.getType() + " " + item.getId() + " already locked by " + item.getLocker().makePseudo());
-			return false;
 		}
-		return false;
+		return item.getLocker();
 	}
 
 	public void addUser(User user) {

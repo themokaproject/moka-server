@@ -2,6 +2,7 @@ package fr.utc.nf28.moka.agents.itemedition;
 
 import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.environment.MokaEnvironment;
+import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JadeUtils;
 import jade.core.AID;
 
@@ -33,10 +34,13 @@ public class ItemLockingAgent extends MokaAgent {
 	 */
 	public void lockItem(int itemId, AID userAID) {
 		final MokaEnvironment environment = getEnvironment();
-		if (environment.lockItem(itemId, userAID.toString())) {
-			//TODO send locking success
+		final User locker = environment.lockItem(itemId, userAID.toString());
+		if (locker == null) {
+			//TODO send error
+		} else if (locker.getAID().equals(userAID)) {
+			//TODO send success
 		} else {
-			//TODO send locking failed
+			//TODO send already locked
 		}
 	}
 }
