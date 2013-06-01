@@ -20,10 +20,10 @@ public class WebSocketRequestFactory {
 	 * @param 	itemId the id of the new item
 	 * @return  {@link WebSocketRequest}
 	 */
-	public static WebSocketRequest createAddItemRequest(String type, String itemId, int left, int top) {
+	public static WebSocketRequest createAddItemRequest(String type, int itemId, int left, int top) {
 		WebSocketRequest request = new WebSocketRequest(TYPE_ADD_ITEM);
 		request.put("type", type);
-		request.put("itemId", itemId);
+		request.put("itemId", String.valueOf(itemId));
 		request.put("top", String.valueOf(top));
 		request.put("left", String.valueOf(left));
 		return request;
