@@ -8,26 +8,26 @@ public class PostIt extends MokaItem {
 	public PostIt() {
 	}
 
-	public PostIt(String title, int x, int y, String mHeader, String mContent) {
+	public PostIt(String title, int x, int y, String header, String content) {
 		super(title, x, y, sType);
-		this.mHeader = mHeader;
-		this.mContent = mContent;
+		mHeader = header;
+		mContent = content;
 	}
 
 	public String getHeader() {
 		return mHeader;
 	}
 
-	public void setHeader(String mHeader) {
-		this.mHeader = mHeader;
+	public void setHeader(String header) {
+		mHeader = header;
 	}
 
 	public String getContent() {
 		return mContent;
 	}
 
-	public void setContent(String mContent) {
-		this.mContent = mContent;
+	public void setContent(String content) {
+		this.mContent = content;
 	}
 
 	public String toString() {

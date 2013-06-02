@@ -47,7 +47,7 @@ public class User {
 	}
 
 	public void setCurrentItem(MokaItem currentItem) {
-		this.mCurrentItem = currentItem;
+		mCurrentItem = currentItem;
 	}
 
 	public String getIp() {
@@ -58,16 +58,16 @@ public class User {
 		this.mIp = ip;
 	}
 
-	public void setAID(String aid) {
-		this.mAID = aid;
-	}
-
 	public String getAID() {
 		return mAID;
 	}
 
-	public String makePseudo(){
-		return mFirstName+" "+mLastName.substring(0,1);
+	public void setAID(String aid) {
+		mAID = aid;
+	}
+
+	public String makePseudo() {
+		return mFirstName + " " + mLastName.substring(0, 1);
 	}
 
 	@Override

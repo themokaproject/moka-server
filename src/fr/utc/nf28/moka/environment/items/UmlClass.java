@@ -53,11 +53,11 @@ public class UmlClass extends MokaItem {
 	}
 
 	public void clearMembers() {
-		mMembers = new ArrayList<String>();
+		mMembers.clear();
 	}
 
 	public void clearMethods() {
-		mMethods = new ArrayList<String>();
+		mMethods.clear();
 	}
 
 	public String toString() {
