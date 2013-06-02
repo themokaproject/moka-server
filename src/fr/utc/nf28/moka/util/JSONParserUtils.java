@@ -76,8 +76,19 @@ public class JSONParserUtils {
 
 
 	public static MokaItem deserializeItem(final String json) throws IOException {
-		// TODO deserialize the appropriate class using the "type" key
-		return sMapper.readValue(json, UmlClass.class);
+		return deserializeItem(sMapper.readTree(json));
+	}
+
+	public static MokaItem deserializeItem(final JsonNode itemNode) throws  IOException {
+		String className = itemNode.path("type").asText();
+		if (className.equals("umlClass")) {
+			return sMapper.treeToValue(itemNode, UmlClass.class);
+		} else if (className.equals("post-it")) {
+			return sMapper.treeToValue(itemNode, PostIt.class);
+		} else if (className.equals("image")) {
+			return sMapper.treeToValue(itemNode, ImageLink.class);
+		}
+		return null;
 	}
 
 	public static String serializeWebSocketRequest(WebSocketRequest request) throws IOException {
@@ -107,8 +118,7 @@ public class JSONParserUtils {
 	}
 
 	public static List<User> deserializeUsers(String json) throws IOException {
-		return sMapper.readValue(json, new TypeReference<List<User>>() {
-		});
+		return sMapper.readValue(json, new TypeReference<List<User>>() {});
 	}
 
 	public static List<MokaItem> deserializeItems(String json) throws IOException {
@@ -116,18 +126,8 @@ public class JSONParserUtils {
 		final List<MokaItem> result = new ArrayList<MokaItem>();
 
 		for (Iterator<JsonNode> iter = rootNode.elements(); iter.hasNext(); ) {
-			JsonNode currenNode = iter.next();
-			String className = currenNode.path("type").asText();
-			if (className.equals("umlClass")) {
-				UmlClass item = sMapper.treeToValue(currenNode, UmlClass.class);
-				result.add(item);
-			} else if (className.equals("post-it")) {
-				PostIt item = sMapper.treeToValue(currenNode, PostIt.class);
-				result.add(item);
-			} else if (className.equals("image")) {
-				ImageLink item = sMapper.treeToValue(currenNode, ImageLink.class);
-				result.add(item);
-			}
+			MokaItem newItem = deserializeItem(iter.next());
+			if(newItem != null) result.add(newItem);
 		}
 		return result;
 	}
