@@ -1,5 +1,6 @@
 package fr.utc.nf28.moka.websocket;
 
+import fr.utc.nf28.moka.environment.HistoryEntry;
 import fr.utc.nf28.moka.environment.MokaEnvironment;
 import fr.utc.nf28.moka.environment.items.MokaItem;
 import fr.utc.nf28.moka.environment.users.User;
@@ -73,7 +74,12 @@ public class MokaWebSocketServer extends WebSocketServer {
 		}
 		environment.setItemIdGenCurrentIndex(++maxId);
 
-		//TODO restore history
+		//restore history
+		environment.clearHistory();
+		List<HistoryEntry> historyEntries = JSONParserUtils.deserializeHistoryEntries(backUp.get("History"));
+		for(HistoryEntry h : historyEntries) {
+			environment.addHistoryEntry(h);
+		}
 
 		mCallback.uploadSucceed();
 	}
