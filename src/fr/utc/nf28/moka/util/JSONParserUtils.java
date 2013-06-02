@@ -101,4 +101,8 @@ public class JSONParserUtils {
 		return result;
 	}
 
+	public static List<HistoryEntry> deserializeHistoryEntries(String json) throws  IOException {
+		return sMapper.readValue(json, new TypeReference<List<HistoryEntry>>(){});
+	}
+
 }

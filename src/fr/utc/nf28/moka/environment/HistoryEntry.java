@@ -3,6 +3,10 @@ package fr.utc.nf28.moka.environment;
 public class HistoryEntry {
 	private String mAction;
 
+	//Used in Json deserialization
+	public HistoryEntry(){
+	}
+
 	public HistoryEntry(String action) {
 		mAction = action;
 	}
