@@ -109,7 +109,8 @@ public class MokaWebSocketServer extends WebSocketServer {
 		}
 
 		for (MokaItem item : environment.getItems().values()) {
-			sendRequest(WebSocketRequestFactory.createAddItemRequest(item.getType(), item.getId(), item.getX(), item.getY(), item.getWidth(), item.getHeight()), connection);
+			sendRequest(WebSocketRequestFactory.createAddItemRequest(item.getType(), item.getId(), item.getX(),
+					item.getY(), item.getWidth(), item.getHeight(), item.getTitle()), connection);
 			if (item.isLocked())
 				sendRequest(WebSocketRequestFactory.createSelectItemRequest(item.getLocker().getIp(), String.valueOf(item.getId())), connection);
 
