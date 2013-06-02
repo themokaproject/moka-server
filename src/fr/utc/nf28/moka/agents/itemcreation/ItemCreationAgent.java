@@ -44,7 +44,7 @@ public class ItemCreationAgent extends MokaAgent {
 		} else if (type.equals("image")) {
 			newItem = new ImageLink("Image", 400, 450, "http://i1.cdnds.net/13/12/618x959/bill-gates-mugshot.jpg");
 		} else if (type.equals("video")) {
-            newItem = new VideoLink("Video", 500, 500, "http://http://www.youtube.com/watch?v=anwy2MPT5RE");
+            newItem = new VideoLink("Video", 500, 500, "http://www.youtube.com/watch?v=anwy2MPT5RE");
         }
 
 		if (newItem == null) {
