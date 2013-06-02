@@ -129,11 +129,12 @@ public class WebSocketRequestFactory {
 	}
 
 
-	public static WebSocketRequest createBackUpRequest(String userBackUp, String itemBackUp) {
+	public static WebSocketRequest createBackUpRequest(String userBackUp, String itemBackUp, String historyBackUp) {
 		WebSocketRequest request = new WebSocketRequest(TYPE_SAVE_WORSPACE);
 		request.put("Date", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
 		request.put("Users", userBackUp);
 		request.put("Items", itemBackUp);
+		request.put("History", historyBackUp);
 		return request;
 	}
 
