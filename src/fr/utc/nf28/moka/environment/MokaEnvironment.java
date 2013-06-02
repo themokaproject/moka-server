@@ -11,7 +11,7 @@ import java.util.List;
  * A class that holds all the models of the running Moka platform
  * All MokaAgents have a reference to their MokaEnvironment
  */
-public class MokaEnvironment {
+public final class MokaEnvironment {
 	private static MokaEnvironment sInstance = null;
 	private final List<HistoryEntry> mHistoryEntries = new ArrayList<HistoryEntry>();
 	private int sItemIdGenCurrentIndex = 0;
@@ -49,13 +49,16 @@ public class MokaEnvironment {
 	}
 
 	public void addItem(MokaItem item) {
-		if (mItems.put(item.getId(), item) == null) {
-			System.out.println("item with id " + item.getId() + " added");
+		final int id = item.getId();
+		if (mItems.put(id, item) == null) {
+			System.out.println("item with id " + id + " added");
 		} else {
-			System.out.println("item with id " + item.getId() + " replaced");
+			System.out.println("item with id " + id + " replaced");
 		}
-		if (item.getLocker() != null)
-			mHistoryEntries.add(new HistoryEntry(item.getLocker().makePseudo() + " a ajouté " + item.getType() + " " + item.getId()));
+		final User locker = item.getLocker();
+		if (locker != null) {
+			mHistoryEntries.add(new HistoryEntry(locker.makePseudo() + " a ajouté " + item.getType() + " " + id));
+		}
 		System.out.println(toString());
 	}
 
@@ -87,10 +90,11 @@ public class MokaEnvironment {
 	}
 
 	public void addUser(User user) {
-		if (mUsers.put(user.getIp(), user) == null) {
-			System.out.println("user with ip " + user.getIp() + " added");
+		final String ip = user.getIp();
+		if (mUsers.put(ip, user) == null) {
+			System.out.println("user with ip " + ip + " added");
 		} else {
-			System.out.println("user with ip " + user.getIp() + " replaced");
+			System.out.println("user with ip " + ip + " replaced");
 		}
 		mHistoryEntries.add(new HistoryEntry(user.makePseudo() + " s'est connecté"));
 		System.out.println(toString());
@@ -101,7 +105,7 @@ public class MokaEnvironment {
 	}
 
 	public User getUserByAID(String userAID) {
-		User found = new User();
+		User found = null;
 		for (User u : mUsers.values()) {
 			if (u.getAID().equals(userAID)) {
 				found = u;
@@ -117,7 +121,8 @@ public class MokaEnvironment {
 			System.out.println("no item with id " + itemId);
 		} else {
 			System.out.println("Item " + itemId + " removed");
-			mHistoryEntries.add(new HistoryEntry(item.getLocker().makePseudo() + " a supprimé " + item.getType() + " " + item.getId()));
+			mHistoryEntries.add(new HistoryEntry(item.getLocker().makePseudo()
+					+ " a supprimé " + item.getType() + " " + item.getId()));
 		}
 		System.out.println(toString());
 	}
