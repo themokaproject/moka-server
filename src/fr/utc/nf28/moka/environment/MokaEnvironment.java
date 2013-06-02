@@ -36,8 +36,16 @@ public class MokaEnvironment {
 		sItemIdGenCurrentIndex = index;
 	}
 
-	public void clearItems(){
+	public void clearItems() {
 		mItems.clear();
+	}
+
+	public void clearHistory() {
+		mHistoryEntries.clear();
+	}
+
+	public void addHistoryEntry(HistoryEntry historyEntry) {
+		mHistoryEntries.add(historyEntry);
 	}
 
 	public void addItem(MokaItem item) {
