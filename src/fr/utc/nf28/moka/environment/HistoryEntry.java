@@ -1,6 +1,5 @@
 package fr.utc.nf28.moka.environment;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.Calendar;
@@ -8,8 +7,7 @@ import java.util.Date;
 
 public class HistoryEntry {
 	private String mAction;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd,HH:00", timezone = "CET")
-	private Date mDate; // TODO: deserialize correctly using Jackson
+	private Date mDate;
 
 	//Used in Json deserialization
 	public HistoryEntry() {
