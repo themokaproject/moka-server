@@ -1,5 +1,6 @@
 package fr.utc.nf28.moka.environment;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.Calendar;
@@ -26,11 +27,12 @@ public class HistoryEntry {
 		mAction = action;
 	}
 
-	@JsonSerialize(using = JsonDateSerializer.class)
+	@JsonSerialize(using = JsonDate.Serializer.class)
 	public Date getDate() {
 		return mDate;
 	}
 
+	@JsonDeserialize(using = JsonDate.Deserializer.class)
 	public void setDate(Date date) {
 		mDate = date;
 	}

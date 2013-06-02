@@ -1,8 +1,9 @@
 package fr.utc.nf28.moka.environment.items;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import fr.utc.nf28.moka.environment.JsonDateSerializer;
+import fr.utc.nf28.moka.environment.JsonDate;
 import fr.utc.nf28.moka.environment.users.User;
 
 import java.util.Calendar;
@@ -136,6 +137,7 @@ public abstract class MokaItem {
 		mType = type;
 	}
 
+	@JsonIgnore
 	public String getCreatorName() {
 		if (mCreator != null) {
 			return mCreator.makePseudo();
@@ -143,11 +145,12 @@ public abstract class MokaItem {
 		return null;
 	}
 
-	@JsonSerialize(using = JsonDateSerializer.class)
+	@JsonSerialize(using = JsonDate.Serializer.class)
 	public Date getCreationDate() {
 		return mCreationDate;
 	}
 
+	@JsonDeserialize(using = JsonDate.Deserializer.class)
 	public void setCreationDate(Date creationDate) {
 		mCreationDate = creationDate;
 	}
