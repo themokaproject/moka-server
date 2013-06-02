@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class UmlClass extends MokaItem {
 	private static final String sType = "umlClass";
+	protected static final String DEFAULT_TITLE = "Uml";
 	private String mClassName;
 	private List<String> mMembers = new ArrayList<String>();
 	private List<String> mMethods = new ArrayList<String>();
@@ -62,5 +63,10 @@ public class UmlClass extends MokaItem {
 
 	public String toString() {
 		return "umlclass:" + mClassName + " " + super.toString();
+	}
+
+	@Override
+	public void makeDefaultTitle() {
+		mTitle = "Class Uml "+String.valueOf(mId);
 	}
 }

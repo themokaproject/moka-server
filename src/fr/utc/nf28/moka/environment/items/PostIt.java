@@ -34,4 +34,9 @@ public class PostIt extends MokaItem {
 		return "post-it:" + mHeader + " " + super.toString();
 	}
 
+	@Override
+	public void makeDefaultTitle() {
+		mTitle = "Post-it "+String.valueOf(mId);
+	}
+
 }

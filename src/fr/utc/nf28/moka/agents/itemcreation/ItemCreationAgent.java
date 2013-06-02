@@ -38,7 +38,7 @@ public class ItemCreationAgent extends MokaAgent {
 		final int newItemId = environment.generateNewId();
 
 		if ("UML".equals(type)) {
-			newItem = new UmlClass("MyClass", 200, 350, "UmlClass");
+			newItem = new UmlClass("MyClass "+String.valueOf(newItemId), 200, 350, "UmlClass");
 		} else if ("post-it".equals(type)) {
 			newItem = new PostIt("Post-it", 300, 350, "Post-it", "Post-it content");
 		} else if ("image".equals(type)) {
@@ -59,6 +59,9 @@ public class ItemCreationAgent extends MokaAgent {
 		//set item id
 		newItem.setId(newItemId);
 		environment.addItem(newItem);
+
+		//make default title
+		newItem.makeDefaultTitle();
 
 		//send back item id to the creator
 		sendBackItemId(response, newItemId);

@@ -27,5 +27,10 @@ public class ImageLink extends MokaItem {
 		return "image:" + mUrl + " " + super.toString();
 	}
 
+	@Override
+	public void makeDefaultTitle() {
+	   	mTitle = "Image "+String.valueOf(mId);
+	}
+
 
 }

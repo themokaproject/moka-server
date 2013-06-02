@@ -23,4 +23,9 @@ public class VideoLink extends MokaItem {
 	public String toString() {
 		return "video:" + mLink + " " + super.toString();
 	}
+
+	@Override
+	public void makeDefaultTitle() {
+		mTitle = "Video "+String.valueOf(mId);
+	}
 }

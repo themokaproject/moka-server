@@ -15,8 +15,8 @@ public abstract class MokaItem {
 	private static final int DEFAULT_WIDTH = 175;
 	private static final int DEFAULT_HEIGHT = 100;
 	private static int sIdIndex = 0;
-	private int mId;
-	private String mTitle;
+	protected int mId;
+	protected String mTitle;
 	private int mX;
 	private int mY;
 	private int mHeight;
@@ -132,6 +132,7 @@ public abstract class MokaItem {
 		mType = type;
 	}
 
+
 	@JsonSerialize(using = JsonDateSerializer.class)
 	public Date getCreationDate() {
 		return mCreationDate;
@@ -140,4 +141,7 @@ public abstract class MokaItem {
 	public void setCreationDate(Date creationDate) {
 		mCreationDate = creationDate;
 	}
+
+	abstract public void makeDefaultTitle();
+
 }
