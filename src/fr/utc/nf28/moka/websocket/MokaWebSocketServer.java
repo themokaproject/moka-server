@@ -47,10 +47,10 @@ public class MokaWebSocketServer extends WebSocketServer {
 		System.out.println(connection + ": " + message);
 		try {
 			WebSocketRequest request = JSONParserUtils.deserializeWebSocketRequest(message);
-			if(request.getType().equals("backUp")) {
+			if (request.getType().equals("backUp")) {
 				sendBackUpRequest(connection);
-			} else if(request.getType().equals("upload")) {
-			    System.out.println(request.getContent().toString());
+			} else if (request.getType().equals("upload")) {
+				System.out.println(request.getContent().toString());
 				uploadBackUp(request.getContent());
 				connectionCheckIn(connection);
 			}
@@ -61,24 +61,39 @@ public class MokaWebSocketServer extends WebSocketServer {
 
 	}
 
-	public void uploadBackUp(HashMap<String, String> backUp) throws IOException {
+	public void uploadBackUp(HashMap<String, String> backUp) {
 		final MokaEnvironment environment = MokaEnvironment.getInstance();
 
 		//restore items
-		environment.clearItems();
-		List<MokaItem> items = JSONParserUtils.deserializeItems(backUp.get("Items"));
-		int maxId = -1;
-		for(MokaItem i : items) {
-			environment.addItem(i);
-			if(maxId < i.getId()) maxId = i.getId();
+		if (backUp.containsKey("Items")) {
+			try {
+				List<MokaItem> items = JSONParserUtils.deserializeItems(backUp.get("Items"));
+				environment.clearItems();
+				int maxId = -1;
+				for (MokaItem i : items) {
+					environment.addItem(i);
+					if (maxId < i.getId()) maxId = i.getId();
+				}
+				environment.setItemIdGenCurrentIndex(++maxId);
+			} catch (IOException exception) {
+				System.out.println("uploadBackUp : restore item : failed !");
+				exception.printStackTrace();
+			}
 		}
-		environment.setItemIdGenCurrentIndex(++maxId);
+
 
 		//restore history
-		environment.clearHistory();
-		List<HistoryEntry> historyEntries = JSONParserUtils.deserializeHistoryEntries(backUp.get("History"));
-		for(HistoryEntry h : historyEntries) {
-			environment.addHistoryEntry(h);
+		if (backUp.containsKey("History")) {
+			try {
+				List<HistoryEntry> historyEntries = JSONParserUtils.deserializeHistoryEntries(backUp.get("History"));
+				environment.clearHistory();
+				for (HistoryEntry h : historyEntries) {
+					environment.addHistoryEntry(h);
+				}
+			} catch (IOException exception) {
+				System.out.println("uploadBackUp : restore hsitory : failed !");
+				exception.printStackTrace();
+			}
 		}
 
 		mCallback.uploadSucceed();
@@ -138,7 +153,7 @@ public class MokaWebSocketServer extends WebSocketServer {
 	}
 
 
-	public interface Callback{
+	public interface Callback {
 		void uploadSucceed();
 	}
 
