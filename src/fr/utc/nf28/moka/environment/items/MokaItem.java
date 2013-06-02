@@ -24,6 +24,7 @@ public abstract class MokaItem {
 	private User mLocker;
 	private String mType;
 	private Date mCreationDate;
+	private User mCreator;
 
 	public MokaItem() {
 		mId = sIdIndex++;
@@ -109,6 +110,9 @@ public abstract class MokaItem {
 	}
 
 	public void lock(User locker) {
+		if (mCreator == null) {
+			mCreator = locker;
+		}
 		if (mLocker != null) {
 			System.out.println("Item " + toString() + "already locked");
 			return;
@@ -132,6 +136,12 @@ public abstract class MokaItem {
 		mType = type;
 	}
 
+	public String getCreatorName() {
+		if (mCreator != null) {
+			return mCreator.makePseudo();
+		}
+		return null;
+	}
 
 	@JsonSerialize(using = JsonDateSerializer.class)
 	public Date getCreationDate() {
