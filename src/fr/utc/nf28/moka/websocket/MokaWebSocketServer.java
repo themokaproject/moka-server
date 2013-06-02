@@ -104,8 +104,8 @@ public class MokaWebSocketServer extends WebSocketServer {
 	private void sendBackUpRequest(WebSocket connection) {
 		try {
 			sendRequest(WebSocketRequestFactory.createBackUpRequest(
-					JSONParserUtils.serializeUsers(MokaEnvironment.getInstance().getUsers().values()),
-					JSONParserUtils.serializeItems(MokaEnvironment.getInstance().getItems().values())),
+					JSONParserUtils.serializeToJson(MokaEnvironment.getInstance().getUsers().values()),
+					JSONParserUtils.serializeToJson(MokaEnvironment.getInstance().getItems().values())),
 					connection);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -120,12 +120,12 @@ public class MokaWebSocketServer extends WebSocketServer {
 	}
 
 	private void sendAll(WebSocketRequest request) throws IOException {
-		sendAll(JSONParserUtils.serializeWebSocketRequest(request));
+		sendAll(JSONParserUtils.serializeToJson(request));
 	}
 
 	private void sendRequest(WebSocketRequest request, WebSocket connection) {
 		try {
-			connection.send(JSONParserUtils.serializeWebSocketRequest(request));
+			connection.send(JSONParserUtils.serializeToJson(request));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

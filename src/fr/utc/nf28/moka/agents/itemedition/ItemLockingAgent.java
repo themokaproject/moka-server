@@ -33,7 +33,7 @@ public class ItemLockingAgent extends MokaAgent {
 		environment.unlockItem(itemId);
 		final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_UNLOCK_ITEM, itemId);
 		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
-				JSONParserUtils.serializeA2ATransaction(transaction),
+				JSONParserUtils.serializeToJson(transaction),
 				jade.lang.acl.ACLMessage.PROPAGATE);
 	}
 
@@ -57,12 +57,12 @@ public class ItemLockingAgent extends MokaAgent {
 			info.put("userId", locker.getIp());
 			final A2ATransaction transactionToWebSocketAgent = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_LOCK_ITEM_SUCCESS, info);
 			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
-					JSONParserUtils.serializeA2ATransaction(transactionToWebSocketAgent),
+					JSONParserUtils.serializeToJson(transactionToWebSocketAgent),
 					jade.lang.acl.ACLMessage.PROPAGATE);
 		} else {
 			transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_LOCK_ITEM_ALREADY, locker.makePseudo());
 		}
-		response.setContent(JSONParserUtils.serializeA2ATransaction(transaction));
+		response.setContent(JSONParserUtils.serializeToJson(transaction));
 		send(response);
 	}
 }

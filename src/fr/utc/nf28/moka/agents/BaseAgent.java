@@ -10,7 +10,6 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
 
-import javax.swing.text.html.HTMLDocument;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -151,7 +150,7 @@ public class BaseAgent extends Agent {
 				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_REFRESH_CURRENT_ITEMS,
 						"new item created, refresh list.");
 		sendMessageToAndroidDevice(ACLMessage.REQUEST,
-				JSONParserUtils.serializeA2ATransaction(refreshTransaction));
+				JSONParserUtils.serializeToJson(refreshTransaction));
 	}
 
 	/**
@@ -165,7 +164,7 @@ public class BaseAgent extends Agent {
 				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_REFRESH_HISTORY,
 						"new item created, refresh list.");
 		sendMessageToAndroidDevice(ACLMessage.REQUEST,
-				JSONParserUtils.serializeA2ATransaction(refreshTransaction));
+				JSONParserUtils.serializeToJson(refreshTransaction));
 	}
 
 }

@@ -23,8 +23,8 @@ import java.util.*;
 public class JSONParserUtils {
 	private static final ObjectMapper sMapper = new ObjectMapper();
 
-	public static String serializeA2ATransaction(final A2ATransaction transaction) throws IOException {
-		return sMapper.writeValueAsString(transaction);
+	public static String serializeToJson(final Object object) throws IOException {
+		return  sMapper.writeValueAsString(object);
 	}
 
 	public static A2ATransaction deserializeA2ATransaction(final String json) throws IOException {
@@ -48,30 +48,8 @@ public class JSONParserUtils {
 		return null;
 	}
 
-	public static String serializeUser(User user) throws IOException {
-		StringWriter sw = new StringWriter();
-		sMapper.writeValue(sw, user);
-		return sw.toString();
-	}
-
-	public static String serializeUsers(Collection<User> users) throws IOException {
-		StringWriter sw = new StringWriter();
-		sMapper.writeValue(sw, users);
-		return sw.toString();
-	}
-
 	public static User deserializeUser(final String json) throws IOException {
 		return sMapper.readValue(json, User.class);
-	}
-
-	public static String serializeItem(MokaItem item) throws IOException {
-		StringWriter sw = new StringWriter();
-		sMapper.writeValue(sw, item);
-		return sw.toString();
-	}
-
-	public static String serializeItems(Collection<MokaItem> mokaItems) throws IOException {
-		return sMapper.writeValueAsString(mokaItems);
 	}
 
 
@@ -89,14 +67,6 @@ public class JSONParserUtils {
 			return sMapper.treeToValue(itemNode, ImageLink.class);
 		}
 		return null;
-	}
-
-	public static String serializeWebSocketRequest(WebSocketRequest request) throws IOException {
-		return sMapper.writeValueAsString(request);
-	}
-
-	public static String serializeHistory(Collection<HistoryEntry> historyEntries) throws IOException {
-		return sMapper.writeValueAsString(historyEntries);
 	}
 
 	public static WebSocketRequest deserializeWebSocketRequest(String json) throws IOException {

@@ -83,7 +83,7 @@ public class ItemCreationAgent extends MokaAgent {
 		final A2ATransaction responseTransaction =
 				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_ITEM_CREATION_SUCCESS, newItemId);
 		response.setPerformative(ACLMessage.REQUEST);
-		response.setContent(JSONParserUtils.serializeA2ATransaction(responseTransaction));
+		response.setContent(JSONParserUtils.serializeToJson(responseTransaction));
 		send(response);
 	}
 
@@ -97,7 +97,7 @@ public class ItemCreationAgent extends MokaAgent {
 		final A2ATransaction transaction =
 				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_ADD_ITEM, newItem);
 		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
-				JSONParserUtils.serializeA2ATransaction(transaction),
+				JSONParserUtils.serializeToJson(transaction),
 				ACLMessage.PROPAGATE);
 
 		//TODO do it in one request ? create an item directly with a locker
@@ -106,7 +106,7 @@ public class ItemCreationAgent extends MokaAgent {
 		info.put("userId", user.getIp());
 		final A2ATransaction transactionToWebSocketAgent = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_LOCK_ITEM_SUCCESS, info);
 		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
-				JSONParserUtils.serializeA2ATransaction(transactionToWebSocketAgent),
+				JSONParserUtils.serializeToJson(transactionToWebSocketAgent),
 				jade.lang.acl.ACLMessage.PROPAGATE);
 	}
 
@@ -120,7 +120,7 @@ public class ItemCreationAgent extends MokaAgent {
 		getEnvironment().removeItem(itemId);
 		final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_DELETE_ITEM, itemId);
 		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
-				JSONParserUtils.serializeA2ATransaction(transaction),
+				JSONParserUtils.serializeToJson(transaction),
 				jade.lang.acl.ACLMessage.PROPAGATE);
 		requestAndroidHistoryRefresh();
 	}

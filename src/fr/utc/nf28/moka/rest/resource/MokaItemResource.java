@@ -10,6 +10,6 @@ import java.io.IOException;
 public class MokaItemResource extends MokaRestResource {
 	@Override
 	public String serialize() throws IOException {
-		return JSONParserUtils.serializeItems(MokaEnvironment.getInstance().getItems().values());
+		return JSONParserUtils.serializeToJson(MokaEnvironment.getInstance().getItems().values());
 	}
 }

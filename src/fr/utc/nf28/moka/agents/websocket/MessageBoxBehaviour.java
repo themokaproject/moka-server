@@ -51,7 +51,7 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 				}
 
 				if (request != null) {
-					messageToSend = JSONParserUtils.serializeWebSocketRequest(request);
+					messageToSend = JSONParserUtils.serializeToJson(request);
 				} else {
 					messageToSend = message.getContent();
 				}

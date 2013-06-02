@@ -29,7 +29,7 @@ public class ItemEditionAgent extends MokaAgent {
 		if (res != null) {
 			final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_MOVE_ITEM, res);
 			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
-					JSONParserUtils.serializeA2ATransaction(transaction),
+					JSONParserUtils.serializeToJson(transaction),
 					jade.lang.acl.ACLMessage.PROPAGATE);
 		}
 	}
@@ -39,7 +39,7 @@ public class ItemEditionAgent extends MokaAgent {
 		if (res != null) {
 			final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM, res);
 			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
-					JSONParserUtils.serializeA2ATransaction(transaction),
+					JSONParserUtils.serializeToJson(transaction),
 					jade.lang.acl.ACLMessage.PROPAGATE);
 		}
 	}
