@@ -62,12 +62,6 @@ public class MokaWebSocketServer extends WebSocketServer {
 
 	public void uploadBackUp(HashMap<String, String> backUp) throws IOException {
 		final MokaEnvironment environment = MokaEnvironment.getInstance();
-		/* TODO Does reloading users make sense ?
-		List<User> users = JSONParserUtils.deserializeUsers(backUp.get("Users"));
-		for(User u : users) {
-			environment.addUser(u);
-		}
-		*/
 		environment.clearItems();
 		List<MokaItem> items = JSONParserUtils.deserializeItems(backUp.get("Items"));
 		int maxId = -1;
