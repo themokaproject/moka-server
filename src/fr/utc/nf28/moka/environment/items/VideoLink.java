@@ -7,8 +7,8 @@ public class VideoLink extends MokaItem{
     public VideoLink() {
     }
 
-    public VideoLink(String title, int x, int y, String type, String mLink) {
-        super(title, x, y, type);
+    public VideoLink(String title, int x, int y, String mLink) {
+        super(title, x, y, sType);
         this.mLink = mLink;
     }
 
@@ -18,5 +18,9 @@ public class VideoLink extends MokaItem{
 
     public void setLink(String link) {
         mLink = link;
+    }
+
+    public String toString() {
+        return "video:" + mLink + " " + super.toString();
     }
 }

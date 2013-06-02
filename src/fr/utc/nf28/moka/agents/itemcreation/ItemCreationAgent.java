@@ -3,10 +3,7 @@ package fr.utc.nf28.moka.agents.itemcreation;
 import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.environment.MokaEnvironment;
-import fr.utc.nf28.moka.environment.items.ImageLink;
-import fr.utc.nf28.moka.environment.items.MokaItem;
-import fr.utc.nf28.moka.environment.items.PostIt;
-import fr.utc.nf28.moka.environment.items.UmlClass;
+import fr.utc.nf28.moka.environment.items.*;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.util.JadeUtils;
@@ -46,7 +43,9 @@ public class ItemCreationAgent extends MokaAgent {
 			newItem = new PostIt("Post-it", 300, 350, "Post-it", "Post-it content");
 		} else if (type.equals("image")) {
 			newItem = new ImageLink("Image", 400, 450, "http://i1.cdnds.net/13/12/618x959/bill-gates-mugshot.jpg");
-		}
+		} else if (type.equals("video")) {
+            newItem = new VideoLink("Video", 500, 500, "http://http://www.youtube.com/watch?v=anwy2MPT5RE");
+        }
 
 		if (newItem == null) {
 			//server side creation failed

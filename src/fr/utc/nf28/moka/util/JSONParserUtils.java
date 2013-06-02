@@ -6,10 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.environment.HistoryEntry;
 import fr.utc.nf28.moka.environment.MokaEnvironment;
-import fr.utc.nf28.moka.environment.items.ImageLink;
-import fr.utc.nf28.moka.environment.items.MokaItem;
-import fr.utc.nf28.moka.environment.items.PostIt;
-import fr.utc.nf28.moka.environment.items.UmlClass;
+import fr.utc.nf28.moka.environment.items.*;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.websocket.request.WebSocketRequest;
 
@@ -65,7 +62,9 @@ public class JSONParserUtils {
 			return sMapper.treeToValue(itemNode, PostIt.class);
 		} else if (className.equals("image")) {
 			return sMapper.treeToValue(itemNode, ImageLink.class);
-		}
+		} else if (className.equals("video")) {
+            return sMapper.treeToValue(itemNode, VideoLink.class);
+        }
 		return null;
 	}
 
