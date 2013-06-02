@@ -25,7 +25,6 @@ public class ItemCreationBehaviour extends CyclicBehaviour {
 				if (type.equals(JadeUtils.TRANSACTION_TYPE_ADD_ITEM)) {
 					((ItemCreationAgent) myAgent).create((String) request.getContent(), message.createReply(), message.getSender());
 				} else if (type.equals(JadeUtils.TRANSACTION_TYPE_DELETE_ITEM)) {
-					//TODO implement destruction
 					((ItemCreationAgent) myAgent).deleteItem((Integer) request.getContent());
 				} else {
 					throw new IOException();
