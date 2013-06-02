@@ -7,59 +7,60 @@ import java.util.List;
  * A UML class item.
  */
 public class UmlClass extends MokaItem {
-    private String mClassName;
-    private List<String> mMembers = new ArrayList<String>();
-    private List<String> mMethods = new ArrayList<String>();
-    private static final String sType = "umlClass";
+	private static final String sType = "umlClass";
+	private String mClassName;
+	private List<String> mMembers = new ArrayList<String>();
+	private List<String> mMethods = new ArrayList<String>();
 
-    public UmlClass() {
-    }
-    public UmlClass(String title, int x, int y, String className) {
-        super(title, x, y, sType);
-        mClassName = className;
-    }
+	public UmlClass() {
+	}
 
-    public String getClassName() {
-        return mClassName;
-    }
+	public UmlClass(String title, int x, int y, String className) {
+		super(title, x, y, sType);
+		mClassName = className;
+	}
 
-    public void setClassName(String className) {
-        mClassName = className;
-    }
+	public String getClassName() {
+		return mClassName;
+	}
 
-    public List<String> getMembers() {
-        return mMembers;
-    }
+	public void setClassName(String className) {
+		mClassName = className;
+	}
 
-    public List<String> getMethods() {
-        return mMethods;
-    }
+	public List<String> getMembers() {
+		return mMembers;
+	}
 
-    public void addMember(String member) {
-        mMembers.add(member);
-    }
+	public List<String> getMethods() {
+		return mMethods;
+	}
 
-    public void addMethod(String method) {
-        mMethods.add(method);
-    }
+	public void addMember(String member) {
+		mMembers.add(member);
+	}
 
-    public void removeMember(String member) {
-        mMembers.remove(member);
-    }
+	public void addMethod(String method) {
+		mMethods.add(method);
+	}
 
-    public void removeMethod(String method) {
-        mMethods.remove(method);
-    }
+	public void removeMember(String member) {
+		mMembers.remove(member);
+	}
 
-    public void clearMembers() {
-        mMembers = new ArrayList<String>();
-    }
+	public void removeMethod(String method) {
+		mMethods.remove(method);
+	}
 
-    public void clearMethods() {
-        mMethods = new ArrayList<String>();
-    }
+	public void clearMembers() {
+		mMembers = new ArrayList<String>();
+	}
 
-    public String toString() {
-        return "umlclass:" + mClassName + " " + super.toString();
-    }
+	public void clearMethods() {
+		mMethods = new ArrayList<String>();
+	}
+
+	public String toString() {
+		return "umlclass:" + mClassName + " " + super.toString();
+	}
 }
