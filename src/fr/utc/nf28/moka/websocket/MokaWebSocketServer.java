@@ -62,6 +62,8 @@ public class MokaWebSocketServer extends WebSocketServer {
 
 	public void uploadBackUp(HashMap<String, String> backUp) throws IOException {
 		final MokaEnvironment environment = MokaEnvironment.getInstance();
+
+		//restore items
 		environment.clearItems();
 		List<MokaItem> items = JSONParserUtils.deserializeItems(backUp.get("Items"));
 		int maxId = -1;
@@ -70,6 +72,9 @@ public class MokaWebSocketServer extends WebSocketServer {
 			if(maxId < i.getId()) maxId = i.getId();
 		}
 		environment.setItemIdGenCurrentIndex(++maxId);
+
+		//TODO restore history
+
 		mCallback.uploadSucceed();
 	}
 
