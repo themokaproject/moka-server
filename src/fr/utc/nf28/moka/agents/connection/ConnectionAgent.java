@@ -30,7 +30,7 @@ public class ConnectionAgent extends MokaAgent {
 		final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_CONNECTION, user);
 		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 				JSONParserUtils.serializeToJson(transaction),
-				jade.lang.acl.ACLMessage.PROPAGATE);
+				ACLMessage.PROPAGATE);
 
 		requestAndroidRefresh();
 	}
