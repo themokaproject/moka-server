@@ -1,7 +1,12 @@
 package fr.utc.nf28.moka.environment.items;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import fr.utc.nf28.moka.environment.JsonDateSerializer;
 import fr.utc.nf28.moka.environment.users.User;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A generic visual item.
@@ -16,13 +21,15 @@ public abstract class MokaItem {
 	private int mY;
 	private int mHeight;
 	private int mWidth;
-	private transient User mLocker;
+	private User mLocker;
 	private String mType;
+	private Date mCreationDate;
 
 	public MokaItem() {
 		mId = sIdIndex++;
 		mHeight = DEFAULT_HEIGHT;
 		mWidth = DEFAULT_WIDTH;
+		mCreationDate = Calendar.getInstance().getTime();
 	}
 
 	public MokaItem(String title, int x, int y, String type) {
@@ -123,5 +130,14 @@ public abstract class MokaItem {
 
 	public void setType(String type) {
 		mType = type;
+	}
+
+	@JsonSerialize(using = JsonDateSerializer.class)
+	public Date getCreationDate() {
+		return mCreationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		mCreationDate = creationDate;
 	}
 }
