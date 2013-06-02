@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class HistoryEntry {
 	private String mAction;
-	private Date mDate;
+	private Date mDate; // TODO: deserialize correctly using Jackson
 
 	//Used in Json deserialization
 	public HistoryEntry() {
