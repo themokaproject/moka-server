@@ -18,14 +18,14 @@ public class ItemEditionAgent extends MokaAgent {
 	public void setup() {
 		super.setup();
 		addBehaviour(new ItemEdtionHandlingBehaviour());
-		HashMap<String,String> skills = new HashMap<String, String>();
+		final HashMap<String, String> skills = new HashMap<String, String>();
 		skills.put(JadeUtils.JADE_SKILL_NAME_ITEM_MOVEMENT, JadeUtils.JADE_SKILL_TYPE_DEFAULT);
 		skills.put(JadeUtils.JADE_SKILL_NAME_ITEM_RESIZING, JadeUtils.JADE_SKILL_TYPE_DEFAULT);
 		registerSkills(skills);
 	}
 
 	public void moveItem(HashMap<String, Integer> itemInfo) throws IOException {
-		MokaItem res = getEnvironment().moveItem(itemInfo.get("itemId"), itemInfo.get("direction"), itemInfo.get("velocity"));
+		final MokaItem res = getEnvironment().moveItem(itemInfo.get("itemId"), itemInfo.get("direction"), itemInfo.get("velocity"));
 		if (res != null) {
 			final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_MOVE_ITEM, res);
 			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
@@ -35,7 +35,7 @@ public class ItemEditionAgent extends MokaAgent {
 	}
 
 	public void resizeItem(HashMap<String, Integer> itemInfo) throws IOException {
-		MokaItem res = getEnvironment().resizeItem(itemInfo.get("itemId"), itemInfo.get("direction"));
+		final MokaItem res = getEnvironment().resizeItem(itemInfo.get("itemId"), itemInfo.get("direction"));
 		if (res != null) {
 			final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM, res);
 			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),

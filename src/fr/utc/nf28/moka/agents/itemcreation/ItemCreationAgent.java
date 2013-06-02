@@ -37,15 +37,15 @@ public class ItemCreationAgent extends MokaAgent {
 		final MokaEnvironment environment = getEnvironment();
 		final int newItemId = environment.generateNewId();
 
-		if (type.equals("UML")) {
+		if ("UML".equals(type)) {
 			newItem = new UmlClass("MyClass", 200, 350, "UmlClass");
-		} else if (type.equals("post-it")) {
+		} else if ("post-it".equals(type)) {
 			newItem = new PostIt("Post-it", 300, 350, "Post-it", "Post-it content");
-		} else if (type.equals("image")) {
+		} else if ("image".equals(type)) {
 			newItem = new ImageLink("Image", 400, 450, "http://i1.cdnds.net/13/12/618x959/bill-gates-mugshot.jpg");
-		} else if (type.equals("video")) {
-            newItem = new VideoLink("Video", 500, 500, "http://www.youtube.com/watch?v=anwy2MPT5RE");
-        }
+		} else if ("video".equals(type)) {
+			newItem = new VideoLink("Video", 500, 500, "http://www.youtube.com/watch?v=anwy2MPT5RE");
+		}
 
 		if (newItem == null) {
 			//server side creation failed
@@ -69,7 +69,6 @@ public class ItemCreationAgent extends MokaAgent {
 		//request refreshing current item list for all android device
 		requestAndroidCurrentItemsListRefresh();
 	}
-
 
 	/**
 	 * Use to send back id of the new created item

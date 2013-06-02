@@ -21,7 +21,7 @@ public class ItemLockingBehaviour extends CyclicBehaviour {
 				if (JadeUtils.TRANSACTION_TYPE_UNLOCK_ITEM.equals(type)) {
 					((ItemLockingAgent) myAgent).unlockItem((Integer) request.getContent());
 				} else if (JadeUtils.TRANSACTION_TYPE_LOCK_ITEM.equals(type)) {
-					((ItemLockingAgent) myAgent).lockItem((Integer) request.getContent(), message.getSender(),message.createReply());
+					((ItemLockingAgent) myAgent).lockItem((Integer) request.getContent(), message.getSender(), message.createReply());
 				}
 			} catch (IOException e) {
 				e.printStackTrace();

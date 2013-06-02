@@ -21,8 +21,6 @@ import java.util.Map;
  * and retrieve agents based on their skills
  */
 public class BaseAgent extends Agent {
-
-
 	/**
 	 * Retrieve all the agents AID that have a skill
 	 * that matches the name
@@ -43,7 +41,7 @@ public class BaseAgent extends Agent {
 	 * @return an arrayList of AIDs
 	 */
 	protected ArrayList<AID> getAgentsWithSkill(String skillName, String skillType) {
-		ArrayList<AID> result = new ArrayList<AID>();
+		final ArrayList<AID> result = new ArrayList<AID>();
 		try {
 			DFAgentDescription[] agentDescriptions = DFService.search(this, getAgentDescriptionWithService(skillName, skillType));
 			for (DFAgentDescription ad : agentDescriptions) {
@@ -82,7 +80,7 @@ public class BaseAgent extends Agent {
 		}
 	}
 
-	protected void registerSkills(HashMap<String, String> skillNameAndType)  {
+	protected void registerSkills(HashMap<String, String> skillNameAndType) {
 		try {
 			DFService.register(this, getAgentDescriptionWithServices(skillNameAndType));
 		} catch (FIPAException e) {
@@ -107,20 +105,20 @@ public class BaseAgent extends Agent {
 	}
 
 	private DFAgentDescription getAgentDescriptionWithServices(HashMap<String, String> skillNameAndType) {
-		DFAgentDescription agentDescription = new DFAgentDescription();
+		final DFAgentDescription agentDescription = new DFAgentDescription();
 		for (Iterator iterator = skillNameAndType.entrySet().iterator(); iterator.hasNext(); ) {
-			final Map.Entry entry = (Map.Entry)iterator.next();
-			ServiceDescription serviceDescription = new ServiceDescription();
-			serviceDescription.setName((String)entry.getKey());
-			serviceDescription.setType((String)entry.getValue());
+			final Map.Entry entry = (Map.Entry) iterator.next();
+			final ServiceDescription serviceDescription = new ServiceDescription();
+			serviceDescription.setName((String) entry.getKey());
+			serviceDescription.setType((String) entry.getValue());
 			agentDescription.addServices(serviceDescription);
 		}
 		return agentDescription;
 	}
 
 	private DFAgentDescription getAgentDescriptionWithService(String skillName, String skillType) {
-		DFAgentDescription agentDescription = new DFAgentDescription();
-		ServiceDescription serviceDescription = new ServiceDescription();
+		final DFAgentDescription agentDescription = new DFAgentDescription();
+		final ServiceDescription serviceDescription = new ServiceDescription();
 		serviceDescription.setName(skillName);
 		serviceDescription.setType(skillType);
 		agentDescription.addServices(serviceDescription);

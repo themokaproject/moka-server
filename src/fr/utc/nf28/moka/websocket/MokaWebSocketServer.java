@@ -18,8 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MokaWebSocketServer extends WebSocketServer {
-
-	private Callback mCallback;
+	private final Callback mCallback;
 
 	public MokaWebSocketServer(int port, Callback c) throws UnknownHostException {
 		super(new InetSocketAddress(port));
@@ -46,10 +45,10 @@ public class MokaWebSocketServer extends WebSocketServer {
 	public void onMessage(WebSocket connection, String message) {
 		System.out.println(connection + ": " + message);
 		try {
-			WebSocketRequest request = JSONParserUtils.deserializeWebSocketRequest(message);
-			if (request.getType().equals("backUp")) {
+			final WebSocketRequest request = JSONParserUtils.deserializeWebSocketRequest(message);
+			if ("backUp".equals(request.getType())) {
 				sendBackUpRequest(connection);
-			} else if (request.getType().equals("upload")) {
+			} else if ("upload".equals(request.getType())) {
 				System.out.println(request.getContent().toString());
 				uploadBackUp(request.getContent());
 				connectionCheckIn(connection);
@@ -67,7 +66,7 @@ public class MokaWebSocketServer extends WebSocketServer {
 		//restore items
 		if (backUp.containsKey("Items")) {
 			try {
-				List<MokaItem> items = JSONParserUtils.deserializeItems(backUp.get("Items"));
+				final List<MokaItem> items = JSONParserUtils.deserializeItems(backUp.get("Items"));
 				environment.clearItems();
 				int maxId = -1;
 				for (MokaItem i : items) {
@@ -80,7 +79,6 @@ public class MokaWebSocketServer extends WebSocketServer {
 				exception.printStackTrace();
 			}
 		}
-
 
 		//restore history
 		if (backUp.containsKey("History")) {
@@ -105,7 +103,7 @@ public class MokaWebSocketServer extends WebSocketServer {
 	}
 
 	private void connectionCheckIn(WebSocket connection) {
-		MokaEnvironment environment = MokaEnvironment.getInstance();
+		final MokaEnvironment environment = MokaEnvironment.getInstance();
 		for (User user : environment.getUsers().values()) {
 			sendRequest(WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.makePseudo()), connection);
 		}
@@ -133,7 +131,6 @@ public class MokaWebSocketServer extends WebSocketServer {
 		}
 	}
 
-
 	public void sendAll(String message) {
 		for (WebSocket connection : this.connections()) {
 			connection.send(message);
@@ -152,9 +149,7 @@ public class MokaWebSocketServer extends WebSocketServer {
 		}
 	}
 
-
 	public interface Callback {
 		void uploadSucceed();
 	}
-
 }

@@ -25,27 +25,26 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 			try {
 				final A2ATransaction transaction = JSONParserUtils.deserializeA2ATransaction(message.getContent());
 				WebSocketRequest request = null;
-				String messageToSend = "";
-
-				if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_CONNECTION)) {
+				final String messageToSend;
+				if (JadeUtils.TRANSACTION_TYPE_CONNECTION.equals(transaction.getType())) {
 					final User user = (User) transaction.getContent();
 					request = WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.makePseudo());
-				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_ADD_ITEM)) {
+				} else if (JadeUtils.TRANSACTION_TYPE_ADD_ITEM.equals(transaction.getType())) {
 					final MokaItem item = (MokaItem) transaction.getContent();
-					request = WebSocketRequestFactory.createAddItemRequest(item.getType(), item.getId(),item.getX(), item.getY());
-				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_DELETE_ITEM)) {
-					String id = String.valueOf(transaction.getContent());
+					request = WebSocketRequestFactory.createAddItemRequest(item.getType(), item.getId(), item.getX(), item.getY());
+				} else if (JadeUtils.TRANSACTION_TYPE_DELETE_ITEM.equals(transaction.getType())) {
+					final String id = String.valueOf(transaction.getContent());
 					request = WebSocketRequestFactory.createRemoveItemRequest(id);
-				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_MOVE_ITEM)) {
+				} else if (JadeUtils.TRANSACTION_TYPE_MOVE_ITEM.equals(transaction.getType())) {
 					final MokaItem item = (MokaItem) transaction.getContent();
 					request = WebSocketRequestFactory.createMoveItemRequest(item.getId(), item.getX(), item.getY());
-				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM)) {
+				} else if (JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM.equals(transaction.getType())) {
 					final MokaItem item = (MokaItem) transaction.getContent();
 					request = WebSocketRequestFactory.createResizeItemRequest(item.getId(), item.getWidth(), item.getHeight());
-				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_LOCK_ITEM_SUCCESS)) {
-					final HashMap<String, String> info= (HashMap<String, String>) transaction.getContent();
+				} else if (JadeUtils.TRANSACTION_TYPE_LOCK_ITEM_SUCCESS.equals(transaction.getType())) {
+					final HashMap<String, String> info = (HashMap<String, String>) transaction.getContent();
 					request = WebSocketRequestFactory.createSelectItemRequest(info.get("userId"), info.get("itemId"));
-				} else if (transaction.getType().equals(JadeUtils.TRANSACTION_TYPE_UNLOCK_ITEM)) {
+				} else if (JadeUtils.TRANSACTION_TYPE_UNLOCK_ITEM.equals(transaction.getType())) {
 					final int itemId = (Integer) transaction.getContent();
 					request = WebSocketRequestFactory.createUnselectItemRequest(itemId);
 				}
@@ -61,8 +60,6 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
-
 		}
 	}
 

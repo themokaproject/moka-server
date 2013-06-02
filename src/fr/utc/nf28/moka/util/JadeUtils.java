@@ -1,7 +1,6 @@
 package fr.utc.nf28.moka.util;
 
-public class JadeUtils {
-
+public final class JadeUtils {
 	/**
 	 * default type for Jade skill registering
 	 */

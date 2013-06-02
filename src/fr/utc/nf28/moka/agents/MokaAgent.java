@@ -1,7 +1,6 @@
 package fr.utc.nf28.moka.agents;
 
 import fr.utc.nf28.moka.environment.MokaEnvironment;
-import fr.utc.nf28.moka.util.JadeUtils;
 
 /**
  * A generic Agent for Moka

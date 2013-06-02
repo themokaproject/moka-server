@@ -1,8 +1,6 @@
 package fr.utc.nf28.moka.agents.itemedition;
 
 import fr.utc.nf28.moka.agents.A2ATransaction;
-import fr.utc.nf28.moka.agents.MokaAgent;
-import fr.utc.nf28.moka.environment.items.MokaItem;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.util.JadeUtils;
 import jade.core.behaviours.CyclicBehaviour;
@@ -24,9 +22,9 @@ public class ItemEdtionHandlingBehaviour extends CyclicBehaviour {
 			try {
 				final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(requestString);
 				final String type = request.getType();
-				if (type.equals(JadeUtils.TRANSACTION_TYPE_MOVE_ITEM)) {
+				if (JadeUtils.TRANSACTION_TYPE_MOVE_ITEM.equals(type)) {
 					((ItemEditionAgent) myAgent).moveItem((HashMap<String, Integer>) request.getContent());
-				} else if (type.equals(JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM)) {
+				} else if (JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM.equals(type)) {
 					((ItemEditionAgent) myAgent).resizeItem((HashMap<String, Integer>) request.getContent());
 				} else {
 					throw new IOException();

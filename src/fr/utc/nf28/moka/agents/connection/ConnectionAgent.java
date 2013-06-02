@@ -16,7 +16,6 @@ import java.util.HashMap;
  * A REQUEST has to be sent for connection or a disconnection
  */
 public class ConnectionAgent extends MokaAgent {
-
 	public void setup() {
 		super.setup();
 		registerSkill(JadeUtils.JADE_SKILL_NAME_CONNECTION);
@@ -24,7 +23,7 @@ public class ConnectionAgent extends MokaAgent {
 	}
 
 	public void connection(final HashMap<String, String> userInfo, AID userAID) throws IOException {
-		User user = new User(userInfo.get("firstName"), userInfo.get("lastName"));
+		final User user = new User(userInfo.get("firstName"), userInfo.get("lastName"));
 		user.setIp(userInfo.get("ip"));
 		user.setAID(userAID.toString());
 		getEnvironment().addUser(user);

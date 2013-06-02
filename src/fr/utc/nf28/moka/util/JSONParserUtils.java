@@ -5,23 +5,24 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.environment.HistoryEntry;
-import fr.utc.nf28.moka.environment.MokaEnvironment;
 import fr.utc.nf28.moka.environment.items.*;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.websocket.request.WebSocketRequest;
 
 import java.io.IOException;
-import java.io.StringWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * a JSON serializer/deserializer that uses Jackson
  */
-public class JSONParserUtils {
+public final class JSONParserUtils {
 	private static final ObjectMapper sMapper = new ObjectMapper();
 
 	public static String serializeToJson(final Object object) throws IOException {
-		return  sMapper.writeValueAsString(object);
+		return sMapper.writeValueAsString(object);
 	}
 
 	public static A2ATransaction deserializeA2ATransaction(final String json) throws IOException {
@@ -38,8 +39,7 @@ public class JSONParserUtils {
 				System.out.println("deserializeA2ATransaction:ClassNotFound : " + contentClassNode.asText());
 				System.out.println("use " + contentClass.toString() + " instead");
 			}
-			Object content = sMapper.treeToValue(contentNode, contentClass);
-			return new A2ATransaction(typeNode.asText(), content);
+			return new A2ATransaction(typeNode.asText(), sMapper.treeToValue(contentNode, contentClass));
 		}
 
 		return null;
@@ -49,13 +49,12 @@ public class JSONParserUtils {
 		return sMapper.readValue(json, User.class);
 	}
 
-
 	public static MokaItem deserializeItem(final String json) throws IOException {
 		return deserializeItem(sMapper.readTree(json));
 	}
 
-	public static MokaItem deserializeItem(final JsonNode itemNode) throws  IOException {
-		String className = itemNode.path("type").asText();
+	public static MokaItem deserializeItem(final JsonNode itemNode) throws IOException {
+		final String className = itemNode.path("type").asText();
 		if (className.equals("umlClass")) {
 			return sMapper.treeToValue(itemNode, UmlClass.class);
 		} else if (className.equals("post-it")) {
@@ -63,8 +62,8 @@ public class JSONParserUtils {
 		} else if (className.equals("image")) {
 			return sMapper.treeToValue(itemNode, ImageLink.class);
 		} else if (className.equals("video")) {
-            return sMapper.treeToValue(itemNode, VideoLink.class);
-        }
+			return sMapper.treeToValue(itemNode, VideoLink.class);
+		}
 		return null;
 	}
 
@@ -77,8 +76,9 @@ public class JSONParserUtils {
 		if (typeNode != null && contentNode != null) {
 			result.setType(typeNode.asText());
 			if (!contentNode.asText().isEmpty()) {
-				HashMap<String, String> content = sMapper.readValue(contentNode.asText(), new TypeReference<HashMap<String, String>>() {
-				});
+				HashMap<String, String> content = sMapper.readValue(contentNode.asText(),
+						new TypeReference<HashMap<String, String>>() {
+						});
 				result.setContent(content);
 			}
 		}
@@ -87,7 +87,8 @@ public class JSONParserUtils {
 	}
 
 	public static List<User> deserializeUsers(String json) throws IOException {
-		return sMapper.readValue(json, new TypeReference<List<User>>() {});
+		return sMapper.readValue(json, new TypeReference<List<User>>() {
+		});
 	}
 
 	public static List<MokaItem> deserializeItems(String json) throws IOException {
@@ -95,14 +96,15 @@ public class JSONParserUtils {
 		final List<MokaItem> result = new ArrayList<MokaItem>();
 
 		for (Iterator<JsonNode> iter = rootNode.elements(); iter.hasNext(); ) {
-			MokaItem newItem = deserializeItem(iter.next());
-			if(newItem != null) result.add(newItem);
+			final MokaItem newItem = deserializeItem(iter.next());
+			if (newItem != null) result.add(newItem);
 		}
 		return result;
 	}
 
-	public static List<HistoryEntry> deserializeHistoryEntries(String json) throws  IOException {
-		return sMapper.readValue(json, new TypeReference<List<HistoryEntry>>(){});
+	public static List<HistoryEntry> deserializeHistoryEntries(String json) throws IOException {
+		return sMapper.readValue(json, new TypeReference<List<HistoryEntry>>() {
+		});
 	}
 
 }
