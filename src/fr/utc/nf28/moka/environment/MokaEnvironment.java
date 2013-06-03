@@ -181,7 +181,7 @@ public final class MokaEnvironment {
 
 	public MokaItem editItem(int itemId, String field, String newValue) {
 		final MokaItem res = mItems.get(itemId);
-		//TODO call update(String field, String newVal) of item
+		res.update(field,newValue);
 		return res;
 	}
 
