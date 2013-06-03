@@ -179,6 +179,12 @@ public final class MokaEnvironment {
 		return res;
 	}
 
+	public MokaItem editItem(int itemId, String field, String newValue) {
+		final MokaItem res = mItems.get(itemId);
+		//TODO call update(String field, String newVal) of item
+		return res;
+	}
+
 	public void updateItem(MokaItem newValue) {
 		// TODO correctly implement udpate
 	}

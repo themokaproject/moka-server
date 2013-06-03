@@ -21,7 +21,7 @@ public class ItemEditionAgent extends MokaAgent {
 		final HashMap<String, String> skills = new HashMap<String, String>();
 		skills.put(JadeUtils.JADE_SKILL_NAME_ITEM_MOVEMENT, JadeUtils.JADE_SKILL_TYPE_DEFAULT);
 		skills.put(JadeUtils.JADE_SKILL_NAME_ITEM_RESIZING, JadeUtils.JADE_SKILL_TYPE_DEFAULT);
-		skills.put(JadeUtils.JADE_SKILL_NAME_ITEM_EDITING,JadeUtils.JADE_SKILL_TYPE_DEFAULT);
+		skills.put(JadeUtils.JADE_SKILL_NAME_ITEM_EDITING, JadeUtils.JADE_SKILL_TYPE_DEFAULT);
 		registerSkills(skills);
 	}
 
@@ -45,7 +45,10 @@ public class ItemEditionAgent extends MokaAgent {
 		}
 	}
 
-	public void editeItem(HashMap<String,Object> editingInfo){
-
+	public void editeItem(HashMap<String, Object> editingInfo) {
+		final MokaItem res = getEnvironment().editItem((Integer) editingInfo.get("itemId"),
+				(String) editingInfo.get("field"),
+				(String) editingInfo.get("content"));
+		//TODO propagete edition to the platform
 	}
 }
