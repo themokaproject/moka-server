@@ -27,6 +27,8 @@ public class ItemEdtionHandlingBehaviour extends CyclicBehaviour {
 				} else if (JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM.equals(type)) {
 					((ItemEditionAgent) myAgent).resizeItem((HashMap<String, Integer>) request.getContent());
 				} else if (JadeUtils.TRANSACTION_TYPE_EDIT_ITEM.equals(type)) {
+					//test request
+					// {"content":{"itemId":0,"field":"title","content":"test"},"contentClass":"java.util.HashMap","type":"editItem"}
 					((ItemEditionAgent) myAgent).editeItem((HashMap<String, Object>) request.getContent());
 				} else {
 					throw new IOException();
