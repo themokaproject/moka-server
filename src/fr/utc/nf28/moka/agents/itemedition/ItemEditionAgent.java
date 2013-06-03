@@ -21,6 +21,7 @@ public class ItemEditionAgent extends MokaAgent {
 		final HashMap<String, String> skills = new HashMap<String, String>();
 		skills.put(JadeUtils.JADE_SKILL_NAME_ITEM_MOVEMENT, JadeUtils.JADE_SKILL_TYPE_DEFAULT);
 		skills.put(JadeUtils.JADE_SKILL_NAME_ITEM_RESIZING, JadeUtils.JADE_SKILL_TYPE_DEFAULT);
+		skills.put(JadeUtils.JADE_SKILL_NAME_ITEM_EDITING,JadeUtils.JADE_SKILL_TYPE_DEFAULT);
 		registerSkills(skills);
 	}
 
