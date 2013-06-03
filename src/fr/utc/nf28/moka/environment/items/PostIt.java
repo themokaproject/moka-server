@@ -36,7 +36,17 @@ public class PostIt extends MokaItem {
 
 	@Override
 	public void makeDefaultTitle() {
-		mTitle = "Post-it "+String.valueOf(mId);
+		mTitle = "Post-it " + String.valueOf(mId);
 	}
 
+	@Override
+	public void update(String field, String newValue) {
+		if ("header".equals(field)) {
+			mHeader = newValue;
+		} else if ("content".equals(field)) {
+			mContent = newValue;
+		} else {
+			super.update(field, newValue);
+		}
+	}
 }

@@ -137,6 +137,12 @@ public abstract class MokaItem {
 		mType = type;
 	}
 
+	public void update(String field, String newValue) {
+		if ("title".equals(field)) {
+			mTitle = newValue;
+		}
+	}
+
 	@JsonIgnore
 	public String getCreatorName() {
 		if (mCreator != null) {
