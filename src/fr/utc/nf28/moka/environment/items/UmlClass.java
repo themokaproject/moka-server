@@ -67,11 +67,15 @@ public class UmlClass extends MokaItem {
 
 	@Override
 	public void makeDefaultTitle() {
-		mTitle = "Class Uml "+String.valueOf(mId);
+		mTitle = "Class Uml " + String.valueOf(mId);
 	}
 
 	@Override
 	public void update(String field, String newValue) {
-		super.update(field, newValue);
+		if ("className".equals(field)) {
+			mClassName = newValue;
+		} else {
+			super.update(field, newValue);
+		}
 	}
 }

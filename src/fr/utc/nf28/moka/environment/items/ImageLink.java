@@ -29,8 +29,15 @@ public class ImageLink extends MokaItem {
 
 	@Override
 	public void makeDefaultTitle() {
-	   	mTitle = "Image "+String.valueOf(mId);
+		mTitle = "Image " + String.valueOf(mId);
 	}
 
-
+	@Override
+	public void update(String field, String newValue) {
+		if ("url".equals(field)) {
+			mUrl = newValue;
+		} else {
+			super.update(field, newValue);
+		}
+	}
 }

@@ -26,6 +26,15 @@ public class VideoLink extends MokaItem {
 
 	@Override
 	public void makeDefaultTitle() {
-		mTitle = "Video "+String.valueOf(mId);
+		mTitle = "Video " + String.valueOf(mId);
+	}
+
+	@Override
+	public void update(String field, String newValue) {
+		if ("link".equals(field)) {
+			mLink = newValue;
+		} else {
+			super.update(field, newValue);
+		}
 	}
 }
