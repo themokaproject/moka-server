@@ -64,7 +64,7 @@ public class ItemCreationAgent extends MokaAgent {
 		newItem.makeDefaultTitle();
 
 		//send back item id to the creator
-		sendBackItemId(response, newItemId);
+		sendBackItem(response, newItem);
 
 		//propagate creation to Ui platform
 		propagateCreation(newItem, environment.getUserByAID(creator.toString()));
@@ -77,12 +77,12 @@ public class ItemCreationAgent extends MokaAgent {
 	 * Use to send back id of the new created item
 	 *
 	 * @param response  ACL response for AndroidAgent which send the creation request
-	 * @param newItemId item id
+	 * @param newItem item
 	 * @throws IOException
 	 */
-	public void sendBackItemId(final ACLMessage response, final int newItemId) throws IOException {
+	public void sendBackItem(final ACLMessage response, final MokaItem newItem) throws IOException {
 		final A2ATransaction responseTransaction =
-				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_ITEM_CREATION_SUCCESS, newItemId);
+				new A2ATransaction(JadeUtils.TRANSACTION_TYPE_ITEM_CREATION_SUCCESS, JSONParserUtils.serializeToJson(newItem));
 		response.setPerformative(ACLMessage.REQUEST);
 		response.setContent(JSONParserUtils.serializeToJson(responseTransaction));
 		send(response);
