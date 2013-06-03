@@ -44,4 +44,8 @@ public class ItemEditionAgent extends MokaAgent {
 					jade.lang.acl.ACLMessage.PROPAGATE);
 		}
 	}
+
+	public void editeItem(HashMap<String,Object> editingInfo){
+
+	}
 }

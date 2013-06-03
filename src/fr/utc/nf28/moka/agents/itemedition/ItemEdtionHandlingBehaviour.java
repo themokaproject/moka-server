@@ -26,6 +26,8 @@ public class ItemEdtionHandlingBehaviour extends CyclicBehaviour {
 					((ItemEditionAgent) myAgent).moveItem((HashMap<String, Integer>) request.getContent());
 				} else if (JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM.equals(type)) {
 					((ItemEditionAgent) myAgent).resizeItem((HashMap<String, Integer>) request.getContent());
+				} else if (JadeUtils.JADE_SKILL_NAME_ITEM_EDITING.equals(type)) {
+					((ItemEditionAgent) myAgent).editeItem((HashMap<String, Object>) request.getContent());
 				} else {
 					throw new IOException();
 				}
