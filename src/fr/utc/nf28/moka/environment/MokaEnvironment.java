@@ -160,12 +160,25 @@ public final class MokaEnvironment {
 
 	public MokaItem rotateItem(int itemId, int direction) {
 		final MokaItem res = mItems.get(itemId);
-		final int dd = 5;
+		final int ddZ = 5;
+		final int ddXY = 20;
 		if (res != null) {
-			if(direction == 1){
-				res.setRotateZ(res.getRotateZ() - dd);
-			} else if (direction == 2){
-				res.setRotateZ(res.getRotateZ() + dd);
+			if(direction == 100){
+				res.setRotateZ(res.getRotateZ() - ddZ);
+			} else if (direction == 200){
+				res.setRotateZ(res.getRotateZ() + ddZ);
+			}else {
+				if (direction % 10 == 1) {
+					res.setRotateY(res.getRotateY() - ddXY);
+				} else if (direction % 10 == 2) {
+					res.setRotateY(res.getRotateY() + ddXY);
+				}
+
+				if (direction >= 20) {
+					res.setRotateX(res.getRotateX() + ddXY);
+				} else if (direction >= 10) {
+					res.setRotateX(res.getRotateX() - ddXY);
+				}
 			}
 		}
 		return res;

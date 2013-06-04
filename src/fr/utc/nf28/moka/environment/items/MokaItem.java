@@ -26,6 +26,8 @@ public abstract class MokaItem {
 	private String mType;
 	private Date mCreationDate;
 	private User mCreator;
+	private int mRotateX;
+	private int mRotateY;
 	private int mRotateZ;
 
 	public MokaItem() {
@@ -33,6 +35,8 @@ public abstract class MokaItem {
 		mHeight = DEFAULT_HEIGHT;
 		mWidth = DEFAULT_WIDTH;
 		mCreationDate = Calendar.getInstance().getTime();
+		mRotateX = 0;
+		mRotateY = 0;
 		mRotateZ = 0;
 	}
 
@@ -161,6 +165,22 @@ public abstract class MokaItem {
 	@JsonDeserialize(using = JsonDate.Deserializer.class)
 	public void setCreationDate(Date creationDate) {
 		mCreationDate = creationDate;
+	}
+
+	public int getRotateY() {
+		return mRotateY;
+	}
+
+	public void setRotateY(int rotateY) {
+		mRotateY = rotateY;
+	}
+
+	public int getRotateX() {
+		return mRotateX;
+	}
+
+	public void setRotateX(int rotateX) {
+		mRotateX = rotateX;
 	}
 
 	public int getRotateZ() {
