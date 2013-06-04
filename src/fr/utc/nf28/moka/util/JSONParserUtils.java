@@ -75,8 +75,9 @@ public final class JSONParserUtils {
 
 		if (typeNode != null && contentNode != null) {
 			result.setType(typeNode.asText());
-			if (!contentNode.asText().isEmpty()) {
-				HashMap<String, String> content = sMapper.readValue(contentNode.asText(),
+			final String text = contentNode.asText();
+			if (text != null && !text.isEmpty()) {
+				final HashMap<String, String> content = sMapper.readValue(text,
 						new TypeReference<HashMap<String, String>>() {
 						});
 				result.setContent(content);
