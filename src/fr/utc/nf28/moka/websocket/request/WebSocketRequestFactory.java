@@ -14,6 +14,7 @@ public class WebSocketRequestFactory {
 	private static final String TYPE_SELECT_ITEM = "selectItem";
 	private static final String TYPE_UNSELECT_ITEM = "unselectItem";
 	private static final String TYPE_SAVE_WORSPACE = "saveWorkSpace";
+	private static final String TYPE_ROTATE_ITEM = "rotateItem";
 
 	/**
 	 * Create a {@link WebSocketRequest} that is aimed at
@@ -128,6 +129,25 @@ public class WebSocketRequestFactory {
 		request.put("itemId", String.valueOf(itemId));
 		request.put("width", String.valueOf(width));
 		request.put("height", String.valueOf(height));
+		return request;
+	}
+
+	/**
+	 * Create a {@link WebSocketRequest} that is aimed at
+	 * resizing an item on the client platforms.
+	 *
+	 * @param 	itemId the id of the id
+	 * @param 	rotateX
+	 * @param 	rotateY
+	 * @param 	rotateZ
+	 * @return  {@link WebSocketRequest}
+	 */
+	public static WebSocketRequest createRotateItemRequest(int itemId, int rotateX, int rotateY, int rotateZ) {
+		WebSocketRequest request = new WebSocketRequest(TYPE_ROTATE_ITEM);
+		request.put("itemId", String.valueOf(itemId));
+		request.put("rotateX", String.valueOf(rotateX));
+		request.put("rotateY", String.valueOf(rotateY));
+		request.put("rotateZ", String.valueOf(rotateZ));
 		return request;
 	}
 

@@ -22,6 +22,7 @@ public class ItemEditionAgent extends MokaAgent {
 		skills.put(JadeUtils.JADE_SKILL_NAME_ITEM_MOVEMENT, JadeUtils.JADE_SKILL_TYPE_DEFAULT);
 		skills.put(JadeUtils.JADE_SKILL_NAME_ITEM_RESIZING, JadeUtils.JADE_SKILL_TYPE_DEFAULT);
 		skills.put(JadeUtils.JADE_SKILL_NAME_ITEM_EDITING, JadeUtils.JADE_SKILL_TYPE_DEFAULT);
+		skills.put(JadeUtils.JADE_SKILL_NAME_ITEM_ROTATING, JadeUtils.JADE_SKILL_TYPE_DEFAULT);
 		registerSkills(skills);
 	}
 
@@ -39,6 +40,16 @@ public class ItemEditionAgent extends MokaAgent {
 		final MokaItem res = getEnvironment().resizeItem(itemInfo.get("itemId"), itemInfo.get("direction"));
 		if (res != null) {
 			final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM, res);
+			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
+					JSONParserUtils.serializeToJson(transaction),
+					jade.lang.acl.ACLMessage.PROPAGATE);
+		}
+	}
+
+	public void rotateItem(HashMap<String, Integer> itemInfo) throws IOException {
+		final MokaItem res = getEnvironment().rotateItem(itemInfo.get("itemId"), itemInfo.get("direction"));
+		if (res != null) {
+			final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_ROTATE_ITEM, res);
 			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 					JSONParserUtils.serializeToJson(transaction),
 					jade.lang.acl.ACLMessage.PROPAGATE);

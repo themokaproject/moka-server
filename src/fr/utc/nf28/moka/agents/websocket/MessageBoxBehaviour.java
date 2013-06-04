@@ -48,7 +48,11 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 				} else if (JadeUtils.TRANSACTION_TYPE_UNLOCK_ITEM.equals(transaction.getType())) {
 					final int itemId = (Integer) transaction.getContent();
 					request = WebSocketRequestFactory.createUnselectItemRequest(itemId);
+				} else if (JadeUtils.TRANSACTION_TYPE_ROTATE_ITEM.equals(transaction.getType())) {
+					final MokaItem item = (MokaItem) transaction.getContent();
+					request = WebSocketRequestFactory.createRotateItemRequest(item.getId(), 0, 0, item.getRotateZ());
 				}
+
 
 				if (request != null) {
 					messageToSend = JSONParserUtils.serializeToJson(request);

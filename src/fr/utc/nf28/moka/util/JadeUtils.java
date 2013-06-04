@@ -38,6 +38,10 @@ public final class JadeUtils {
 	 */
 	public static final String JADE_SKILL_NAME_ITEM_EDITING = "ItemEditingSkillName";
 	/**
+	 * name for Jade item rotating skill
+	 */
+	public static final String JADE_SKILL_NAME_ITEM_ROTATING = "ItemRotatingSkillName";
+	/**
 	 * connection transaction
 	 */
 	public static final String TRANSACTION_TYPE_CONNECTION = "connection";
@@ -81,6 +85,10 @@ public final class JadeUtils {
 	 * lock transaction
 	 */
 	public static final String TRANSACTION_TYPE_LOCK_ITEM = "lockItem";
+	/**
+	 * rotateItem transaction
+	 */
+	public static final String TRANSACTION_TYPE_ROTATE_ITEM = "rotateItem";
 	/**
 	 * lock success
 	 */

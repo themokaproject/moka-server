@@ -158,8 +158,20 @@ public final class MokaEnvironment {
 		return res;
 	}
 
+	public MokaItem rotateItem(int itemId, int direction) {
+		final MokaItem res = mItems.get(itemId);
+		final int dd = 5;
+		if (res != null) {
+			if(direction == 1){
+				res.setRotateZ(res.getRotateZ() - dd);
+			} else if (direction == 2){
+				res.setRotateZ(res.getRotateZ() + dd);
+			}
+		}
+		return res;
+	}
+
 	public MokaItem resizeItem(int itemId, int direction) {
-		//TODO implement getById !
 		final MokaItem res = mItems.get(itemId);
 		final int dd = 15;
 		if (res != null) {

@@ -30,6 +30,8 @@ public class ItemEdtionHandlingBehaviour extends CyclicBehaviour {
 					//test request
 					// {"content":{"itemId":0,"field":"title","content":"test"},"contentClass":"java.util.HashMap","type":"editItem"}
 					((ItemEditionAgent) myAgent).editeItem((HashMap<String, Object>) request.getContent());
+				} else if (JadeUtils.TRANSACTION_TYPE_ROTATE_ITEM.equals(type)) {
+					((ItemEditionAgent) myAgent).rotateItem((HashMap<String, Integer>) request.getContent());
 				} else {
 					throw new IOException();
 				}
