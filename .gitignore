@@ -18,3 +18,6 @@ gen/
 *.db
 APDescription.txt
 MTPs-Main-Container.txt
+
+#moka uploaded images
+mokaimages/

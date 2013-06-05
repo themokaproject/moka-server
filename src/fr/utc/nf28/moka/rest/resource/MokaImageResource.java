@@ -1,87 +1,59 @@
 package fr.utc.nf28.moka.rest.resource;
 
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import com.sun.jersey.core.header.FormDataContentDisposition;
+import com.sun.jersey.multipart.FormDataParam;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.*;
 
 @Path("/image/{id}")
-public class MokaImageResource extends MokaRestResource {
+public class MokaImageResource {
+
+	private static final File mDir = new File("mokaimages" + File.separator);
+
 	@POST
-	public Response uploadPicture(@PathParam("id") int itemId) {
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Response uploadPicture(@PathParam("id") int itemId, @FormDataParam("file") InputStream uploadedInputStream,
+	                              @FormDataParam("file") FormDataContentDisposition fileDetail) {
 		System.out.println("upload request received " + String.valueOf(itemId));
 
-		//String uploadedFileLocation = "C:/moka/" + fileDetail.getFileName();
-		// save it
-		//writeToFile(uploadedInputStream, uploadedFileLocation);
+		if (!mDir.exists()) {
+			mDir.mkdirs();
+		}
 
-		//String output = "File uploaded to : " + uploadedFileLocation;
+		File local = new File(mDir.getAbsolutePath() + File.separator + String.valueOf(itemId) + ".jpg");
+		if (!local.exists()) {
+			try {
+				local.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 
-//		File dir = new File("C:" + File.separator + "moka" + File.separator);
-//		if (dir.exists()) {
-//			System.out.println("dir already exist at " + dir.getAbsolutePath());
-//		} else {
-//			dir.mkdirs();
-//			System.out.println("dir created at " + dir.getAbsolutePath());
-//		}
-//
-//		File local = new File(dir.getAbsolutePath() +File.separator+ String.valueOf(itemId) + ".jpg");
-//		if (local.exists()) {
-//			System.out.println("file already exist at " + local.getAbsolutePath());
-//		} else {
-//			try {
-//				local.createNewFile();
-//				System.out.println("file created " + local.getAbsolutePath());
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//
-//		try {
-//			InputStream in = new FileInputStream(t);
-//			OutputStream out = new FileOutputStream(local);
-//			byte[] buf = new byte[1024];
-//			int len;
-//			while ((len = in.read(buf)) > 0){
-//				out.write(buf, 0, len);
-//			}
-//			in.close();
-//			out.close();
-//			System.out.println("File copied.");
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//		} catch (IOException e) {
-//			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//		}
-		return Response.status(200).build();
+		writeToFile(uploadedInputStream, local);
+		return Response.ok("ok").status(200).build();
 	}
 
-	/**
-	 * @Consumes(MediaType.MULTIPART_FORM_DATA) public Response uploadImage(@PathParam("id") @FormDataParam("itemId") int itemId,
-	 * @FormDataParam("file") InputStream uploadedInputStream,
-	 * @FormDataParam("file") FormDataContentDisposition fileDetail) {
-	 * System.out.println("upload request received" + String.valueOf(itemId));
-	 * return Response.status(200).build();
-	 * }  *
-	 */
-
-	@Override
-	public String serialize() throws IOException {
-		return "Coucou";
+	@GET
+	@Produces("image/*")
+	public Response getPicture(@PathParam("id") int itemId) {
+		File image = new File(mDir.getAbsolutePath() + File.separator + itemId + ".jpg");
+		if (image.exists()) {
+			return Response.ok(image, "image/jpg").build();
+		}
+		return Response.ok("404 not found :x").status(404).build();
 	}
+
 
 	// save uploaded file to new location
-	private void writeToFile(InputStream uploadedInputStream,
-							 String uploadedFileLocation) {
-
+	private void writeToFile(InputStream uploadedInputStream, File uploadedFile) {
 		try {
-			OutputStream out = new FileOutputStream(new File(
-					uploadedFileLocation));
 			int read = 0;
 			byte[] bytes = new byte[1024];
 
-			out = new FileOutputStream(new File(uploadedFileLocation));
+			OutputStream out = new FileOutputStream(uploadedFile);
 			while ((read = uploadedInputStream.read(bytes)) != -1) {
 				out.write(bytes, 0, read);
 			}
