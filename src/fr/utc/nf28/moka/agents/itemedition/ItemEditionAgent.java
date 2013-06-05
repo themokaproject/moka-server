@@ -56,10 +56,15 @@ public class ItemEditionAgent extends MokaAgent {
 		}
 	}
 
-	public void editeItem(HashMap<String, Object> editingInfo) {
+	public void editeItem(HashMap<String, Object> editingInfo) throws IOException {
 		final MokaItem res = getEnvironment().editItem((Integer) editingInfo.get("itemId"),
 				(String) editingInfo.get("field"),
 				(String) editingInfo.get("content"));
-		//TODO propagete edition to the platform
+		if (res != null) {
+			final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_EDIT_ITEM, editingInfo);
+			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
+					JSONParserUtils.serializeToJson(transaction),
+					jade.lang.acl.ACLMessage.PROPAGATE);
+		}
 	}
 }

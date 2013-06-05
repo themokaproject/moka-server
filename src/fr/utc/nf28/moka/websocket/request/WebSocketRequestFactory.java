@@ -3,6 +3,7 @@ package fr.utc.nf28.moka.websocket.request;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 public class WebSocketRequestFactory {
 	private static final String TYPE_ADD_ITEM = "addItem";
@@ -15,6 +16,7 @@ public class WebSocketRequestFactory {
 	private static final String TYPE_UNSELECT_ITEM = "unselectItem";
 	private static final String TYPE_SAVE_WORSPACE = "saveWorkSpace";
 	private static final String TYPE_ROTATE_ITEM = "rotateItem";
+	private static final String TYPE_EDIT_ITEM = "editItem";
 
 	/**
 	 * Create a {@link WebSocketRequest} that is aimed at
@@ -162,6 +164,19 @@ public class WebSocketRequestFactory {
 		request.put("Users", userBackUp);
 		request.put("Items", itemBackUp);
 		request.put("History", historyBackUp);
+		return request;
+	}
+
+
+	public static WebSocketRequest createEditRequest(HashMap<String, Object> info) {
+		return createEditRequest((Integer)info.get("itemId"), (String) info.get("field"), (String)info.get("content"));
+	}
+
+	public static WebSocketRequest createEditRequest(int itemId, String field, String content) {
+		WebSocketRequest request = new WebSocketRequest(TYPE_EDIT_ITEM);
+		request.put("itemId", String.valueOf(itemId));
+		request.put("field", field);
+		request.put("content", content);
 		return request;
 	}
 

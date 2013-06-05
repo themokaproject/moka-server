@@ -51,6 +51,9 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 				} else if (JadeUtils.TRANSACTION_TYPE_ROTATE_ITEM.equals(transaction.getType())) {
 					final MokaItem item = (MokaItem) transaction.getContent();
 					request = WebSocketRequestFactory.createRotateItemRequest(item.getId(), item.getRotateX(), item.getRotateY(), item.getRotateZ());
+				} else if(JadeUtils.TRANSACTION_TYPE_EDIT_ITEM.equals(transaction.getType())) {
+					final HashMap<String, Object> infos = (HashMap<String, Object>) transaction.getContent();
+					request = WebSocketRequestFactory.createEditRequest(infos);
 				}
 
 
