@@ -140,7 +140,7 @@ public final class MokaEnvironment {
 	public MokaItem moveItem(int itemId, int direction, int velocity) {
 		//TODO implement getById !
 		final MokaItem res = mItems.get(itemId);
-		final int dd = (4 * velocity);
+		final int dd = (5 * velocity);
 		if (res != null && dd < 100) {
 			if (direction % 10 == 1) {
 				res.setX(res.getX() + dd);
@@ -160,7 +160,7 @@ public final class MokaEnvironment {
 
 	public MokaItem rotateItem(int itemId, int direction) {
 		final MokaItem res = mItems.get(itemId);
-		final int ddZ = 5;
+		final int ddZ = 10;
 		final int ddXY = 20;
 		if (res != null) {
 			if(direction == 100){
@@ -186,7 +186,7 @@ public final class MokaEnvironment {
 
 	public MokaItem resizeItem(int itemId, int direction) {
 		final MokaItem res = mItems.get(itemId);
-		final int dd = 15;
+		final int dd = 30;
 		if (res != null) {
 			if (direction % 10 == 1) {
 				res.setWidth(res.getWidth() + dd);
