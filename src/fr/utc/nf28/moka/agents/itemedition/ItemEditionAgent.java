@@ -65,6 +65,9 @@ public class ItemEditionAgent extends MokaAgent {
 			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 					JSONParserUtils.serializeToJson(transaction),
 					jade.lang.acl.ACLMessage.PROPAGATE);
+
+			//request refresh of currentItemsList of all device
+			requestAndroidCurrentItemsListRefresh();
 		}
 	}
 }
