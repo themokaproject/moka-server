@@ -18,6 +18,13 @@ import java.util.HashMap;
  */
 public class ItemCreationAgent extends MokaAgent {
 
+	private static final int START_X_POSITION = 200;
+	private static final int START_X_LIMIT_POSITION = 150;
+	private static final int START_Y_POSITION = 30;
+	private static final int START_Y_LIMIT_POSITION = 100;
+
+	private int mStartXPosition;
+
 	public void setup() {
 		super.setup();
 		registerSkill(JadeUtils.JADE_SKILL_NAME_CREATION);
@@ -36,15 +43,17 @@ public class ItemCreationAgent extends MokaAgent {
 		MokaItem newItem = null;
 		final MokaEnvironment environment = getEnvironment();
 		final int newItemId = environment.generateNewId();
+		final int startXPosition = START_X_POSITION + (newItemId * 50 ) % START_X_LIMIT_POSITION;
+		final int startYPosition = START_Y_POSITION + (newItemId * 20 ) % START_Y_LIMIT_POSITION;
 
 		if ("UML".equals(type)) {
-			newItem = new UmlClass("MyClass "+String.valueOf(newItemId), 200, 350, "UmlClass");
+			newItem = new UmlClass("MyClass "+String.valueOf(newItemId), startXPosition, startYPosition, "UmlClass");
 		} else if ("post-it".equals(type)) {
-			newItem = new PostIt("Post-it", 300, 350, "Post-it", "Post-it content");
+			newItem = new PostIt("Post-it", startXPosition, startYPosition, "Post-it", "Post-it content");
 		} else if ("image".equals(type)) {
-			newItem = new ImageLink("Image", 400, 450, "http://i1.cdnds.net/13/12/618x959/bill-gates-mugshot.jpg");
+			newItem = new ImageLink("Image", startXPosition, startYPosition, "http://i1.cdnds.net/13/12/618x959/bill-gates-mugshot.jpg");
 		} else if ("video".equals(type)) {
-			newItem = new VideoLink("Video", 500, 500, "http://www.youtube.com/watch?v=anwy2MPT5RE");
+			newItem = new VideoLink("Video", startXPosition, startYPosition, "http://www.youtube.com/watch?v=anwy2MPT5RE");
 		}
 
 		if (newItem == null) {
@@ -52,6 +61,7 @@ public class ItemCreationAgent extends MokaAgent {
 			//TODO implement callback error in order to warn AndroidDevice which has requested this creation
 			return;
 		}
+
 
 		//set creator as Locker
 		newItem.lock(environment.getUserByAID(creator.toString()));
