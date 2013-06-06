@@ -25,8 +25,8 @@ public class ConnectionHandlingBehaviour extends CyclicBehaviour {
 				final String type = request.getType();
 				if (type.equals(JadeUtils.TRANSACTION_TYPE_CONNECTION)) {
 					((ConnectionAgent) myAgent).connection((HashMap<String, String>) request.getContent(), message.getSender());
-				} else if (type.equals("disconnection")) {
-					disconnection("disconnect");
+				} else if (type.equals(JadeUtils.TRANSACTION_TYPE_LOGOUT)) {
+                    ((ConnectionAgent) myAgent).disconnection(message.getSender());
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -36,10 +36,5 @@ public class ConnectionHandlingBehaviour extends CyclicBehaviour {
 		} else {
 			block();
 		}
-	}
-
-
-	private void disconnection(String ip) {
-		((MokaAgent) myAgent).getEnvironment().removeUser(ip);
 	}
 }

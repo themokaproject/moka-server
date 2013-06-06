@@ -45,6 +45,10 @@ public final class JadeUtils {
 	 * connection transaction
 	 */
 	public static final String TRANSACTION_TYPE_CONNECTION = "connection";
+    /**
+     * logout transaction
+     */
+    public static final String TRANSACTION_TYPE_LOGOUT = "logout";
 	/**
 	 * addItem transaction
 	 */

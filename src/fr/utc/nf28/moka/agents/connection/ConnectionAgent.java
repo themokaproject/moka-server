@@ -35,6 +35,10 @@ public class ConnectionAgent extends MokaAgent {
 		requestAndroidRefresh();
 	}
 
+    public void disconnection(AID sender) {
+        getEnvironment().removeUser(getEnvironment().getUserByAID(sender.toString()).getIp());
+    }
+
 	/**
 	 * send ACL request to all android device to inform that a new user is connected
 	 *
@@ -47,5 +51,6 @@ public class ConnectionAgent extends MokaAgent {
 		sendMessageToAndroidDevice(ACLMessage.REQUEST,
 				JSONParserUtils.serializeToJson(refreshTransaction));
 	}
+
 
 }
