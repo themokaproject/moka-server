@@ -4,6 +4,8 @@ package fr.utc.nf28.moka.environment.items;
  * An image item.
  */
 public class ImageLink extends MokaItem {
+	private static final int DEFAULT_WIDTH = 200;
+	private static final int DEFAULT_HEIGHT = 200;
 	private static final String sType = "image";
 	private String mUrl;
 
@@ -13,6 +15,8 @@ public class ImageLink extends MokaItem {
 	public ImageLink(String title, int x, int y, String url) {
 		super(title, x, y, sType);
 		mUrl = url;
+		mHeight = DEFAULT_HEIGHT;
+		mWidth = DEFAULT_WIDTH;
 	}
 
 	public String getUrl() {

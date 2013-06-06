@@ -20,8 +20,8 @@ public abstract class MokaItem {
 	protected String mTitle;
 	private int mX;
 	private int mY;
-	private int mHeight;
-	private int mWidth;
+	protected int mHeight;
+	protected int mWidth;
 	private User mLocker;
 	private String mType;
 	private Date mCreationDate;
