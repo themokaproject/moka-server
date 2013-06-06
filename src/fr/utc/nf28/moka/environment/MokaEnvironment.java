@@ -3,8 +3,8 @@ package fr.utc.nf28.moka.environment;
 import fr.utc.nf28.moka.environment.items.MokaItem;
 import fr.utc.nf28.moka.environment.users.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public final class MokaEnvironment {
 	private static MokaEnvironment sInstance = null;
-	private final List<HistoryEntry> mHistoryEntries = new ArrayList<HistoryEntry>();
+	private final List<HistoryEntry> mHistoryEntries = new LinkedList<HistoryEntry>();
 	private int sItemIdGenCurrentIndex = 0;
 	private HashMap<String, User> mUsers = new HashMap<String, User>();
 	private HashMap<Integer, MokaItem> mItems = new HashMap<Integer, MokaItem>();
@@ -45,7 +45,7 @@ public final class MokaEnvironment {
 	}
 
 	public void addHistoryEntry(HistoryEntry historyEntry) {
-		mHistoryEntries.add(historyEntry);
+		((LinkedList<HistoryEntry>) mHistoryEntries).addFirst(historyEntry);
 	}
 
 	public void addItem(MokaItem item) {
@@ -57,7 +57,7 @@ public final class MokaEnvironment {
 		}
 		final User locker = item.getLocker();
 		if (locker != null) {
-			mHistoryEntries.add(new HistoryEntry(locker.makePseudo() + " a ajouté " + item.getType() + " " + id));
+			addHistoryEntry(new HistoryEntry(locker.makePseudo() + " a ajouté " + item.getType() + " " + id));
 		}
 		System.out.println(toString());
 	}
@@ -96,7 +96,7 @@ public final class MokaEnvironment {
 		} else {
 			System.out.println("user with ip " + ip + " replaced");
 		}
-		mHistoryEntries.add(new HistoryEntry(user.makePseudo() + " s'est connecté"));
+		addHistoryEntry(new HistoryEntry(user.makePseudo() + " s'est connecté"));
 		System.out.println(toString());
 	}
 
@@ -121,7 +121,7 @@ public final class MokaEnvironment {
 			System.out.println("no item with id " + itemId);
 		} else {
 			System.out.println("Item " + itemId + " removed");
-			mHistoryEntries.add(new HistoryEntry(item.getLocker().makePseudo()
+			addHistoryEntry(new HistoryEntry(item.getLocker().makePseudo()
 					+ " a supprimé " + item.getType() + " " + item.getId()));
 		}
 		System.out.println(toString());
@@ -132,7 +132,7 @@ public final class MokaEnvironment {
 			System.out.println("no user with ip " + ip);
 		} else {
 			System.out.println("User " + ip + " removed");
-			mHistoryEntries.add(new HistoryEntry("Un utilisateur s'est déconnecté"));
+			addHistoryEntry(new HistoryEntry("Un utilisateur s'est déconnecté"));
 		}
 		System.out.println(toString());
 	}
@@ -163,11 +163,11 @@ public final class MokaEnvironment {
 		final int ddZ = 10;
 		final int ddXY = 20;
 		if (res != null) {
-			if(direction == 100){
+			if (direction == 100) {
 				res.setRotateZ(res.getRotateZ() - ddZ);
-			} else if (direction == 200){
+			} else if (direction == 200) {
 				res.setRotateZ(res.getRotateZ() + ddZ);
-			}else {
+			} else {
 				if (direction % 10 == 1) {
 					res.setRotateY(res.getRotateY() - ddXY);
 				} else if (direction % 10 == 2) {
@@ -206,7 +206,7 @@ public final class MokaEnvironment {
 
 	public MokaItem editItem(int itemId, String field, String newValue) {
 		final MokaItem res = mItems.get(itemId);
-		res.update(field,newValue);
+		res.update(field, newValue);
 		return res;
 	}
 
