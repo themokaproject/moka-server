@@ -1,26 +1,22 @@
 package fr.utc.nf28.moka.environment.items;
 
+import java.util.ArrayList;
+
 public class PostIt extends MokaItem {
 	private static final String sType = "post-it";
-	private String mHeader;
+	private static final String DEFAULT_TITLE = "Post-it";
+	private static final String DEFAULT_CONTENT = "";
 	private String mContent;
 
 	public PostIt() {
 	}
 
-	public PostIt(String title, int x, int y, String header, String content) {
-		super(title, x, y, sType);
-		mHeader = header;
-		mContent = content;
+	public PostIt(int x, int y) {
+		super(DEFAULT_TITLE, x, y, sType);
+		mContent = DEFAULT_CONTENT;
 	}
 
-	public String getHeader() {
-		return mHeader;
-	}
 
-	public void setHeader(String header) {
-		mHeader = header;
-	}
 
 	public String getContent() {
 		return mContent;
@@ -31,22 +27,27 @@ public class PostIt extends MokaItem {
 	}
 
 	public String toString() {
-		return "post-it:" + mHeader + " " + super.toString();
+		return "post-it: " + super.toString();
 	}
 
 	@Override
 	public void makeDefaultTitle() {
-		mTitle = "Post-it " + String.valueOf(mId);
+		mTitle = DEFAULT_TITLE+ " " + String.valueOf(mId);
 	}
 
 	@Override
 	public void update(String field, String newValue) {
-		if ("header".equals(field)) {
-			mHeader = newValue;
-		} else if ("content".equals(field)) {
+		if ("content".equals(field)) {
 			mContent = newValue;
 		} else {
 			super.update(field, newValue);
 		}
+	}
+
+	@Override
+	public ArrayList<ContentEntry> getContentEntries() {
+		ArrayList<ContentEntry> entries = super.getContentEntries();
+		entries.add(new ContentEntry(MokaItem.CONTENT_FIELD_TEXT_CONTENT, mContent));
+		return entries;
 	}
 }

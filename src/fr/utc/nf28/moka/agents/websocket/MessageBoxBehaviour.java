@@ -32,8 +32,8 @@ public class MessageBoxBehaviour extends CyclicBehaviour {
 					request = WebSocketRequestFactory.createAddUserRequest(user.getIp(), user.makePseudo());
 				} else if (JadeUtils.TRANSACTION_TYPE_ADD_ITEM.equals(transactionType)) {
 					final MokaItem item = (MokaItem) transaction.getContent();
-					request = WebSocketRequestFactory.createAddItemRequest(item.getType(), item.getId(), item.getX(),
-							item.getY(), item.getWidth(), item.getHeight(), item.getTitle(), item.getRotateX(), item.getRotateY(), item.getRotateZ());
+					request = WebSocketRequestFactory.createAddItemRequest(item.getType(), item.getId(), item.getContentEntries(), item.getX(),
+							item.getY(), item.getWidth(), item.getHeight(), item.getRotateX(), item.getRotateY(), item.getRotateZ());
 				} else if (JadeUtils.TRANSACTION_TYPE_DELETE_ITEM.equals(transactionType)) {
 					final String id = String.valueOf(transaction.getContent());
 					request = WebSocketRequestFactory.createRemoveItemRequest(id);

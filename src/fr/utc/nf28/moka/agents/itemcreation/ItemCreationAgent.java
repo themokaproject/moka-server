@@ -47,15 +47,15 @@ public class ItemCreationAgent extends MokaAgent {
 		final int startYPosition = START_Y_POSITION + (newItemId * 20 ) % START_Y_LIMIT_POSITION;
 
 		if ("UML".equals(type)) {
-			newItem = new UmlClass("MyClass "+String.valueOf(newItemId), startXPosition, startYPosition, "UmlClass");
+			newItem = new UmlClass(startXPosition, startYPosition);
 		} else if ("post-it".equals(type)) {
-			newItem = new PostIt("Post-it", startXPosition, startYPosition, "Post-it", "Post-it content");
+			newItem = new PostIt(startXPosition, startYPosition);
 		} else if ("image".equals(type)) {
-			newItem = new ImageLink("Image", startXPosition, startYPosition, "http://i1.cdnds.net/13/12/618x959/bill-gates-mugshot.jpg");
+			newItem = new ImageLink(startXPosition, startYPosition);
 		} else if ("video".equals(type)) {
-			newItem = new VideoLink("Video", startXPosition, startYPosition, "http://www.youtube.com/watch?v=anwy2MPT5RE");
+			newItem = new VideoLink(startXPosition, startYPosition);
 		} else if ("iframe".equals(type)) {
-			newItem = new IframeLink("Iframe", startXPosition, startYPosition, "http://themokaproject.github.io/");
+			newItem = new IframeLink(startXPosition, startYPosition);
 		}
 
 		if (newItem == null) {

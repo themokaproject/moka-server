@@ -8,25 +8,15 @@ import java.util.List;
  */
 public class UmlClass extends MokaItem {
 	private static final String sType = "umlClass";
-	protected static final String DEFAULT_TITLE = "Uml";
-	private String mClassName;
+	private static final String DEFAULT_TITLE = "Classe Uml";
 	private List<String> mMembers = new ArrayList<String>();
 	private List<String> mMethods = new ArrayList<String>();
 
 	public UmlClass() {
 	}
 
-	public UmlClass(String title, int x, int y, String className) {
-		super(title, x, y, sType);
-		mClassName = className;
-	}
-
-	public String getClassName() {
-		return mClassName;
-	}
-
-	public void setClassName(String className) {
-		mClassName = className;
+	public UmlClass(int x, int y) {
+		super(DEFAULT_TITLE, x, y, sType);
 	}
 
 	public List<String> getMembers() {
@@ -62,20 +52,17 @@ public class UmlClass extends MokaItem {
 	}
 
 	public String toString() {
-		return "umlclass:" + mClassName + " " + super.toString();
+		return "umlclass: " + super.toString();
 	}
 
 	@Override
 	public void makeDefaultTitle() {
-		mTitle = "Class Uml " + String.valueOf(mId);
+		mTitle = DEFAULT_TITLE + " " + String.valueOf(mId);
 	}
 
 	@Override
 	public void update(String field, String newValue) {
-		if ("className".equals(field)) {
-			mClassName = newValue;
-		} else {
-			super.update(field, newValue);
-		}
+		super.update(field, newValue);
 	}
+
 }

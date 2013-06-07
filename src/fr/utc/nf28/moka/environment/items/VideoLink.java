@@ -1,38 +1,38 @@
 package fr.utc.nf28.moka.environment.items;
 
-public class VideoLink extends MokaItem {
+import java.util.ArrayList;
+
+public class VideoLink extends UrlItem {
+	private static final String DEFAULT_TITLE = "Video";
+	private static final String DEFAULT_URL = "http://www.youtube.com/watch?v=anwy2MPT5RE";
 	private static final String sType = "video";
-	private String mLink;
+	private static final int DEFAULT_WIDTH = 300;
+	private static final int DEFAULT_HEIGHT = 300;
 
 	public VideoLink() {
 	}
 
-	public VideoLink(String title, int x, int y, String link) {
-		super(title, x, y, sType);
-		mLink = link;
+	public VideoLink(int x, int y) {
+		super(DEFAULT_TITLE, x, y, sType);
+		mUrl = DEFAULT_URL;
+		mWidth = DEFAULT_WIDTH;
+		mHeight = DEFAULT_HEIGHT;
 	}
 
-	public String getLink() {
-		return mLink;
-	}
-
-	public void setLink(String link) {
-		mLink = link;
-	}
 
 	public String toString() {
-		return "video:" + mLink + " " + super.toString();
+		return "video:" + mUrl + " " + super.toString();
 	}
 
 	@Override
 	public void makeDefaultTitle() {
-		mTitle = "Video " + String.valueOf(mId);
+		mTitle = DEFAULT_TITLE+ " " + String.valueOf(mId);
 	}
 
 	@Override
 	public void update(String field, String newValue) {
 		if ("link".equals(field)) {
-			mLink = newValue;
+			mUrl = newValue;
 		} else {
 			super.update(field, newValue);
 		}

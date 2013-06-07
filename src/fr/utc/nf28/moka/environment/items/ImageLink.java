@@ -1,30 +1,25 @@
 package fr.utc.nf28.moka.environment.items;
 
+import java.util.ArrayList;
+
 /**
  * An image item.
  */
-public class ImageLink extends MokaItem {
+public class ImageLink extends UrlItem {
+	private static final String DEFAULT_TITLE = "Image";
+	private static final String DEFAULT_URL = "./images/default_picture.gif";
 	private static final int DEFAULT_WIDTH = 200;
 	private static final int DEFAULT_HEIGHT = 200;
 	private static final String sType = "image";
-	private String mUrl;
 
 	public ImageLink() {
 	}
 
-	public ImageLink(String title, int x, int y, String url) {
-		super(title, x, y, sType);
-		mUrl = url;
+	public ImageLink(int x, int y) {
+		super(DEFAULT_TITLE, x, y, sType);
+		mUrl = DEFAULT_URL;
 		mHeight = DEFAULT_HEIGHT;
 		mWidth = DEFAULT_WIDTH;
-	}
-
-	public String getUrl() {
-		return mUrl;
-	}
-
-	public void setUrl(String url) {
-		this.mUrl = url;
 	}
 
 	public String toString() {
@@ -33,7 +28,7 @@ public class ImageLink extends MokaItem {
 
 	@Override
 	public void makeDefaultTitle() {
-		mTitle = "Image " + String.valueOf(mId);
+		mTitle = DEFAULT_TITLE+ " " + String.valueOf(mId);
 	}
 
 	@Override

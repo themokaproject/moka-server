@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import fr.utc.nf28.moka.environment.JsonDate;
 import fr.utc.nf28.moka.environment.users.User;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,6 +14,9 @@ import java.util.Date;
  * A generic visual item.
  */
 public abstract class MokaItem {
+	public static final String CONTENT_FIELD_TITLE = "title";
+	public static final String CONTENT_FIELD_URL = "url";
+	public static final String CONTENT_FIELD_TEXT_CONTENT = "content";
 	private static final int DEFAULT_WIDTH = 175;
 	private static final int DEFAULT_HEIGHT = 100;
 	private static int sIdIndex = 0;
@@ -191,6 +195,13 @@ public abstract class MokaItem {
 		mRotateZ = rotateZ;
 	}
 
+	public ArrayList<ContentEntry> getContentEntries(){
+		ArrayList<ContentEntry> entries = new ArrayList<ContentEntry>();
+		entries.add(new ContentEntry(MokaItem.CONTENT_FIELD_TITLE, mTitle));
+		return entries;
+	}
+
 	abstract public void makeDefaultTitle();
+
 
 }

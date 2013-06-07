@@ -1,7 +1,12 @@
 package fr.utc.nf28.moka.websocket.request;
 
 
+import fr.utc.nf28.moka.environment.items.ContentEntry;
+import fr.utc.nf28.moka.util.JSONParserUtils;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -22,23 +27,27 @@ public class WebSocketRequestFactory {
 	 * Create a {@link WebSocketRequest} that is aimed at
 	 * adding a new item on the client platforms
 	 *
-	 * @param 	type the type of the new item
-	 * @param 	itemId the id of the new item
-	 * @return  {@link WebSocketRequest}
+	 * @param type   the type of the new item
+	 * @param itemId the id of the new item
+	 * @return {@link WebSocketRequest}
 	 */
-	public static WebSocketRequest createAddItemRequest(String type, int itemId, int left, int top, int width,
-	                                                    int height, String title, int rotateX,  int rotateY,  int rotateZ) {
+	public static WebSocketRequest createAddItemRequest(String type, int itemId, ArrayList<ContentEntry> content, int left, int top, int width,
+	                                                    int height, int rotateX, int rotateY, int rotateZ) {
 		WebSocketRequest request = new WebSocketRequest(TYPE_ADD_ITEM);
-		request.put("type", type);
-		request.put("itemId", String.valueOf(itemId));
-		request.put("top", String.valueOf(top));
-		request.put("left", String.valueOf(left));
-		request.put("width", String.valueOf(width));
-		request.put("height", String.valueOf(height));
-		request.put("title", title);
-		request.put("rotateX", String.valueOf(rotateX));
-		request.put("rotateY", String.valueOf(rotateY));
-		request.put("rotateZ", String.valueOf(rotateZ));
+		try {
+			request.put("type", type);
+			request.put("itemId", String.valueOf(itemId));
+			request.put("top", String.valueOf(top));
+			request.put("left", String.valueOf(left));
+			request.put("width", String.valueOf(width));
+			request.put("height", String.valueOf(height));
+			request.put("rotateX", String.valueOf(rotateX));
+			request.put("rotateY", String.valueOf(rotateY));
+			request.put("rotateZ", String.valueOf(rotateZ));
+			request.put("content", JSONParserUtils.serializeToJson(content));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return request;
 	}
 
@@ -46,8 +55,8 @@ public class WebSocketRequestFactory {
 	 * Create a {@link WebSocketRequest} that is aimed at
 	 * removing an item form the client platforms
 	 *
-	 * @param 	itemId the id of the item
-	 * @return  {@link WebSocketRequest}
+	 * @param itemId the id of the item
+	 * @return {@link WebSocketRequest}
 	 */
 	public static WebSocketRequest createRemoveItemRequest(String itemId) {
 		WebSocketRequest request = new WebSocketRequest(TYPE_REMOVE_ITEM);
@@ -59,9 +68,9 @@ public class WebSocketRequestFactory {
 	 * Create a {@link WebSocketRequest} that is aimed at
 	 * adding a new user on the client platforms
 	 *
-	 * @param 	userId the id of the new user
-	 * @param 	name the name of the user
-	 * @return  {@link WebSocketRequest}
+	 * @param userId the id of the new user
+	 * @param name   the name of the user
+	 * @return {@link WebSocketRequest}
 	 */
 	public static WebSocketRequest createAddUserRequest(String userId, String name) {
 		WebSocketRequest request = new WebSocketRequest(TYPE_ADD_USER);
@@ -74,8 +83,8 @@ public class WebSocketRequestFactory {
 	 * Create a {@link WebSocketRequest} that is aimed at
 	 * removing a user from the client platforms
 	 *
-	 * @param 	userId the id of the user
-	 * @return  {@link WebSocketRequest}
+	 * @param userId the id of the user
+	 * @return {@link WebSocketRequest}
 	 */
 	public static WebSocketRequest createRemoveUserRequest(String userId) {
 		WebSocketRequest request = new WebSocketRequest(TYPE_REMOVE_USER);
@@ -87,10 +96,10 @@ public class WebSocketRequestFactory {
 	 * Create a {@link WebSocketRequest} that is aimed at
 	 * moving an item on the client platforms.
 	 *
-	 * @param 	itemId the id of the id
-	 * @param 	left the left position of the item
-	 * @param 	top the top position of the item
-	 * @return  {@link WebSocketRequest}
+	 * @param itemId the id of the id
+	 * @param left   the left position of the item
+	 * @param top    the top position of the item
+	 * @return {@link WebSocketRequest}
 	 */
 	public static WebSocketRequest createMoveItemRequest(int itemId, int left, int top) {
 		WebSocketRequest request = new WebSocketRequest(TYPE_MOVE_ITEM);
@@ -104,9 +113,9 @@ public class WebSocketRequestFactory {
 	 * Create a {@link WebSocketRequest} that is aimed at
 	 * selecting a item by a user on the client platforms.
 	 *
-	 * @param 	userId the id of the user
-	 * @param 	itemId the id of the item
-	 * @return  {@link WebSocketRequest}
+	 * @param userId the id of the user
+	 * @param itemId the id of the item
+	 * @return {@link WebSocketRequest}
 	 */
 	public static WebSocketRequest createSelectItemRequest(String userId, String itemId) {
 		WebSocketRequest request = new WebSocketRequest(TYPE_SELECT_ITEM);
@@ -125,10 +134,10 @@ public class WebSocketRequestFactory {
 	 * Create a {@link WebSocketRequest} that is aimed at
 	 * resizing an item on the client platforms.
 	 *
-	 * @param 	itemId the id of the id
-	 * @param 	width the width of the item
-	 * @param 	height the height position of the item
-	 * @return  {@link WebSocketRequest}
+	 * @param itemId the id of the id
+	 * @param width  the width of the item
+	 * @param height the height position of the item
+	 * @return {@link WebSocketRequest}
 	 */
 	public static WebSocketRequest createResizeItemRequest(int itemId, int width, int height) {
 		WebSocketRequest request = new WebSocketRequest(TYPE_RESIZE_ITEM);
@@ -142,11 +151,11 @@ public class WebSocketRequestFactory {
 	 * Create a {@link WebSocketRequest} that is aimed at
 	 * resizing an item on the client platforms.
 	 *
-	 * @param 	itemId the id of the id
-	 * @param 	rotateX
-	 * @param 	rotateY
-	 * @param 	rotateZ
-	 * @return  {@link WebSocketRequest}
+	 * @param itemId  the id of the id
+	 * @param rotateX
+	 * @param rotateY
+	 * @param rotateZ
+	 * @return {@link WebSocketRequest}
 	 */
 	public static WebSocketRequest createRotateItemRequest(int itemId, int rotateX, int rotateY, int rotateZ) {
 		WebSocketRequest request = new WebSocketRequest(TYPE_ROTATE_ITEM);
@@ -169,7 +178,7 @@ public class WebSocketRequestFactory {
 
 
 	public static WebSocketRequest createEditRequest(HashMap<String, Object> info) {
-		return createEditRequest((Integer)info.get("itemId"), (String) info.get("field"), (String)info.get("content"));
+		return createEditRequest((Integer) info.get("itemId"), (String) info.get("field"), (String) info.get("content"));
 	}
 
 	public static WebSocketRequest createEditRequest(int itemId, String field, String content) {
@@ -179,9 +188,6 @@ public class WebSocketRequestFactory {
 		request.put("content", content);
 		return request;
 	}
-
-
-
 
 
 }
