@@ -31,12 +31,4 @@ public class ImageLink extends UrlItem {
 		mTitle = DEFAULT_TITLE+ " " + String.valueOf(mId);
 	}
 
-	@Override
-	public void update(String field, String newValue) {
-		if ("url".equals(field)) {
-			mUrl = newValue;
-		} else {
-			super.update(field, newValue);
-		}
-	}
 }

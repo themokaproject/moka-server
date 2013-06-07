@@ -15,8 +15,6 @@ import java.util.Date;
  */
 public abstract class MokaItem {
 	public static final String CONTENT_FIELD_TITLE = "title";
-	public static final String CONTENT_FIELD_URL = "url";
-	public static final String CONTENT_FIELD_TEXT_CONTENT = "content";
 	private static final int DEFAULT_WIDTH = 175;
 	private static final int DEFAULT_HEIGHT = 100;
 	private static int sIdIndex = 0;

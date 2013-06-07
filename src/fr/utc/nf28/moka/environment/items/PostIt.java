@@ -3,6 +3,7 @@ package fr.utc.nf28.moka.environment.items;
 import java.util.ArrayList;
 
 public class PostIt extends MokaItem {
+	public static final String CONTENT_FIELD_TEXT_CONTENT = "content";
 	private static final String sType = "post-it";
 	private static final String DEFAULT_TITLE = "Post-it";
 	private static final String DEFAULT_CONTENT = "";
@@ -47,7 +48,7 @@ public class PostIt extends MokaItem {
 	@Override
 	public ArrayList<ContentEntry> getContentEntries() {
 		ArrayList<ContentEntry> entries = super.getContentEntries();
-		entries.add(new ContentEntry(MokaItem.CONTENT_FIELD_TEXT_CONTENT, mContent));
+		entries.add(new ContentEntry(PostIt.CONTENT_FIELD_TEXT_CONTENT, mContent));
 		return entries;
 	}
 }

@@ -3,6 +3,7 @@ package fr.utc.nf28.moka.environment.items;
 import java.util.ArrayList;
 
 abstract public class UrlItem extends MokaItem {
+	public static final String CONTENT_FIELD_URL = "url";
 	protected String mUrl;
 
 	public UrlItem() {
@@ -23,8 +24,17 @@ abstract public class UrlItem extends MokaItem {
 	@Override
 	public ArrayList<ContentEntry> getContentEntries() {
 		ArrayList<ContentEntry> entries = super.getContentEntries();
-		entries.add(new ContentEntry(MokaItem.CONTENT_FIELD_URL, mUrl));
+		entries.add(new ContentEntry(UrlItem.CONTENT_FIELD_URL, mUrl));
 		return entries;
+	}
+
+	@Override
+	public void update(String field, String newValue) {
+		if (UrlItem.CONTENT_FIELD_URL.equals(field)) {
+			mUrl = newValue;
+		} else {
+			super.update(field, newValue);
+		}
 	}
 
 }

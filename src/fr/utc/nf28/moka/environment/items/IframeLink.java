@@ -29,14 +29,5 @@ public class IframeLink extends UrlItem {
 	public void makeDefaultTitle() {
 		mTitle = DEFAULT_TITLE + " " + String.valueOf(mId);
 	}
-
-	@Override
-	public void update(String field, String newValue) {
-		if ("link".equals(field)) {
-			mUrl = newValue;
-		} else {
-			super.update(field, newValue);
-		}
-	}
 }
 

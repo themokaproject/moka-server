@@ -56,7 +56,7 @@ public class ItemEditionAgent extends MokaAgent {
 		}
 	}
 
-	public void editeItem(HashMap<String, Object> editingInfo) throws IOException {
+	public void editItem(HashMap<String, Object> editingInfo) throws IOException {
 		final MokaItem res = getEnvironment().editItem((Integer) editingInfo.get("itemId"),
 				(String) editingInfo.get("field"),
 				(String) editingInfo.get("content"));
