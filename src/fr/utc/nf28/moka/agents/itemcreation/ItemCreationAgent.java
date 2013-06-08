@@ -42,8 +42,8 @@ public class ItemCreationAgent extends MokaAgent {
 		MokaItem newItem = null;
 		final MokaEnvironment environment = getEnvironment();
 		final int newItemId = environment.generateNewId();
-		final int startXPosition = START_X_POSITION + (newItemId * 50 ) % START_X_LIMIT_POSITION;
-		final int startYPosition = START_Y_POSITION + (newItemId * 20 ) % START_Y_LIMIT_POSITION;
+		final int startXPosition = START_X_POSITION + (newItemId * 50) % START_X_LIMIT_POSITION;
+		final int startYPosition = START_Y_POSITION + (newItemId * 20) % START_Y_LIMIT_POSITION;
 
 		if ("umlClass".equals(type)) {
 			newItem = new UmlClass(startXPosition, startYPosition);
@@ -87,8 +87,8 @@ public class ItemCreationAgent extends MokaAgent {
 	/**
 	 * Use to send back id of the new created item
 	 *
-	 * @param response  ACL response for AndroidAgent which send the creation request
-	 * @param newItem item
+	 * @param response ACL response for AndroidAgent which send the creation request
+	 * @param newItem  item
 	 * @throws IOException
 	 */
 	public void sendBackItem(final ACLMessage response, final MokaItem newItem) throws IOException {
@@ -134,6 +134,11 @@ public class ItemCreationAgent extends MokaAgent {
 		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 				JSONParserUtils.serializeToJson(transaction),
 				jade.lang.acl.ACLMessage.PROPAGATE);
+
+		//request refreshing history for all android device
 		requestAndroidHistoryRefresh();
+
+		//request refreshing current item list for all android device
+		requestAndroidCurrentItemsListRefresh();
 	}
 }
