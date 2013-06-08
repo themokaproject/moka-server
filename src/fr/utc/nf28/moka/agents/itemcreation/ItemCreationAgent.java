@@ -22,7 +22,6 @@ public class ItemCreationAgent extends MokaAgent {
 	private static final int START_X_LIMIT_POSITION = 150;
 	private static final int START_Y_POSITION = 30;
 	private static final int START_Y_LIMIT_POSITION = 100;
-
 	private int mStartXPosition;
 
 	public void setup() {
@@ -46,7 +45,7 @@ public class ItemCreationAgent extends MokaAgent {
 		final int startXPosition = START_X_POSITION + (newItemId * 50 ) % START_X_LIMIT_POSITION;
 		final int startYPosition = START_Y_POSITION + (newItemId * 20 ) % START_Y_LIMIT_POSITION;
 
-		if ("UML".equals(type)) {
+		if ("umlClass".equals(type)) {
 			newItem = new UmlClass(startXPosition, startYPosition);
 		} else if ("post-it".equals(type)) {
 			newItem = new PostIt(startXPosition, startYPosition);
