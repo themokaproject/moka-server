@@ -35,9 +35,14 @@ public class ConnectionAgent extends MokaAgent {
 		requestAndroidRefresh();
 	}
 
-    public void disconnection(AID sender) {
-        getEnvironment().removeUser(getEnvironment().getUserByAID(sender.toString()).getIp());
-    }
+	public void disconnection(AID sender) throws IOException {
+		String ip = getEnvironment().getUserByAID(sender.toString()).getIp();
+		getEnvironment().removeUser(ip);
+		final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_LOGOUT, ip);
+		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
+				JSONParserUtils.serializeToJson(transaction),
+				ACLMessage.PROPAGATE);
+	}
 
 	/**
 	 * send ACL request to all android device to inform that a new user is connected
