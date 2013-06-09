@@ -2,6 +2,7 @@ package fr.utc.nf28.moka.agents.connection;
 
 import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.agents.MokaAgent;
+import fr.utc.nf28.moka.environment.MokaEnvironment;
 import fr.utc.nf28.moka.environment.users.User;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.util.JadeUtils;
@@ -36,8 +37,9 @@ public class ConnectionAgent extends MokaAgent {
 	}
 
 	public void disconnection(AID sender) throws IOException {
-		String ip = getEnvironment().getUserByAID(sender.toString()).getIp();
-		getEnvironment().removeUser(ip);
+		final MokaEnvironment environment = getEnvironment();
+		final String ip = environment.getUserByAID(sender.toString()).getIp();
+		environment.removeUser(ip);
 		final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_LOGOUT, ip);
 		sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 				JSONParserUtils.serializeToJson(transaction),
