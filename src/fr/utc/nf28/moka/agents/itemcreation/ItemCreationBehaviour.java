@@ -35,7 +35,9 @@ public class ItemCreationBehaviour extends CyclicBehaviour {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		} else {
+            block();
+        }
 	}
 
 	private void destroy(String idString) {

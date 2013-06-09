@@ -26,6 +26,8 @@ public class ItemLockingBehaviour extends CyclicBehaviour {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
+		} else {
+            block();
+        }
 	}
 }
