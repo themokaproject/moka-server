@@ -14,30 +14,30 @@ import java.util.HashMap;
  * A behaviour that handles item itemedition.
  */
 public class ItemEdtionHandlingBehaviour extends CyclicBehaviour {
-	@Override
-	public void action() {
-		final ACLMessage message = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
-		if (message != null) {
-			final String requestString = message.getContent();
-			try {
-				final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(requestString);
-				final String type = request.getType();
-				if (JadeUtils.TRANSACTION_TYPE_MOVE_ITEM.equals(type)) {
-					((ItemEditionAgent) myAgent).moveItem((HashMap<String, Integer>) request.getContent());
-				} else if (JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM.equals(type)) {
-					((ItemEditionAgent) myAgent).resizeItem((HashMap<String, Integer>) request.getContent());
-				} else if (JadeUtils.TRANSACTION_TYPE_EDIT_ITEM.equals(type)) {
-					((ItemEditionAgent) myAgent).editItem((HashMap<String, Object>) request.getContent());
-				} else if (JadeUtils.TRANSACTION_TYPE_ROTATE_ITEM.equals(type)) {
-					((ItemEditionAgent) myAgent).rotateItem((HashMap<String, Integer>) request.getContent());
-				} else {
-					throw new IOException();
-				}
-			} catch (IOException e) {
-				System.out.println("Edition request syntax is wrong");
-			}
-		} else {
+    @Override
+    public void action() {
+        final ACLMessage message = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
+        if (message != null) {
+            final String requestString = message.getContent();
+            try {
+                final A2ATransaction request = JSONParserUtils.deserializeA2ATransaction(requestString);
+                final String type = request.getType();
+                if (JadeUtils.TRANSACTION_TYPE_MOVE_ITEM.equals(type)) {
+                    ((ItemEditionAgent) myAgent).moveItem((HashMap<String, Integer>) request.getContent());
+                } else if (JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM.equals(type)) {
+                    ((ItemEditionAgent) myAgent).resizeItem((HashMap<String, Integer>) request.getContent());
+                } else if (JadeUtils.TRANSACTION_TYPE_EDIT_ITEM.equals(type)) {
+                    ((ItemEditionAgent) myAgent).editItem((HashMap<String, Object>) request.getContent());
+                } else if (JadeUtils.TRANSACTION_TYPE_ROTATE_ITEM.equals(type)) {
+                    ((ItemEditionAgent) myAgent).rotateItem((HashMap<String, Integer>) request.getContent());
+                } else {
+                    throw new IOException();
+                }
+            } catch (IOException e) {
+                System.out.println("Edition request syntax is wrong");
+            }
+        } else {
             block();
         }
-	}
+    }
 }
