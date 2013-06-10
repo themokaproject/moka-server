@@ -1,5 +1,6 @@
 package fr.utc.nf28.moka.websocket;
 
+import fr.utc.nf28.moka.BuildConfig;
 import fr.utc.nf28.moka.environment.HistoryEntry;
 import fr.utc.nf28.moka.environment.MokaEnvironment;
 import fr.utc.nf28.moka.environment.items.MokaItem;
@@ -32,30 +33,30 @@ public class MokaWebSocketServer extends WebSocketServer {
 
 	@Override
 	public void onOpen(WebSocket connection, ClientHandshake clientHandshake) {
-		System.out.println(connection.getRemoteSocketAddress().getAddress().getHostAddress() + " entered the room!");
+		if (BuildConfig.DEBUG) System.out.println(connection.getRemoteSocketAddress().getAddress().getHostAddress() + " entered the room!");
 		connectionCheckIn(connection);
 	}
 
 	@Override
 	public void onClose(WebSocket connection, int i, String s, boolean b) {
-		System.out.println(connection + " has left the room!");
+		if (BuildConfig.DEBUG) System.out.println(connection + " has left the room!");
 	}
 
 	@Override
 	public void onMessage(WebSocket connection, String message) {
-		System.out.println(connection + ": " + message);
+		if (BuildConfig.DEBUG) System.out.println(connection + ": " + message);
 		try {
 			final WebSocketRequest request = JSONParserUtils.deserializeWebSocketRequest(message);
 			if ("backUp".equals(request.getType())) {
 				sendBackUpRequest(connection);
 			} else if ("upload".equals(request.getType())) {
-				System.out.println(request.getContent().toString());
+				if (BuildConfig.DEBUG) System.out.println(request.getContent().toString());
 				uploadBackUp(request.getContent());
 				connectionCheckIn(connection);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println(message);
+			if (BuildConfig.DEBUG) System.out.println(message);
 		}
 
 	}
@@ -75,7 +76,7 @@ public class MokaWebSocketServer extends WebSocketServer {
 				}
 				environment.setItemIdGenCurrentIndex(++maxId);
 			} catch (IOException exception) {
-				System.out.println("uploadBackUp : restore item : failed !");
+				if (BuildConfig.DEBUG) System.out.println("uploadBackUp : restore item : failed !");
 				exception.printStackTrace();
 			}
 		}
@@ -89,7 +90,7 @@ public class MokaWebSocketServer extends WebSocketServer {
 					environment.addHistoryEntry(h);
 				}
 			} catch (IOException exception) {
-				System.out.println("uploadBackUp : restore hsitory : failed !");
+				if (BuildConfig.DEBUG) System.out.println("uploadBackUp : restore hsitory : failed !");
 				exception.printStackTrace();
 			}
 		}

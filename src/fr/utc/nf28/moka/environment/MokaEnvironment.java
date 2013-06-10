@@ -1,5 +1,6 @@
 package fr.utc.nf28.moka.environment;
 
+import fr.utc.nf28.moka.BuildConfig;
 import fr.utc.nf28.moka.environment.items.MokaItem;
 import fr.utc.nf28.moka.environment.users.User;
 
@@ -51,15 +52,15 @@ public final class MokaEnvironment {
 	public void addItem(MokaItem item) {
 		final int id = item.getId();
 		if (mItems.put(id, item) == null) {
-			System.out.println("item with id " + id + " added");
+			if (BuildConfig.DEBUG) System.out.println("item with id " + id + " added");
 		} else {
-			System.out.println("item with id " + id + " replaced");
+			if (BuildConfig.DEBUG) System.out.println("item with id " + id + " replaced");
 		}
 		final User locker = item.getLocker();
 		if (locker != null) {
 			addHistoryEntry(new HistoryEntry(locker.makePseudo() + " a ajouté " + item.getType() + " " + id));
 		}
-		System.out.println(toString());
+		if (BuildConfig.DEBUG) System.out.println(toString());
 	}
 
 	/**
@@ -71,7 +72,7 @@ public final class MokaEnvironment {
 		final MokaItem item = mItems.get(itemId);
 		if (item != null) {
 			item.unlock();
-			System.out.println("item  " + item.getId() + " unlock.");
+			if (BuildConfig.DEBUG) System.out.println("item  " + item.getId() + " unlock.");
 		}
 	}
 
@@ -82,9 +83,9 @@ public final class MokaEnvironment {
 		}
 		if (!item.isLocked()) {
 			item.lock(getUserByAID(userAID));
-			System.out.println(item.getType() + " " + item.getId() + " locked by " + item.getLocker().makePseudo());
+			if (BuildConfig.DEBUG) System.out.println(item.getType() + " " + item.getId() + " locked by " + item.getLocker().makePseudo());
 		} else {
-			System.out.println(item.getType() + " " + item.getId() + " already locked by " + item.getLocker().makePseudo());
+			if (BuildConfig.DEBUG) System.out.println(item.getType() + " " + item.getId() + " already locked by " + item.getLocker().makePseudo());
 		}
 		return item.getLocker();
 	}
@@ -92,12 +93,12 @@ public final class MokaEnvironment {
 	public void addUser(User user) {
 		final String ip = user.getIp();
 		if (mUsers.put(ip, user) == null) {
-			System.out.println("user with ip " + ip + " added");
+			if (BuildConfig.DEBUG) System.out.println("user with ip " + ip + " added");
 		} else {
-			System.out.println("user with ip " + ip + " replaced");
+			if (BuildConfig.DEBUG) System.out.println("user with ip " + ip + " replaced");
 		}
 		addHistoryEntry(new HistoryEntry(user.makePseudo() + " s'est connecté"));
-		System.out.println(toString());
+		if (BuildConfig.DEBUG) System.out.println(toString());
 	}
 
 	public HashMap<String, User> getUsers() {
@@ -118,23 +119,23 @@ public final class MokaEnvironment {
 	public void removeItem(int itemId) {
 		final MokaItem item = mItems.get(itemId);
 		if (mItems.remove(itemId) == null) {
-			System.out.println("no item with id " + itemId);
+			if (BuildConfig.DEBUG) System.out.println("no item with id " + itemId);
 		} else {
-			System.out.println("Item " + itemId + " removed");
+			if (BuildConfig.DEBUG) System.out.println("Item " + itemId + " removed");
 			addHistoryEntry(new HistoryEntry(item.getLocker().makePseudo()
 					+ " a supprimé " + item.getType() + " " + item.getId()));
 		}
-		System.out.println(toString());
+		if (BuildConfig.DEBUG) System.out.println(toString());
 	}
 
 	public void removeUser(String ip) {
 		if (mUsers.remove(ip) == null) {
-			System.out.println("no user with ip " + ip);
+			if (BuildConfig.DEBUG) System.out.println("no user with ip " + ip);
 		} else {
-			System.out.println("User " + ip + " removed");
+			if (BuildConfig.DEBUG) System.out.println("User " + ip + " removed");
 			addHistoryEntry(new HistoryEntry("Un utilisateur s'est déconnecté"));
 		}
-		System.out.println(toString());
+		if (BuildConfig.DEBUG) System.out.println(toString());
 	}
 
 	public MokaItem moveItem(int itemId, int direction, int velocity) {

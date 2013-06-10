@@ -1,5 +1,6 @@
 package fr.utc.nf28.moka.agents.itemedition;
 
+import fr.utc.nf28.moka.BuildConfig;
 import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.util.JadeUtils;
@@ -34,7 +35,7 @@ public class ItemEdtionHandlingBehaviour extends CyclicBehaviour {
                     throw new IOException();
                 }
             } catch (IOException e) {
-                System.out.println("Edition request syntax is wrong");
+				if (BuildConfig.DEBUG) System.out.println("Edition request syntax is wrong");
             }
         } else {
             block();

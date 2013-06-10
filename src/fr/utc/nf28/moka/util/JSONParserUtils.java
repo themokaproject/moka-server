@@ -3,6 +3,7 @@ package fr.utc.nf28.moka.util;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.utc.nf28.moka.BuildConfig;
 import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.environment.HistoryEntry;
 import fr.utc.nf28.moka.environment.items.*;
@@ -36,8 +37,10 @@ public final class JSONParserUtils {
 			try {
 				contentClass = Class.forName(contentClassNode.asText());
 			} catch (ClassNotFoundException e) {
-				System.out.println("deserializeA2ATransaction:ClassNotFound : " + contentClassNode.asText());
-				System.out.println("use " + contentClass.toString() + " instead");
+				if (BuildConfig.DEBUG) {
+					System.out.println("deserializeA2ATransaction:ClassNotFound : " + contentClassNode.asText());
+					System.out.println("use " + contentClass.toString() + " instead");
+				}
 			}
 			return new A2ATransaction(typeNode.asText(), sMapper.treeToValue(contentNode, contentClass));
 		}

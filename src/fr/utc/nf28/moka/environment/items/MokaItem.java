@@ -3,6 +3,7 @@ package fr.utc.nf28.moka.environment.items;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import fr.utc.nf28.moka.BuildConfig;
 import fr.utc.nf28.moka.environment.JsonDate;
 import fr.utc.nf28.moka.environment.users.User;
 
@@ -20,10 +21,10 @@ public abstract class MokaItem {
 	private static int sIdIndex = 0;
 	protected int mId;
 	protected String mTitle;
-	private int mX;
-	private int mY;
 	protected int mHeight;
 	protected int mWidth;
+	private int mX;
+	private int mY;
 	private User mLocker;
 	private String mType;
 	private Date mCreationDate;
@@ -123,7 +124,7 @@ public abstract class MokaItem {
 			mCreator = locker;
 		}
 		if (mLocker != null) {
-			System.out.println("Item " + toString() + "already locked");
+			if (BuildConfig.DEBUG) System.out.println("Item " + toString() + "already locked");
 			return;
 		}
 		mLocker = locker;
@@ -193,8 +194,8 @@ public abstract class MokaItem {
 		mRotateZ = rotateZ;
 	}
 
-	public ArrayList<ContentEntry> getContentEntries(){
-		ArrayList<ContentEntry> entries = new ArrayList<ContentEntry>();
+	public ArrayList<ContentEntry> getContentEntries() {
+		final ArrayList<ContentEntry> entries = new ArrayList<ContentEntry>();
 		entries.add(new ContentEntry(MokaItem.CONTENT_FIELD_TITLE, mTitle));
 		return entries;
 	}

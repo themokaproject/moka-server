@@ -1,5 +1,6 @@
 package fr.utc.nf28.moka.agents.itemcreation;
 
+import fr.utc.nf28.moka.BuildConfig;
 import fr.utc.nf28.moka.agents.A2ATransaction;
 import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.util.JSONParserUtils;
@@ -31,7 +32,7 @@ public class ItemCreationBehaviour extends CyclicBehaviour {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                System.out.println("Item creation/destruction request syntax is wrong");
+				if (BuildConfig.DEBUG) System.out.println("Item creation/destruction request syntax is wrong");
             } catch (Exception e) {
                 e.printStackTrace();
             }

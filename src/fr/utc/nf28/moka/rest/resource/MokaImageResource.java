@@ -2,6 +2,7 @@ package fr.utc.nf28.moka.rest.resource;
 
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
+import fr.utc.nf28.moka.BuildConfig;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -16,7 +17,7 @@ public class MokaImageResource {
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response uploadPicture(@PathParam("id") int itemId, @FormDataParam("file") InputStream uploadedInputStream,
 								  @FormDataParam("file") FormDataContentDisposition fileDetail) {
-		System.out.println("upload request received " + String.valueOf(itemId));
+		if (BuildConfig.DEBUG) System.out.println("upload request received " + String.valueOf(itemId));
 
 		if (!sFileDir.exists()) {
 			sFileDir.mkdirs();

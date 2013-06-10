@@ -1,7 +1,7 @@
 package fr.utc.nf28.moka.agents.connection;
 
+import fr.utc.nf28.moka.BuildConfig;
 import fr.utc.nf28.moka.agents.A2ATransaction;
-import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.util.JadeUtils;
 import jade.core.behaviours.CyclicBehaviour;
@@ -30,7 +30,7 @@ public class ConnectionHandlingBehaviour extends CyclicBehaviour {
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
-				System.out.println("Connection/disconnection request syntax is wrong");
+				if (BuildConfig.DEBUG) System.out.println("Connection/disconnection request syntax is wrong");
 			}
 
 		} else {
