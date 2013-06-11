@@ -84,7 +84,7 @@ public class MokaWebSocketServer extends WebSocketServer {
 		//restore history
 		if (backUp.containsKey("History")) {
 			try {
-				List<HistoryEntry> historyEntries = JSONParserUtils.deserializeHistoryEntries(backUp.get("History"));
+				final List<HistoryEntry> historyEntries = JSONParserUtils.deserializeHistoryEntries(backUp.get("History"));
 				environment.clearHistory();
 				for (HistoryEntry h : historyEntries) {
 					environment.addHistoryEntry(h);
