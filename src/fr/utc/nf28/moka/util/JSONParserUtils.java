@@ -66,6 +66,8 @@ public final class JSONParserUtils {
 			return sMapper.treeToValue(itemNode, ImageLink.class);
 		} else if (className.equals("video")) {
 			return sMapper.treeToValue(itemNode, VideoLink.class);
+		} else if (className.equals("iframe")) {
+			return sMapper.treeToValue(itemNode, IframeLink.class);
 		}
 		return null;
 	}
