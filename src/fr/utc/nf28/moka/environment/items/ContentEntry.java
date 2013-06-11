@@ -5,7 +5,7 @@ public class ContentEntry {
 	private String mField;
 	private String mContent;
 
-	public ContentEntry(){
+	public ContentEntry() {
 	}
 
 	public ContentEntry(String field, String content) {
@@ -13,19 +13,19 @@ public class ContentEntry {
 		mContent = content;
 	}
 
-	public String getField(){
-		return  mField;
+	public String getField() {
+		return mField;
 	}
 
-	public void setField(String field){
+	public void setField(String field) {
 		mField = field;
 	}
 
-	public String getContent(){
-		return  mContent;
+	public String getContent() {
+		return mContent;
 	}
 
-	public void setContent(String content){
+	public void setContent(String content) {
 		mContent = content;
 	}
 }
