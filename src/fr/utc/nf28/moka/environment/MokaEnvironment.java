@@ -14,8 +14,8 @@ import java.util.List;
  */
 public final class MokaEnvironment {
 	private static MokaEnvironment sInstance = null;
+	private static int sItemIdGenCurrentIndex = 0;
 	private final LinkedList<HistoryEntry> mHistoryEntries = new LinkedList<HistoryEntry>();
-	private int sItemIdGenCurrentIndex = 0;
 	private HashMap<String, User> mUsers = new HashMap<String, User>();
 	private HashMap<Integer, MokaItem> mItems = new HashMap<Integer, MokaItem>();
 
