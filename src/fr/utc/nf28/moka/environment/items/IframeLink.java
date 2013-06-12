@@ -1,10 +1,8 @@
 package fr.utc.nf28.moka.environment.items;
 
 
-import java.util.ArrayList;
-
 public class IframeLink extends UrlItem {
-	private static final String DEFAULT_URL = "./default.html";
+	private static final String DEFAULT_URL = "http://www.google.com/custom";
 	private static final String DEFAULT_TITLE = "Iframe";
 	private static final String sType = "iframe";
 	private static final int DEFAULT_WIDTH = 300;
