@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.*;
 
-@Path("/image/{id}")
+@Path("/item/{id}/image/")
 public class MokaImageResource {
 	private static final File sFileDir = new File("mokaimages" + File.separator);
 

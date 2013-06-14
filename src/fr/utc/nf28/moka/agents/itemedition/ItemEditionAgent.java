@@ -5,6 +5,7 @@ import fr.utc.nf28.moka.agents.MokaAgent;
 import fr.utc.nf28.moka.environment.items.MokaItem;
 import fr.utc.nf28.moka.util.JSONParserUtils;
 import fr.utc.nf28.moka.util.JadeUtils;
+import jade.lang.acl.ACLMessage;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -32,7 +33,7 @@ public class ItemEditionAgent extends MokaAgent {
 			final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_MOVE_ITEM, res);
 			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 					JSONParserUtils.serializeToJson(transaction),
-					jade.lang.acl.ACLMessage.PROPAGATE);
+					ACLMessage.PROPAGATE);
 		}
 	}
 
@@ -42,7 +43,7 @@ public class ItemEditionAgent extends MokaAgent {
 			final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_RESIZE_ITEM, res);
 			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 					JSONParserUtils.serializeToJson(transaction),
-					jade.lang.acl.ACLMessage.PROPAGATE);
+					ACLMessage.PROPAGATE);
 		}
 	}
 
@@ -52,7 +53,7 @@ public class ItemEditionAgent extends MokaAgent {
 			final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_ROTATE_ITEM, res);
 			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 					JSONParserUtils.serializeToJson(transaction),
-					jade.lang.acl.ACLMessage.PROPAGATE);
+					ACLMessage.PROPAGATE);
 		}
 	}
 
@@ -64,7 +65,7 @@ public class ItemEditionAgent extends MokaAgent {
 			final A2ATransaction transaction = new A2ATransaction(JadeUtils.TRANSACTION_TYPE_EDIT_ITEM, editingInfo);
 			sendMessage(getAgentsWithSkill(JadeUtils.JADE_SKILL_NAME_WEBSOCKET_SERVER),
 					JSONParserUtils.serializeToJson(transaction),
-					jade.lang.acl.ACLMessage.PROPAGATE);
+					ACLMessage.PROPAGATE);
 
 			//request refresh of currentItemsList of all device
 			requestAndroidCurrentItemsListRefresh();
